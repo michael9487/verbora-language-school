@@ -1,8 +1,6 @@
-# Verbora 沃語國際語言學校（作品集示範）
+# Verbora 沃語國際語言學校
 
-虛構語言學校的官方網站。**品牌、校區、電話、課程與活動全部是虛構內容**，不提供實際服務。
-
-這個專案示範如何把純 HTML + PHP 的多頁網站，現代化重構成 Next.js 應用，並串接 LINE LIFF。內容全部使用虛構品牌與公開授權素材。
+語言學校官方網站作品集。將純 HTML + PHP 的多頁網站重構為 Next.js 應用，並串接 LINE LIFF 會員功能與 Google 試算表活動消息。
 
 ## 重點功能
 
@@ -127,6 +125,10 @@ npm run dev       # http://localhost:3000
 - **活動報到**：在 `checkin_events` 新增活動，把 `https://你的網域/member?checkin=活動代碼` 做成 QR Code。
 - **LINE**：在 LINE Developers 建立 LIFF，Endpoint URL 填 `https://你的網域/member`，Scope 勾選 `profile`、`openid`，開啟 shareTargetPicker 和 Scan QR，Bot link 選 On (Aggressive) 並連結官方帳號。
 - **Google 試算表**：A 欄標題、B 欄內文、C 欄日期，開啟「知道連結的任何人都能檢視」，再填入 `NEWS_SHEET_ID`。
+
+## 聲明
+
+本專案為個人作品集，不提供實際服務；網站中的學校、校區、電話、課程與活動皆非真實資訊。
 
 ## 素材授權
 
