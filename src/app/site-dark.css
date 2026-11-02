@@ -1,0 +1,379 @@
+/* 自動產生，請勿手動修改：node scripts/gen-dark-css.mjs */
+:root.dark body {
+    color: var(--dk-text-strong);
+    background: var(--dk-bg)
+}
+:root.dark .site-header {
+    background: var(--dk-bg)
+}
+:root.dark .header-nav ul li a:hover,
+:root.dark .header-nav ul li a.active {
+    color: var(--dk-link)
+}
+:root.dark .teaching-nav {
+    background: var(--dk-bg)
+}
+:root.dark .teaching-nav-tab {
+    color: var(--dk-text)
+}
+:root.dark .teaching-nav-tab.is-active {
+    color: var(--dk-link)
+}
+:root.dark .story {
+    background: var(--dk-bg)
+}
+:root.dark .meaning {
+    background: var(--dk-surface)
+}
+:root.dark .verba-list {
+    background: var(--dk-glass)
+}
+:root.dark .philosophy {
+    background: var(--dk-bg)
+}
+:root.dark .methods {
+    background: var(--dk-surface)
+}
+:root.dark .principles {
+    background: var(--dk-bg)
+}
+:root.dark .footer {
+    background: var(--dk-surface-2)
+}
+:root.dark .footer-contact {
+    color: var(--dk-text)
+}
+:root.dark .footer-nav-primary a,
+:root.dark .footer-nav-secondary a {
+    color: var(--dk-text)
+}
+:root.dark .footer-copyright {
+    color: var(--dk-text)
+}
+:root.dark .campus {
+    background-color: var(--dk-surface)
+}
+:root.dark .school-info-label {
+    color: var(--dk-text-muted)
+}
+:root.dark .school-info-content-text {
+    color: var(--dk-text-strong)
+}
+:root.dark .schedule {
+    background: var(--dk-bg)
+}
+:root.dark .schedule-day {
+    color: var(--dk-text)
+}
+:root.dark .schedule-time {
+    color: var(--dk-text)
+}
+:root.dark .schedule-activity {
+    color: var(--dk-text)
+}
+:root.dark .schedule-note {
+    color: var(--dk-text)
+}
+:root.dark .placeholder-note {
+    color: var(--dk-text-muted)
+}
+:root.dark .corporate-section {
+    background-color: var(--dk-surface)
+}
+:root.dark .corporate-info-label {
+    color: var(--dk-text)
+}
+:root.dark .corporate-info-text {
+    color: var(--dk-text)
+}
+:root.dark .schedule-split-baby-cell {
+    color: var(--dk-text)
+}
+:root.dark .schedule-split-older-cell {
+    color: var(--dk-text)
+}
+:root.dark .teaching-system-section {
+    background-color: var(--dk-bg)
+}
+:root.dark .teaching-system-title h2 {
+    color: var(--dk-text)
+}
+:root.dark .teaching-info-section-title {
+    color: var(--dk-text)
+}
+:root.dark .teaching-info-section-body {
+    color: var(--dk-text)
+}
+:root.dark .teaching-content-block-title {
+    color: var(--dk-text)
+}
+:root.dark .teaching-content-block-body {
+    color: var(--dk-text)
+}
+:root.dark .teaching-content-list {
+    color: var(--dk-text)
+}
+:root.dark .teaching-content-sub-title {
+    color: var(--dk-text)
+}
+:root.dark .gallery-dot {
+    background: var(--dk-border)
+}
+:root.dark .region-nav {
+    background: var(--dk-bg)
+}
+:root.dark .region-tab {
+    color: var(--dk-text-muted)
+}
+:root.dark .region-tab.is-active {
+    color: var(--dk-link)
+}
+:root.dark .region-section {
+    background: var(--dk-bg)
+}
+:root.dark .region-header {
+    color: var(--dk-text)
+}
+:root.dark .branch-item {
+    border-bottom: 2px solid var(--dk-border)
+}
+:root.dark .branch-info {
+    color: var(--dk-text)
+}
+:root.dark .branch-btn {
+    color: var(--dk-text)
+}
+:root.dark .region-tag ~ .region-count {
+    color: var(--dk-text-muted)
+}
+:root.dark .news-body {
+    background: var(--dk-bg)
+}
+:root.dark .news-list-title {
+    color: var(--dk-text)
+}
+:root.dark .news-acc-item {
+    border-bottom: 1px solid var(--dk-border)
+}
+:root.dark .news-acc-head {
+    background: var(--dk-glass)
+}
+:root.dark .news-date {
+    color: var(--dk-text-muted)
+}
+:root.dark .news-title {
+    color: var(--dk-text)
+}
+:root.dark .news-acc-body {
+    background: var(--dk-glass)
+}
+:root.dark .news-event {
+    border-bottom: 1px solid var(--dk-border);
+    background: var(--dk-glass);
+    color: var(--dk-text)
+}
+:root.dark .news-event-meta {
+    color: var(--dk-text-muted)
+}
+:root.dark .gallery-body {
+    background: var(--dk-bg)
+}
+:root.dark .gallery-subtitle {
+    color: var(--dk-text)
+}
+:root.dark .gallery-article-role {
+    color: var(--dk-text)
+}
+:root.dark .gallery-article:hover .gallery-article-title {
+    color: var(--dk-link)
+}
+:root.dark .post-body {
+    background: var(--dk-bg)
+}
+:root.dark .post-main {
+    color: var(--dk-text)
+}
+:root.dark .post-breadcrumb {
+    color: var(--dk-text)
+}
+:root.dark .post-breadcrumb a {
+    color: var(--dk-text)
+}
+:root.dark .post-breadcrumb a:hover {
+    color: var(--dk-link)
+}
+:root.dark .login-body {
+    background: var(--dk-bg)
+}
+:root.dark .login-box {
+    background: var(--dk-bg);
+    border: 1px solid var(--dk-border)
+}
+:root.dark .login-title {
+    color: var(--dk-link)
+}
+:root.dark .login-label {
+    color: var(--dk-text)
+}
+:root.dark .login-input {
+    background: var(--dk-bg);
+    border: 1px solid var(--dk-border);
+    color: var(--dk-text-strong)
+}
+:root.dark .login-input::placeholder {
+    color: var(--dk-text-muted)
+}
+:root.dark .login-input-password input {
+    color: var(--dk-text-strong)
+}
+:root.dark .login-input-password input::placeholder {
+    color: var(--dk-text-muted)
+}
+:root.dark .audio-body {
+    background: var(--dk-bg)
+}
+:root.dark .audio-semester-title {
+    color: var(--dk-link)
+}
+:root.dark .audio-logout {
+    color: var(--dk-link)
+}
+:root.dark .audio-item {
+    border: 1px solid var(--dk-border)
+}
+:root.dark .audio-track-name {
+    color: var(--dk-text-strong)
+}
+:root.dark .audio-empty {
+    border: 1px solid var(--dk-border);
+    color: var(--dk-text-muted)
+}
+:root.dark .policy-body {
+    background: var(--dk-bg)
+}
+:root.dark .policy-container {
+    color: var(--dk-text)
+}
+:root.dark .policy-breadcrumb a {
+    color: var(--dk-text)
+}
+:root.dark .policy-breadcrumb a:hover {
+    color: var(--dk-link)
+}
+:root.dark .policy-text--boxed {
+    background: var(--dk-surface)
+}
+:root.dark .notfound-body {
+    background: var(--dk-bg)
+}
+:root.dark .notfound-code {
+    color: var(--dk-link)
+}
+@media (max-width: 1023px) {
+    :root.dark .header-nav {
+        background: var(--dk-bg)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .header-nav ul li a {
+        border-bottom: 1px solid var(--dk-border);
+        color: var(--dk-text)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .header-nav ul li a.active {
+        color: var(--dk-link)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .region-dropdown {
+        background: var(--dk-bg)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .region-dropdown-caption {
+        color: var(--dk-text-muted)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .region-dropdown-field {
+        background: var(--dk-bg)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .region-dropdown-index {
+        color: var(--dk-link)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-name {
+        color: var(--dk-text)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-details {
+        color: var(--dk-text)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-btn {
+        background: var(--dk-surface-2)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-btn--call {
+        background: var(--dk-bg)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-btn--nav:active {
+        color: var(--dk-link)
+    }
+}
+@media (max-width: 1023px) {
+    :root.dark .branch-btn--call:active {
+        color: var(--dk-link)
+    }
+}
+@media (max-width: 767px) {
+    :root.dark .school-info-label {
+        color: var(--dk-text-muted)
+    }
+}
+@media (max-width: 767px) {
+    :root.dark .school-info-content-text,
+:root.dark .corporate-info-text {
+        color: var(--dk-text)
+    }
+}
+@media (max-width: 767px) {
+    :root.dark .schedule-row {
+        border-bottom-color: var(--dk-border)
+    }
+}
+@media (max-width: 767px) {
+    :root.dark .schedule-time {
+        background: var(--dk-surface)
+    }
+}
+@media (max-width: 767px) {
+    :root.dark .schedule-split-older {
+        background: var(--dk-surface)
+    }
+}
+:root.dark .audio-book-title {
+    color: var(--dk-link)
+}
+:root.dark .audio-play {
+    background: var(--dk-bg);
+    color: var(--dk-link)
+}
+:root.dark .audio-item.is-current {
+    background: var(--dk-surface-2)
+}
+:root.dark .audio-player {
+    background: var(--dk-bg)
+}
+:root.dark .audio-player-title {
+    color: var(--dk-link)
+}

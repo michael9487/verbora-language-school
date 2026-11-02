@@ -1,0 +1,78 @@
+/* 圖層順序：既有版面樣式放在 site 層，排在 utilities 之前，所以加上 Tailwind class 一定會蓋過它，可以一頁一頁慢慢換。
+   不載入 Tailwind 的 preflight：site.css 有自己的 reset。 */
+@layer theme, base, site, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./site.css" layer(site);
+@import "./site-dark.css" layer(site);
+
+/* 深色模式由 <html class="dark"> 控制（使用者手動選擇，記在 localStorage） */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --color-brand: #1e6ec8;
+  --color-brand-dark: #06478f;
+  --color-brand-tint: #dceeff;
+  --color-line: #06c755;
+  --color-ink: #2c2c2c;
+  --color-ink-muted: #787877;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --dk-bg: #11161d;
+    --dk-surface: #171e27;
+    --dk-surface-2: #1d2530;
+    --dk-glass: rgba(23, 30, 39, 0.85);
+    --dk-border: #2c3644;
+    --dk-text-strong: #e8ebef;
+    --dk-text: #ccd3dc;
+    --dk-text-muted: #9aa5b3;
+    --dk-link: #6fb1f5;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+}
+
+/* 色彩變數 + 自動產生規則沒涵蓋的細節 */
+@layer site {
+  /* 大張背景裝飾淡化，不搶內容 */
+  .meaning-bg-illust,
+  .campus-decoration,
+  .corporate-decoration {
+    opacity: 0.25;
+  }
+
+  :root.dark {
+    --neutral-body: var(--dk-text);
+    --neutral-text: var(--dk-text-strong);
+    --neutral-muted: var(--dk-text-muted);
+    --ink-body: var(--dk-text-muted);
+    --neutral-bg-alt: var(--dk-surface);
+    --neutral-border: var(--dk-border);
+    --verba-1: #b39dff;
+    --verba-2: #6fb1f5;
+    --verba-3: #4fd1bf;
+    --verba-4: #ffc15e;
+    --verba-5: #f783ac;
+  }
+
+  /* 品牌藍在深色底上對比不足，改用淺藍 */
+  :root.dark .verba-list {
+    border-top-color: var(--dk-link);
+  }
+
+  :root.dark .site-header {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  :root.dark .nav-toggle span {
+    background: var(--dk-text);
+  }
+
+}

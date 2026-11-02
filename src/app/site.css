@@ -1,0 +1,6043 @@
+
+
+
+
+:root {
+    --header-h: 70px;
+    --content-max: 1440px;
+    --content-pad: clamp(24px, 5.5vw, 80px);
+
+    
+    --brand-blue: #1E6EC8;
+    --brand-teal: #2A9D8F;
+    --brand-blue-light: #3D9BE9;
+    --brand-blue-dark: #06478F;
+    --brand-orange: #E05A2B;
+    --brand-blue-tint: #DCEEFF;
+    --brand-green: #4A9E6B;
+    --brand-purple: #9B59B6;
+
+    --neutral-body: #444444;
+    --neutral-white: #FFFFFF;
+    --neutral-text: #2C2C2C;
+    --neutral-border: #E8ECF0;
+    --verba-1: #6F4BD8;
+    --verba-2: #1E6EC8;
+    --verba-3: #0B8F80;
+    --verba-4: #C77700;
+    --verba-5: #D6336C;
+    --neutral-black: #000000;
+    --neutral-muted: #666666;
+    --neutral-gray-737373: #737373;
+    --neutral-bg-alt: #F8F9FA;
+    --neutral-gray-cbcbcb: #CBCBCB;
+    --neutral-gray-eae9e9: #EAE9E9;
+    --neutral-gray-a7a7a7: #A7A7A7;
+    --neutral-gray-555555: #555555;
+    --neutral-gray-cccccc: #CCCCCC;
+    --neutral-gray-999999: #999999;
+    --neutral-gray-aaaaaa: #AAAAAA;
+
+    --ink-body: #787877;
+
+    --palette-blue: #008CD6;
+    --palette-yellow: #FFF100;        /* 只用於圖形，不用於白底文字 */
+    --palette-yellow-text: #D4A500;   /* 白底上的黃色文字（開發備註指定，色票頁未列） */
+    --palette-green: #00A73C;
+    --palette-red: #E60012;
+    --palette-purple: #92308D;
+    --palette-orange: #F39800;
+
+    --accent-red: #D91E33;
+    --accent-line-green: #00B900;
+
+    --tint-teal: #D5F2EF;
+    --tint-green-d8f0e3: #D8F0E3;
+    --tint-purple: #EEDFF7;
+    --tint-blue: #DDE3EC;
+    --tint-green-d3f6be: #D3F6BE;
+
+    --overlay-white-70: rgba(255, 255, 255, 0.7);
+    --overlay-black-30: rgba(0, 0, 0, 0.3);
+    --overlay-white-80: rgba(255, 255, 255, 0.8);
+    --overlay-black-20: rgba(0, 0, 0, 0.2);
+
+    /* ---- 文字樣式（桌機版 1440，font 簡寫：weight size/line-height family）---- */
+    --font-family-base: var(--font-noto-sans-tc), 'Noto Sans TC', 'Noto Sans CJK TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+
+    --text-display-hero: 500 72px/1.45 var(--font-family-base);        /* letter-spacing -0.025em */
+    --text-display-letter: 700 48px/1 var(--font-family-base);
+    --text-heading-h1: 700 48px/1.3 var(--font-family-base);
+    --text-heading-h2: 700 36px/1.3 var(--font-family-base);
+    --text-heading-subtitle: 500 20px/1.4 var(--font-family-base);     /* letter-spacing 0.02em */
+    --text-heading-h3: 700 28px/1.4 var(--font-family-base);
+    --text-heading-h4: 700 22px/1.4 var(--font-family-base);
+    --text-heading-h5: 700 18px/1.5 var(--font-family-base);
+    --text-body-lead: 500 20px/1.5 var(--font-family-base);
+    --text-body-large: 400 18px/1.9 var(--font-family-base);
+    --text-body-large-strong: 500 18px/1.9 var(--font-family-base);
+    --text-body-default: 400 16px/1.8 var(--font-family-base);
+    --text-body-small: 400 14px/1.8 var(--font-family-base);
+    --text-body-caption: 400 12px/1.7 var(--font-family-base);
+    --text-body-micro: 400 12px/1.8 var(--font-family-base);
+    --text-label-emphasis: 700 16px/1.8 var(--font-family-base);
+    --text-label-strong: 700 14px/1.7 var(--font-family-base);
+    --text-label-eyebrow: 400 14px/1.5 var(--font-family-base);        /* letter-spacing 0.02em */
+    --text-label-tag: 700 12px/1.5 var(--font-family-base);
+    --text-ui-menu: 500 16px/1.5 var(--font-family-base);
+    --text-ui-button: 700 16px/1.5 var(--font-family-base);
+    --text-ui-icon: 400 20px/1 var(--font-family-base);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-family-base);
+    color: #2c2c2c;
+    background: #fff;
+}
+
+img { display: block; max-width: 100%; }
+
+a { text-decoration: none; color: inherit; }
+
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    background: #FFFFFF;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* nav-container: max-width 1280 / padding L+R 32 / gap 80；Logo 212x32
+   nav-item: padding 8px 16px / 16px 400 行高 1.8 / active 文字下方 gap 4 接 30x2 底線 */
+.header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: var(--header-h);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.header-logo { flex-shrink: 0; }
+
+.header-logo img {
+    width: 212px;
+    height: 32px;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav ul li a {
+    display: block;
+    padding: 8px 16px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--neutral-text);
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.header-nav ul li a:hover,
+.header-nav ul li a.active {
+    color: var(--brand-blue);
+}
+
+.header-nav ul li a.active::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    margin: 4px auto 0;
+    background: var(--brand-blue);
+}
+
+
+.hero {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    height: 693px;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--content-max);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 var(--content-pad);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 274px;
+    text-align: center;
+}
+
+.hero-logo-word {
+    width: 274px;
+    margin: 0 auto;
+}
+
+.hero-logo-name {
+    margin-top: 14px;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+.hero-logo-tagline {
+    margin-top: 2px;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+.hero-page-title {
+    font: var(--text-display-hero);
+    letter-spacing: -0.025em;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.teaching-nav {
+    scroll-margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    
+}
+
+.teaching-nav-inner {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 61px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.teaching-nav-tab {
+    flex: 1 0 0;
+    min-width: 0;
+    padding: 16px 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font: var(--text-ui-menu);
+    letter-spacing: 0;
+    text-align: center;
+    color: #444444;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.teaching-nav-tab.is-active {
+    color: #1E6EC8;
+    border-bottom-color: #1E6EC8;
+}
+
+.teaching-section {
+    scroll-margin-top: 70px;
+}
+
+
+.story {
+    position: relative;
+    max-width: var(--content-max);
+    height: 523px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 40px 0;
+}
+
+.story-container {
+    position: relative;
+    max-width: 1100px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+}
+
+.story-text {
+    position: relative;
+    width: 486px;
+    max-width: 100%;
+}
+
+.story-icon {
+    position: absolute;
+    left: -160px;
+    top: 70px;
+    width: 154px;
+    z-index: 0;
+    transform: rotate(14deg);
+}
+
+/* 標題 H2 36/1.3 → gap 8 → Eyebrow 14/1.5 字距 0.02em → gap 24 → Body/Large 18/1.9，皆 #444 */
+.story-text h2 {
+    position: relative;
+    font: var(--text-heading-h2);
+    color: var(--neutral-body);
+    margin-bottom: 8px;
+}
+
+.story-sub {
+    position: relative;
+    font: var(--text-label-eyebrow);
+    letter-spacing: 0.02em;
+    color: var(--neutral-body);
+    margin-bottom: 24px;
+}
+
+.story-quote,
+.story-quote-zh {
+    position: relative;
+    font: var(--text-body-large);
+    color: var(--neutral-body);
+}
+
+.story-image {
+    position: absolute;
+    right: 77px;
+    bottom: 14px;
+    width: 451px;
+    max-width: 100%;
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.meaning {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    background: #F8F9FA;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.meaning-bg-illust {
+    position: absolute;
+    top: 40px;
+    right: 200px;
+    width: 300px;
+    transform: rotate(-35deg);
+    transform-origin: top right;
+    z-index: 0;
+}
+
+.meaning-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px;
+}
+
+.meaning-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.meaning-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meaning-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.title-illust-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.meaning-title {
+    font: var(--text-heading-h2);
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--neutral-body);
+}
+
+.meaning-subtitle {
+    font: var(--text-label-emphasis);
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--neutral-body);
+}
+
+/* 半透明底：背景插圖不會干擾內文 */
+.verba-list {
+    background: var(--overlay-white-80);
+    border-top: 2px solid #1E6EC8;
+}
+
+/* 一列三欄：字母 96 / 標題 220 / 內文 Fill */
+.verba-item {
+    display: grid;
+    grid-template-columns: 96px 220px 1fr;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid var(--neutral-border);
+}
+
+.verba-letter {
+    font: var(--text-display-letter);
+}
+
+.verba-title {
+    font: var(--text-heading-h5);
+}
+
+.verba-desc {
+    font: var(--text-body-default);
+    color: var(--neutral-muted);
+}
+
+.meaning-closing {
+    font: var(--text-body-default);
+    letter-spacing: 0;
+    color: var(--neutral-muted);
+}
+
+
+.philosophy {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 80px 0;
+}
+
+/* container 1100 / padding L+R 32 / gap 40；插圖欄固定 486，文字欄 Fill */
+.philosophy-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.philosophy-illust {
+    flex: 0 1 486px;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.philosophy-illust img {
+    width: 100%;
+    max-width: 380px;
+    transform: rotate(15deg);
+}
+
+.philosophy-text {
+    flex: 1;
+}
+
+.philosophy-title {
+    font: var(--text-heading-h2);
+    letter-spacing: 0;
+    color: var(--neutral-body);
+    margin-bottom: 25px;
+}
+
+.philosophy-text p {
+    font: var(--text-body-default);
+    letter-spacing: 0;
+    color: var(--neutral-body);
+}
+
+.philosophy-text p + p {
+    margin-top: 20px;
+}
+
+
+.methods {
+    position: relative;
+    max-width: var(--content-max);
+    min-height: 382px;
+    margin: 0 auto;
+    background: #F8F9FA;
+    padding: 80px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.methods-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    overflow: visible;
+}
+
+.methods-title {
+    position: relative;
+    z-index: 1;
+    font: var(--text-heading-h2);
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--neutral-body);
+}
+
+.methods-text {
+    position: relative;
+    z-index: 1;
+}
+
+.methods-text p {
+    font: var(--text-body-default);
+    letter-spacing: 0;
+    color: var(--neutral-body);
+}
+
+
+.principles {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.principles-illust {
+    position: absolute;
+    left: 6%;
+    bottom: 20px;
+    width: clamp(240px, 25vw, 360px);
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(45deg);
+}
+
+.principles-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.principles-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.principles-title {
+    font: var(--text-heading-h2);
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--neutral-body);
+}
+
+.principles-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.principles-text p {
+    font: var(--text-body-default);
+    letter-spacing: 0;
+    color: var(--neutral-body);
+}
+
+.methods-illust {
+    position: absolute;
+    right: 30px;
+    top:20px;
+    width: 260px;
+    z-index: 0;
+}
+
+.methods-illust img {
+    width: 100%;
+}
+
+/* 桌機：照片不壓文字，標題和內文都讓出照片的寬度 */
+@media (min-width: 1024px) {
+    .methods-title,
+    .methods-text {
+        padding-right: 300px;
+    }
+
+    .methods-illust {
+        top: 0;
+    }
+
+    .principles-title-row,
+    .principles-text {
+        padding-left: 350px;
+    }
+
+    .principles-illust {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%) rotate(45deg);
+    }
+}
+
+
+.footer {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 32px 0;
+    background: #E8ECF0;
+    box-sizing: border-box;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1280px;
+    min-height: 234px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.footer-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.footer-logo {
+    width: 314px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+}
+
+.footer-contact {
+    width: 314px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.7;
+    letter-spacing: 0;
+    color: #444444;
+}
+
+/* 設計稿固定 532px，依開發備註改彈性寬度：空間不足時縮小、換行 */
+.footer-nav {
+    flex: 0 1 532px;
+    min-width: 0;
+    padding: 16px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-nav-primary,
+.footer-nav-secondary {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px 32px;
+    white-space: nowrap;
+}
+
+.footer-nav-primary a,
+.footer-nav-secondary a {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444444;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-copyright {
+    width: 350px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.7;
+    letter-spacing: 0;
+    text-align: center;
+    color: #444444;
+}
+
+
+.campus {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 0;
+    background-color: #F8F9FA;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.campus-decoration {
+    position: absolute;
+    right: -100px;
+    bottom: 0;
+    width: 60%;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.campus-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.campus-title-image {
+    width: 420px;
+    height: 120px;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    align-self: flex-start;
+}
+
+.school-info-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.school-info-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 32px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #787877;
+}
+
+.school-info-label {
+    flex: 0 0 73px;
+    width: 73px;
+    font: var(--text-label-eyebrow);
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #666666;
+}
+
+.info-content {
+    flex: 1;
+    min-width: 0;
+    padding-left: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.school-info-content-text {
+    margin: 0;
+    font: var(--text-body-large-strong);
+    letter-spacing: 0;
+    color: #2C2C2C;
+    text-align: left;
+}
+
+
+.schedule {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 0;
+    background: #FFFFFF;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.schedule-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.schedule-title-row {
+    position: relative;
+}
+
+.schedule-title {
+    width: 290px;
+    height: 106px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+.schedule-title-decoration {
+    position: absolute;
+    left: 360px;
+    top: -40px;
+    width: 56px;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-105deg);
+}
+
+.schedule-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-head {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #444444;
+}
+
+.schedule-head-time {
+    flex: 0 0 88px;
+    width: 88px;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 8px 16px 20px 0;
+}
+
+.schedule-day {
+    flex: 0 0 146.4px;
+    width: 146.4px;
+    box-sizing: border-box;
+    padding: 8px 12px 20px;
+    font: var(--text-label-eyebrow);
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #444444;
+}
+
+.schedule-row {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    border-bottom: 1px solid #444444;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    flex: 0 0 88px;
+    width: 88px;
+    box-sizing: border-box;
+    padding: 24px 16px 24px 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font: var(--text-body-micro);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.schedule-activity {
+    flex: 0 0 732px;
+    width: 732px;
+    box-sizing: border-box;
+    padding: 24px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.schedule-nap-decoration {
+    position: absolute;
+    left: calc(50% + 71px);
+    top: -21px;
+    width: 95px;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(17deg);
+}
+
+.corporate-schedule-nap-decoration {
+    position: absolute;
+    left: calc(50% + 72px);
+    top: -5px;
+    width: 69px;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(6deg);
+}
+
+.schedule-note {
+    width: 100%;
+    min-height: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+/* ============================================================
+   頁面預留區（尚未收到內容規格）
+   ============================================================ */
+.placeholder-note {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 4rem var(--content-pad);
+    color: #999;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+.corporate-section {
+    position: relative;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 0;
+    background-color: #F8F9FA;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.corporate-decoration {
+    position: absolute;
+    right: 50px;
+    top: -200px;
+    width: 30%;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-20deg);
+}
+
+.corporate-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.corporate-title {
+    width: 420px;
+    height: 102px;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+.corporate-info-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.corporate-info-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 32px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #444444;
+}
+
+.corporate-info-label {
+    flex: 0 0 73px;
+    width: 73px;
+    font: var(--text-label-eyebrow);
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #444444;
+}
+
+.corporate-info-content {
+    flex: 1;
+    min-width: 0;
+    padding-left: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.corporate-info-text {
+    margin: 0;
+    font: var(--text-body-large-strong);
+    letter-spacing: 0;
+    color: #444444;
+    text-align: left;
+}
+
+
+.corporate-schedule-decoration {
+    position: absolute;
+    left: 257px;
+    top: -6px;
+    width: 104px;
+    height: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-8deg);
+}
+
+.schedule-split-content {
+    flex: 0 0 732px;
+    width: 732px;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-split-baby {
+    width: 732px;
+    border-bottom: 1px solid #666666;
+}
+
+.schedule-split-baby-cell {
+    width: 100%;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.schedule-split-older {
+    width: 732px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.schedule-split-older-cell {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+
+.teaching-system-section {
+    position: relative;
+    width: 100%;
+    padding: 64px 0;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    box-sizing: border-box;
+    scroll-margin-top: 70px;
+}
+
+.teaching-system-main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.teaching-system-title {
+    position: relative;
+    width: 100%;
+    min-height: 59px;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.teaching-system-title h2 {
+    margin: 0;
+    font: var(--text-heading-h1);
+    letter-spacing: 0;
+    text-align: center;
+    color: #444444;
+}
+
+.teaching-system-title-decoration {
+    position: absolute;
+    top: -10px;
+    right: -24px;
+    width: 120px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(24deg);
+}
+
+/* 第一個課程的標題插圖：桌機再往下 30px（其他系統沿用上面的共用位置） */
+@media (min-width: 1024px) {
+    #humanities .teaching-system-title-decoration {
+        top: 20px;
+    }
+}
+
+.teaching-system-content {
+    width: 100%;
+    padding: 40px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.teaching-main-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+}
+
+.teaching-images {
+    position: relative;
+    flex: 0 0 562px;
+    width: 562px;
+    max-width: 100%;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+
+.teaching-images > img:not(.teaching-media-decoration),
+.teaching-images > picture > img {
+    flex: 1 1 0;
+    min-height: 0;
+    width: 562px;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.teaching-media {
+    flex: 0 0 562px;
+    width: 562px;
+    max-width: 100%;
+    position: relative;
+}
+
+.teaching-media-main-image {
+    width: 562px;
+    max-width: 100%;
+    height: 670px;
+    object-fit: contain;
+    display: block;
+}
+
+.teaching-media-decoration {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 平板、手機專用的插圖標籤，桌機不顯示。
+   手機專用的加 !important，避免被平板那些用圖檔名選取的規則誤顯示 */
+.teaching-media-decoration.is-tablet {
+    display: none;
+}
+
+.teaching-media-decoration.is-mobile {
+    display: none !important;
+}
+
+.teaching-content-block.is-relative {
+    position: relative;
+}
+
+.teaching-info {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.teaching-info-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.teaching-info-section-title,
+.teaching-info-section-body,
+.teaching-content-block-title,
+.teaching-content-block-body {
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+}
+
+.teaching-info-section-title {
+    margin: 0;
+    font: var(--text-heading-h3);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.teaching-info-section-body {
+    margin: 0;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+    white-space: pre-line;
+}
+
+.teaching-info-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.teaching-content-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.teaching-content-block-title {
+    margin: 0;
+    font: var(--text-heading-h3);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.teaching-content-block-body {
+    margin: 0;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+    white-space: pre-line;
+}
+
+.teaching-content-list {
+    list-style: disc;
+    width: 100%;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 32px;
+    padding-left: calc(32px + 27px);
+    box-sizing: border-box;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+.teaching-content-list.is-nested {
+    padding-left: calc(32px + 54px);
+}
+
+.teaching-content-sub-title {
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+    margin: 0;
+    font: var(--text-body-large);
+    letter-spacing: 0;
+    color: #444444;
+}
+
+/* ---- Gallery（各語言課程共用）---- */
+.teaching-gallery {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.teaching-gallery-track {
+    width: 100%;
+    height: 253px;
+    padding: 32px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-top: 1px solid #787877;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.teaching-gallery-track::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-slide {
+    flex-shrink: 0;
+    height: 188px;
+    scroll-snap-align: start;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.teaching-gallery-nav {
+    width: 100%;
+    height: 56px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.gallery-arrow {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+
+.gallery-arrow svg,
+.gallery-arrow img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.gallery-indicators {
+    width: fit-content;
+    height: 32px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gallery-dot {
+    flex: 0 0 12px;
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #D9D9D9;
+    cursor: pointer;
+}
+
+.gallery-dot.is-active {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+    background: #444444;
+}
+
+/* ---- Lightbox（共用，點擊 Gallery 圖片放大用） ---- */
+.gallery-slide img {
+    cursor: zoom-in;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+
+.region-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    /* 不加底部分隔線（依設計稿） */
+    box-sizing: border-box;
+}
+
+.region-nav-inner {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    overflow-x: auto;
+}
+
+.region-tab {
+    flex: 0 0 144px;
+    width: 144px;
+    padding: 16px 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font: var(--text-ui-menu);
+    letter-spacing: 0;
+    color: #666666;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.region-tab.is-active {
+    color: #1E6EC8;
+    border-bottom-color: #1E6EC8;
+}
+
+
+.region-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1440px; /* 限制在設計稿寬度內，插圖才會貼著內容區，不會跑到寬螢幕最右邊 */
+    margin: 0 auto;
+    padding: 40px 0 64px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.region-deco {
+    position: absolute;
+    top: 154px;
+    right: -90px;
+    width: 337px;
+    height: auto;
+    opacity: 0.8;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+.region-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.region-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #444444;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.region-title {
+    margin: 0;
+    font: var(--text-heading-h3);
+}
+
+.region-count {
+    font: var(--text-body-small);
+}
+
+.branch-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.branch-item {
+    display: flex;
+    align-items: center;
+    padding: 24px 12px;
+    border-bottom: 2px solid #E8ECF0;
+}
+
+.branch-photo {
+    flex: 0 0 160px;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.branch-info {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #444444;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.branch-name {
+    margin: 0;
+    font: var(--text-heading-h5);
+}
+
+.branch-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.branch-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font: var(--text-body-caption);
+}
+
+.branch-detail-icon {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+}
+
+.branch-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 33px;
+}
+
+.branch-btn {
+    display: flex;
+    width: 29px;
+    height: 29px;
+    color: #444444;
+    transition: opacity 0.2s;
+}
+
+.branch-btn svg {
+    width: 100%;
+    height: 100%;
+}
+
+.branch-btn:hover {
+    opacity: 0.7;
+}
+
+/* 「導航」文字和「撥打」按鈕只在平板、手機版出現 */
+.branch-btn-text,
+.branch-btn--call {
+    display: none;
+}
+
+/* 新竹地區插圖（星星）：原圖 216x232 以 @2x 顯示 */
+.region-deco--hsinchu {
+    top: 272px;
+    right: 205px;
+    width: 108px;
+    transform: none;
+}
+
+/* 台中地區插圖（水滴）：原圖直向，旋轉 -90 度成橫向 */
+.region-deco--taichung {
+    top: 419px;
+    right: 177px;
+    width: 152px;
+    transform: rotate(-80deg);
+}
+
+/* 海外地區插圖（花）：原圖 502x410 以 @2x 顯示，位於標題列右上 */
+.region-deco--overseas {
+    top: 12px;
+    right: 195px;
+    width: 251px;
+    transform: none;
+}
+
+
+.region-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 16px;
+    border-radius: 20px;
+    background: #1E6EC8;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 19px;
+    white-space: nowrap;
+}
+
+/* 有標籤的標題列（海外），所數文字改用 #666666 */
+.region-tag ~ .region-count {
+    color: #666666;
+}
+
+
+.news-body {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 0;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.news-deco {
+    position: absolute;
+    z-index: 0;
+    height: auto;
+    pointer-events: none;
+}
+
+/* 左中 U 形：依區塊高度垂直置中，收合/展開都維持在左側中段；原圖開口朝上，轉 90 度讓開口朝右 */
+.news-deco--left {
+    top: 40%;
+    left: 80px;
+    width: 183px;
+    transform: translateY(-50%) rotate(110deg);
+}
+
+/* 右下襪子：貼著區塊底部，展開/收合時跟著移動 */
+.news-deco--right {
+    bottom: 200px;
+    right: 98px;
+    width: 246px;
+    opacity: 0.8;
+}
+
+.news-main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.news-list-header {
+    width: 100%;
+    max-width: 796px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.news-list-title {
+    margin: 0;
+    font: var(--text-heading-h4);
+    color: #444444;
+}
+
+.news-accordion {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.news-acc-item {
+    border-bottom: 1px solid #E8ECF0;
+}
+
+.news-acc-item:last-child {
+    border-bottom: 0;
+}
+
+/* 預設只顯示最新六則，第七則之後按「查看更多」才出現 */
+.news-accordion:not(.is-expanded) .news-acc-item:nth-child(n+7) {
+    display: none;
+}
+
+.news-accordion:not(.is-expanded) .news-acc-item:nth-child(6) {
+    border-bottom: 0;
+}
+
+.news-more-btn {
+    align-self: center;
+    width: 160px;
+    height: 44px;
+    margin-top: 8px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 4px;
+    background: var(--brand-blue);
+    font: var(--text-ui-button);
+    color: #FFFFFF;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.news-more-btn:hover {
+    background: #185CA8;
+}
+
+.news-more-btn:active {
+    background: #06478F;
+}
+
+.news-more-btn[hidden] {
+    display: none;
+}
+
+.news-acc-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    list-style: none;
+}
+
+.news-acc-head::-webkit-details-marker {
+    display: none;
+}
+
+.news-date {
+    flex: 0 0 80px;
+    font: var(--text-body-caption);
+    color: #787877;
+}
+
+.news-tag {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font: var(--text-label-tag);
+}
+
+.news-tag--hsinchu { background: #D5F2EF; color: #2A9D8F; }
+.news-tag--taipei { background: #DCEEFF; color: #1E6EC8; }
+.news-tag--taichung  { background: #D8F0E3; color: #4A9E6B; }
+.news-tag--overseas { background: #EEDFF7; color: #9B59B6; }
+
+.news-title {
+    flex: 1;
+    min-width: 0;
+    font: var(--text-label-emphasis);
+    color: #444444;
+}
+
+.news-chevron {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    font-size: 0;
+    background: url('/images/ui/icon-chevron-down.svg') center / contain no-repeat;
+}
+
+.news-acc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px 24px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* 還沒有活動內容的消息，展開時不顯示空白區 */
+.news-acc-body:empty {
+    display: none;
+}
+
+.news-event {
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-bottom: 1px solid #E8ECF0;
+    background: rgba(255, 255, 255, 0.7);
+    color: #444444;
+}
+
+.news-event-name {
+    margin: 0 0 6px;
+    font: var(--text-label-emphasis);
+}
+
+.news-event-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+    font: var(--text-body-caption);
+    color: #787877;
+}
+
+.news-event-desc {
+    margin: 0;
+    font: var(--text-body-small);
+}
+
+/* 試算表的活動原文：照原樣逐行顯示（保留換行）；同一則裡的英文標題和上面的中文內容隔開 */
+.news-event-raw {
+    white-space: pre-line;
+}
+
+.news-event-name--en {
+    margin-top: 16px;
+}
+
+
+.gallery-body {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px 0 80px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.gallery-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.gallery-subtitle {
+    margin: 0;
+    font: var(--text-body-lead);
+    color: #444444;
+    text-align: center;
+}
+
+.gallery-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.gallery-article {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 24px 0;
+    border-bottom: 1px solid #787877;
+    color: var(--neutral-body);
+    text-decoration: none;
+}
+
+.gallery-article-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gallery-article-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gallery-article-avatar {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.gallery-article-role {
+    font: var(--text-body-large);
+    color: #444444;
+}
+
+.gallery-article-content {
+    height: 204px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+}
+
+.gallery-article-title {
+    margin: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    font: var(--text-heading-h2);
+    color: var(--neutral-body);
+    transition: color 0.2s;
+}
+
+.gallery-article-desc {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    font: var(--text-body-large);
+    color: var(--neutral-body);
+}
+
+.gallery-article-desc p {
+    margin: 0;
+}
+
+.gallery-article-photo {
+    flex: 0 0 413px;
+    width: 413px;
+    height: 277px;
+    object-fit: cover;
+    transition: opacity 0.2s;
+}
+
+/* picture 只用來在平板換另一張裁切的照片，本身不參與排版 */
+.gallery-article-picture {
+    display: contents;
+}
+
+/* picture 攤平後，裡面的 source 也會被算成一個排版項目，多吃一份間距，所以要明確隱藏 */
+.gallery-article-picture source {
+    display: none;
+}
+
+.gallery-article:hover .gallery-article-title {
+    color: #1E6EC8;
+}
+
+.gallery-article:hover .gallery-article-photo {
+    opacity: 0.85;
+}
+
+
+.hero--article::before {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.post-body {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px 0 80px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.post-deco {
+    position: absolute;
+    height: auto;
+    pointer-events: none;
+}
+
+.post-deco--right-photo {
+    top: 258px;
+    z-index: 1;
+    right: 48px;
+    width: 197px;
+    transform: rotate(10deg);
+}
+
+/* 水滴：原圖水滴尖端朝上，轉 -125 度讓尖端朝左下 */
+.post-deco--right-illust {
+    top: 464px;
+    z-index: 2; /* 疊在蛋形照片上面 */
+    right: 104px;
+    width: 72px;
+    transform: rotate(-115deg);
+}
+
+.post-deco--left-photo {
+    top: 553px;
+    left: -17px;
+    width: 258px;
+}
+
+.post-main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 48px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    color: #444444;
+}
+
+.post-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.post-author-avatar {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-author-role {
+    font: var(--text-body-large);
+}
+
+.post-title {
+    margin: 0;
+    font: var(--text-heading-h2);
+}
+
+.post-text,
+.post-section p {
+    font: var(--text-body-large);
+}
+
+/* 段落之間空一行；緊接條列的段落不空 */
+.post-text p {
+    margin: 0 0 1.9em;
+}
+
+.post-text p:has(+ .post-list) {
+    margin-bottom: 0;
+}
+
+/* 編號和小標縮排 27px，說明文字靠左對齊內文 */
+.post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: post-item;
+}
+
+.post-list > li {
+    counter-increment: post-item;
+}
+
+.post-list-head {
+    display: block;
+    padding-left: 8px;
+}
+
+.post-list-head::before {
+    content: counter(post-item) '. ';
+}
+
+/* 麵包屑：16px / 1.8，項目間距 8，目前頁粗體 */
+.post-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+    font: var(--text-body-default);
+    color: #444444;
+}
+
+.post-breadcrumb a {
+    color: #444444;
+    text-decoration: none;
+}
+
+.post-breadcrumb a:hover {
+    color: #1E6EC8;
+}
+
+.post-breadcrumb-current {
+    font-weight: 700;
+}
+
+.post-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.post-section-title {
+    margin: 0;
+    font: var(--text-heading-h3);
+}
+
+.post-section p {
+    margin: 0;
+}
+
+/* 視窗較窄時，裝飾圖會壓到內文，先隱藏 */
+@media (max-width: 1300px) {
+    .post-deco {
+        display: none;
+    }
+}
+
+
+.post-body .post-text p:last-child {
+    margin-bottom: 0;
+}
+
+.post2-deco--left-illust {
+    top: 475px;
+    left: 94px;
+    width: 140px;
+}
+
+/* 照片下緣超出區塊，被裁掉一截（同設計稿） */
+.post2-deco--right-photo {
+    top: 509px;
+    right: 43px;
+    width: 184px;
+}
+
+/* 內文 3：標題為 Bold 700 */
+.post-title--bold {
+    font-weight: 700;
+}
+
+
+.post3-deco--left-photo {
+    top: 442px;
+    left: -27px; /* 左邊超出畫面一點，被裁掉（同設計稿） */
+    width: 227px;
+}
+
+/* 外框轉 -21 度、照片轉 -20 度，已直接做在圖檔裡（設計稿遮罩和照片各自有轉） */
+.post3-deco--right-photo {
+    top: 275px;
+    right: 59px;
+    width: 188px;
+    z-index: 1;
+}
+
+/* 平板版才出現：接在第一段文字結尾的漢堡插圖 */
+.post3-inline-illust {
+    display: none;
+}
+
+/* 漢堡插圖疊在右側照片左下角之上 */
+.post3-deco--right-illust {
+    top: 458px;
+    right: 141px;
+    width: 101px;
+    z-index: 2;
+}
+
+
+/* ============================================================
+   學員登入 login.php
+   login-body: Fill / Hug / padding 48px 0 / #FFFFFF
+   login-box: Fixed 400 / radius 8 / border 1px #DDE3EC / padding 40
+   標題→表單 gap 24；欄位之間、欄位→按鈕 gap 19；label→input gap 6
+   input: Fixed 318x44 / radius 4 / border 1px #CCCCCC / padding 0 13
+   btn: Fixed 318x47 / radius 4 / #1E6EC8
+   ============================================================ */
+.login-body {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 16px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px;
+    max-width: 100%;
+    padding: 40px;
+    background: #FFFFFF;
+    border: 1px solid #DDE3EC;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.login-title {
+    font: var(--text-heading-h4);
+    color: #1E6EC8;
+    text-align: center;
+}
+
+.login-error {
+    font: var(--text-body-caption);
+    color: var(--accent-red);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.login-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-label {
+    font: var(--text-body-small);
+    color: #555555;
+}
+
+.login-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font: var(--text-body-large);
+    color: #2C2C2C;
+}
+
+.login-input::placeholder {
+    color: #999999;
+}
+
+.login-input:focus,
+.login-input-password:focus-within {
+    outline: none;
+    border-color: #1E6EC8;
+    box-shadow: inset 0 0 0 1px #1E6EC8;
+}
+
+/* 錯誤狀態：紅色 2px 外框 */
+.login-input.is-error {
+    border-color: var(--accent-red);
+    box-shadow: inset 0 0 0 1px var(--accent-red);
+}
+
+.login-input-password {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.login-input-password input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font: var(--text-body-large);
+    color: #2C2C2C;
+    outline: none;
+}
+
+.login-input-password input::placeholder {
+    color: #999999;
+}
+
+.login-pw-toggle {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 0;
+    background: url('/images/ui/icon-eye.svg') center / contain no-repeat;
+    cursor: pointer;
+}
+
+.login-btn {
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-radius: 4px;
+    background: #1E6EC8;
+    color: #FFFFFF;
+    font: var(--text-ui-button);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.login-btn:hover {
+    background: #185CA8;
+}
+
+.login-btn:active {
+    background: #06478F;
+}
+
+
+/* ============================================================
+   語音教學 audio.php（登入後音檔列表）
+   沿用登入框的配色：邊框 #DDE3EC / 主色 #1E6EC8
+   ============================================================ */
+.audio-body {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 16px 80px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.audio-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.audio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1E6EC8;
+}
+
+.audio-semester-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: normal;
+    color: #1E6EC8;
+}
+
+.audio-logout {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border: 1px solid #1E6EC8;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #1E6EC8;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.audio-logout:hover {
+    background: #1E6EC8;
+    color: #FFFFFF;
+}
+
+.audio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.audio-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    border: 1px solid #DDE3EC;
+    border-radius: 8px;
+}
+
+.audio-track-name {
+    flex: 1;
+    min-width: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    color: #2C2C2C;
+    overflow-wrap: anywhere;
+}
+
+.audio-download {
+    flex-shrink: 0;
+    padding: 8px 20px;
+    border-radius: 4px;
+    background: #1E6EC8;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.audio-download:hover {
+    background: #185CA8;
+}
+
+.audio-empty {
+    padding: 48px 24px;
+    border: 1px solid #DDE3EC;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #999999;
+    text-align: center;
+}
+
+
+/* ============================================================
+   隱私權政策 privacy.html
+   section: Fill / padding 80 0 / #FFFFFF
+   container: Fixed 1100 / padding 0 32 / gap 32
+   麵包屑: 15.2px / 30.4 / #444，項目 gap 8，目前頁 700
+   標題: 30px 700 置中 / 內文: 15.2px / 30.4 置中
+   ============================================================ */
+.policy-body {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 0;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.policy-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    color: #444444;
+}
+
+.policy-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font: var(--text-body-default);
+}
+
+.policy-breadcrumb a {
+    color: #444444;
+    text-decoration: none;
+}
+
+.policy-breadcrumb a:hover {
+    color: #1E6EC8;
+}
+
+.policy-breadcrumb-current {
+    font-weight: 700;
+}
+
+.policy-title {
+    font: var(--text-heading-h2);
+    text-align: center;
+}
+
+.policy-text {
+    font: var(--text-body-default);
+    text-align: center;
+}
+
+
+/* 聯絡我們 contact.html：content-text 背景 #F8F9FA，多行文字保留換行 */
+.policy-text--boxed {
+    background: #F8F9FA;
+    white-space: pre-line;
+}
+
+
+/* ============================================================
+   404 找不到頁面 404.html
+   section: padding 80 0 / container 1100、padding 0 32、gap 16、置中
+   404: Display/Hero #1E6EC8 / 標題 H3 #2C2C2C / 說明 Body/Default #666
+   按鈕: 160x44 / radius 4 / #1E6EC8 / UI/Button 白字，上方多留 8
+   ============================================================ */
+.notfound-body {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 0;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.notfound-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+
+.notfound-code {
+    font: var(--text-display-hero);
+    letter-spacing: -0.025em;
+    color: var(--brand-blue);
+}
+
+.notfound-title {
+    font: var(--text-heading-h3);
+    color: var(--neutral-text);
+}
+
+.notfound-text {
+    font: var(--text-body-default);
+    color: var(--neutral-muted);
+}
+
+.notfound-btn {
+    width: 160px;
+    height: 44px;
+    margin-top: 8px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: var(--brand-blue);
+    font: var(--text-ui-button);
+    color: #FFFFFF;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+
+.notfound-btn:hover {
+    background: #185CA8;
+}
+
+.notfound-btn:active {
+    background: #06478F;
+}
+
+
+/* ============================================================
+   漢堡選單按鈕（桌機隱藏，平板與手機顯示）
+   ============================================================ */
+.nav-toggle {
+    display: none;
+}
+
+/* ============================================================
+   平板版 768–1023px（設計稿寬 768）
+   Header／Footer 左右 padding 40；內容寬度隨螢幕流動、左右 padding 40
+   文字樣式：標題 24/1.4、內文 14 或 16 / 1.8、極小字 12/1.8
+   ============================================================ */
+@media (max-width: 1023px) {
+    :root {
+        --header-h: 56px;
+
+        /* 平板文字樣式（Tablet/…）：只列出跟桌機不同的 */
+        --text-display-hero: 500 46px/1.45 var(--font-family-base);
+        --text-display-letter: 700 36px/1 var(--font-family-base);
+        --text-heading-h1: 700 40px/1.3 var(--font-family-base);
+        --text-heading-h2: 700 32px/1.3 var(--font-family-base);
+        --text-heading-subtitle: 500 18px/1.4 var(--font-family-base);
+        --text-heading-h3: 700 24px/1.4 var(--font-family-base);
+        --text-heading-h4: 700 20px/1.4 var(--font-family-base);
+        --text-heading-h5: 700 16px/1.5 var(--font-family-base);
+        --text-body-lead: 500 19px/1.5 var(--font-family-base);
+    }
+
+    /* ---- Header：高 56，Logo 189x27，右側漢堡按鈕 44x44 ---- */
+    .header-inner {
+        max-width: none;
+        padding: 0 56px;
+        gap: 16px;
+    }
+
+    .header-logo img {
+        width: 189px;
+        height: 27px;
+    }
+
+    .nav-toggle {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+    }
+
+    .nav-toggle span {
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        background: #444444;
+        transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .site-header.is-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .site-header.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .site-header.is-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* 選單展開面板：白底、padding 8 40 24、陰影 0 8 24；
+       每項高 52、下方 1px #EAE9E9 分隔線、18px/1.9；目前頁藍字；面板外蓋 30% 黑色遮罩 */
+    .header-nav {
+        display: none;
+        position: absolute;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        padding: 8px 40px 24px;
+        background: #FFFFFF;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .site-header.is-open .header-nav {
+        display: block;
+    }
+
+    .site-header.is-open::after {
+        content: '';
+        position: fixed;
+        top: var(--header-h);
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .header-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-nav ul li a {
+        height: 52px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #EAE9E9;
+        font: var(--text-body-large);
+        color: #444444;
+    }
+
+    .header-nav ul li a.active {
+        color: var(--brand-blue);
+    }
+
+    .header-nav ul li a.active::after {
+        display: none;
+    }
+
+    /* ---- Hero：768 寬時高 430，依比例縮放 ---- */
+    .hero {
+        height: 56vw;
+    }
+
+    /* 首頁 Banner 平板版改為置中裁切（蓋過桌機版寫在標籤上的位置） */
+    .hero--home {
+        background-position: center !important;
+    }
+
+    .hero-logo,
+    .hero-logo-word {
+        width: 138px;
+    }
+
+    .hero-logo-name {
+        margin-top: 8px;
+        font-size: 0.85rem;
+    }
+
+    .hero-logo-tagline {
+        font-size: 0.6rem;
+    }
+
+    /* ---- 首頁：品牌故事（上文下圖、文字置中） ---- */
+    .story {
+        height: auto;
+        padding: 32px 0;
+    }
+
+    .story-container {
+        height: auto;
+        padding: 0 40px;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .story-text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .story-text h2 {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    .story-sub {
+        margin-bottom: 24px;
+    }
+
+    .story-text {
+        z-index: 1;
+    }
+
+    .story-icon {
+        left: calc(50% - 36px);
+        top: 180px;
+        width: 70px;
+        z-index: 2;
+        transform: rotate(18deg);
+    }
+
+    /* 拼貼圖：寬 95%，往上疊進文字區下緣（圖檔上方是細線留白），不裁切 */
+    .story-image {
+        position: relative;
+        z-index: 0;
+        right: auto;
+        bottom: auto;
+        width: 84%;
+        align-self: center;
+        margin-top: -15.5%;
+    }
+
+    
+    .meaning {
+        padding: 32px 0;
+    }
+
+    .meaning-container {
+        padding: 40px;
+    }
+
+    .meaning-bg-illust {
+        top: 16px;
+        right: -3px;
+        width: 112px;
+        transform: rotate(-27.8deg);
+        transform-origin: center;
+    }
+
+    .meaning-title {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    /* 字母固定在左欄，標題和內文上下疊 */
+    .verba-item {
+        grid-template-columns: 64px 1fr;
+        align-items: start;
+        row-gap: 4px;
+        padding: 20px 16px;
+    }
+
+    .verba-letter {
+        grid-row: span 2;
+    }
+
+    .verba-desc {
+        font-size: 14px;
+    }
+
+    .meaning-closing {
+        font-size: 14px;
+    }
+
+    /* ---- 首頁：教學目標（上圖下文） ---- */
+    .philosophy {
+        padding: 48px 0;
+    }
+
+    .philosophy-inner {
+        padding: 0 40px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .philosophy-illust {
+        flex: none;
+        height: 156px;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .philosophy-illust img {
+        max-width: 163px;
+    }
+
+    .philosophy-title {
+        margin-bottom: 16px;
+        font-size: 24px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .philosophy-text p {
+        font-size: 14px;
+    }
+
+    /* ---- 首頁：教學方法、教學原則 ---- */
+    .methods,
+    .principles {
+        min-height: 0;
+        padding: 48px 0;
+    }
+
+    .methods-container,
+    .principles-container {
+        padding: 0 40px;
+        gap: 16px;
+    }
+
+    .methods-title,
+    .principles-title {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    .methods-illust {
+        display: none;
+    }
+
+    .principles-text p {
+        font-size: 14px;
+    }
+
+    .principles-illust {
+        display: none;
+    }
+
+    /* ---- 隱私權政策／服務條款／聯絡我們 ---- */
+    .policy-body {
+        padding: 48px 0;
+    }
+
+    .policy-container {
+        padding: 0 40px;
+    }
+
+    .policy-title {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    /* ---- Footer：置中直排，九個連結排成一列自動換行 ---- */
+    .footer {
+        padding: 24px 40px;
+    }
+
+    .footer-container {
+        min-height: 0;
+        padding: 0;
+        gap: 16px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-brand {
+        align-items: center;
+        gap: 16px;
+    }
+
+    .footer-logo {
+        width: 189px;
+        height: 27px;
+    }
+
+    .footer-contact {
+        width: auto;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    .footer-nav {
+        flex: none;
+        width: 100%;
+        padding: 16px 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .footer-nav-primary,
+    .footer-nav-secondary {
+        display: contents;
+    }
+
+    .footer-nav-primary a,
+    .footer-nav-secondary a {
+        font-size: 12px;
+    }
+
+    .footer-copyright {
+        width: 100%;
+        height: auto;
+        line-height: 1.8;
+    }
+}
+
+
+/* ============================================================
+   平板版 768–1023px：關於我們
+   區塊留白、資訊列、字級同桌機；作息表欄寬改為隨螢幕伸縮
+   ============================================================ */
+@media (max-width: 1023px) {
+    .schedule-day,
+    .schedule-activity,
+    .schedule-split-content {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+    }
+
+    .schedule-split-baby,
+    .schedule-split-older {
+        width: 100%;
+    }
+
+    /* 插圖：由平板設計稿畫面換算（已扣除圖檔透明邊） */
+    .campus-decoration {
+        right: 73px;
+        bottom: 46px;
+        width: 324px;
+    }
+
+    .schedule-title-decoration {
+        left: 305px;
+        top: 0;
+        width: 30px;
+    }
+
+    .schedule-nap-decoration {
+        left: calc(50% + 67px);
+        top: -21px;
+        width: 96px;
+        transform: rotate(10deg);
+    }
+
+    .corporate-decoration {
+        top: -23px;
+        right: 15px;
+        width: 208px;
+    }
+
+    .corporate-schedule-decoration {
+        left: 283px;
+        top: 16px;
+        width: 74px;
+        transform: none;
+    }
+
+    .corporate-schedule-nap-decoration {
+        left: calc(50% + 67px);
+        top: -22px;
+        width: 88px;
+        transform: none;
+    }
+}
+
+
+/* ============================================================
+   下拉選單（語言課程／校區資訊共用）：桌機隱藏
+   ============================================================ */
+.region-dropdown {
+    display: none;
+}
+
+/* Banner 英文副標（目前只有語言課程頁）：桌機也顯示，排在中文標題下方
+   Desktop/Heading/Subtitle：Noto Sans TC 500 20px/1.4、字距 2%、置中 */
+.hero-inner:has(.hero-page-eyebrow) {
+    flex-direction: column;
+}
+
+.hero-page-eyebrow {
+    margin: 0;
+    font: var(--text-heading-subtitle);
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* ============================================================
+   平板版 768–1023px：Banner 標題、下拉選單、語言課程頁
+   ============================================================ */
+@media (max-width: 1023px) {
+    /* Banner 標題：平板稿用 Subtitle 18/1.4、字距 0.02em；英文副標 H5 16/1.5 */
+    .hero-inner {
+        flex-direction: column;
+        padding: 0 40px;
+    }
+
+    .hero-page-title {
+        font: var(--text-heading-subtitle);
+        letter-spacing: 0.02em;
+    }
+
+    .hero-page-eyebrow {
+        display: block;
+        font: var(--text-heading-h5);
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    /* 分頁列改為下拉選單：說明字 12/1.7 #999EA8；欄位 1.5px 藍框、圓角 12、padding 12 16 */
+    .teaching-nav {
+        display: none;
+    }
+
+    .region-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px 40px;
+        background: #FFFFFF;
+    }
+
+    .region-dropdown-caption {
+        font: var(--text-body-caption);
+        color: #999EA8;
+    }
+
+    .region-dropdown-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border: 1.5px solid var(--brand-blue);
+        border-radius: 12px;
+        background: #FFFFFF;
+    }
+
+    .region-dropdown-label {
+        flex: 1 1 0;
+        min-width: 0;
+        font: var(--text-heading-h5);
+        color: var(--neutral-text);
+    }
+
+    .region-dropdown-index {
+        font: var(--text-body-caption);
+        color: var(--brand-blue);
+        white-space: nowrap;
+    }
+
+    .region-dropdown-chevron {
+        flex: 0 0 16px;
+        width: 16px;
+        height: 16px;
+        background: url('/images/ui/chevron-down.svg') center / contain no-repeat;
+    }
+
+    /* 透明的原生選單蓋在整個欄位上，點欄位任何地方都會開啟系統選單 */
+    .region-dropdown-select {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* 語言課程內容：區塊 padding 40 0；大標 H1 40px；兩張照片並排在上、文字在下 */
+    .teaching-system-section {
+        padding: 40px 0;
+    }
+
+    .teaching-system-main {
+        gap: 16px;
+    }
+
+    .teaching-system-title {
+        padding: 0 40px;
+    }
+
+    .teaching-system-content {
+        padding: 16px 0;
+    }
+
+    .teaching-main-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .teaching-images {
+        flex: none;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        align-self: auto;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .teaching-images > img:not(.teaching-media-decoration),
+    .teaching-images > picture > img {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        height: auto;
+        aspect-ratio: 338 / 386;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .teaching-media {
+        flex: none;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+
+    .teaching-media-main-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .teaching-info-section-title,
+    .teaching-info-section-body,
+    .teaching-content-block-title,
+    .teaching-content-block-body,
+    .teaching-content-sub-title {
+        padding: 0 40px;
+    }
+
+    .teaching-info-section-title,
+    .teaching-content-block-title {
+        font: var(--text-heading-h4);
+    }
+
+    .teaching-content-list {
+        padding-right: 40px;
+        padding-left: calc(40px + 27px);
+    }
+
+    .teaching-content-list.is-nested {
+        padding-left: calc(40px + 54px);
+    }
+
+    /* 插圖：桌機版的位置在平板不適用，先隱藏；第一個課程的標題插圖依設計稿定位 */
+    .teaching-media-decoration,
+    .teaching-system-title-decoration {
+        display: none;
+    }
+
+    /* top 跟著照片高度變化：照片寬 = (螢幕寬 - 左右留白 80 - 間距 12) / 2，高 = 寬 × 386/338 */
+    #humanities .teaching-system-title-decoration {
+        display: block;
+        top: calc(112px + (100vw - 92px) * 0.571);
+        right: 128px;
+        width: 85px;
+        opacity: 0.8;
+        transform: rotate(-22.35deg);
+        z-index: 2; /* 疊在照片上面，不被第二張圖的白底蓋住 */
+    }
+
+    /* 人際智能：插圖 125px、不旋轉，頂端對齊文字區上緣（照片下方 24px），距右 116px
+       桌機版的大小和位置寫在標籤上，所以這裡用 !important 蓋過 */
+    #interpersonal .teaching-system-title-decoration {
+        display: block;
+        top: calc(108px + (100vw - 92px) * 0.571);
+        right: 116px !important;
+        width: 125px !important;
+        transform: none !important;
+    }
+
+    /* 中文正音「教學特色」：第一項有圓點，其餘三項是它的子項目，再縮一層（同平板、手機設計稿的層次） */
+    #chinese-pronunciation .teaching-info-list > .teaching-content-block:nth-child(4) li:not(:first-child) {
+        margin-left: 27px;
+    }
+
+    /* 中文正音：主圖縮成 359px 置中（圖檔上下有白邊，用負 margin 讓版面佔高維持 386）
+       書疊在主圖右下；ㄅㄆㄇ 改用平板專用的標籤，各自跟著所在的文字區塊走 */
+    #chinese-pronunciation .teaching-media-main-image {
+        width: 359px;
+        margin: -12px auto -29px;
+    }
+
+    #chinese-pronunciation .teaching-media > .teaching-media-decoration[src*="書"] {
+        display: block;
+        top: 285px !important;
+        left: calc(50% + 65px) !important;
+        width: 187px !important;
+        transform: none !important;
+    }
+
+    #chinese-pronunciation .teaching-media-decoration.is-tablet {
+        display: block;
+        z-index: -1;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄅ"] {
+        top: -63px;
+        left: 141px;
+        width: 73px;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄆ"] {
+        top: -32px;
+        left: 129px;
+        width: 73px;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄇ"] {
+        top: -61px;
+        right: 105px;
+        width: 90px;
+    }
+
+    /* 生活美語：右圖（去背彩蛋）在設計稿比照片略小，左右內縮讓圖縮 2.6%，
+       上下裁切變少，底部珠子的字才會完整露出；
+       ABC 插圖改用平板專用標籤，放在「系統概述」標題右上方 */
+    #english .teaching-images > img:nth-child(2) {
+        box-sizing: border-box;
+        padding: 0 0.97% 0 0.33%;
+    }
+
+    #english .teaching-media-decoration.is-tablet {
+        display: block;
+        z-index: -1;
+        top: -51px;
+        right: 72px;
+        width: 106px;
+    }
+
+    /* 上方文字最後一行右邊有空位時（由 systems.html 的 script 判斷），照設計稿往上靠 */
+    #english .teaching-media-decoration.is-tablet.is-raised {
+        top: -70px;
+    }
+
+    /* 音樂律動：高音譜號（沿用桌機標籤）和灰色音符在「適用年齡層」右邊，
+       黃色音符在「課程重點」標題右邊，粉紅音符在「課程內容」標題右上方 */
+    #music .teaching-content-block {
+        position: relative;
+    }
+
+    #music .teaching-info > .teaching-media-decoration[src*="插圖1"] {
+        display: block;
+        top: -7px !important;
+        right: 200px !important;
+        width: 67px !important;
+        transform: rotate(15deg) !important;
+    }
+
+    #music .teaching-media-decoration.is-tablet {
+        display: block;
+        z-index: -1;
+    }
+
+    #music .is-tablet[src*="插圖4"] {
+        top: 11px;
+        right: 131px;
+        width: 120px;
+    }
+
+    #music .is-tablet[src*="插圖2"] {
+        top: -42px;
+        left: 122px;
+        width: 77px;
+    }
+
+    #music .is-tablet[src*="插圖3"] {
+        top: -51px;
+        right: 59px;
+        width: 98px;
+        transform: rotate(15deg);
+    }
+
+    /* 創思數學：思考泡泡在「適用年齡層」右邊、乘號在「四大教學步驟」標題右上方（沿用桌機標籤），
+       百分比在「課程內容」標題右上方、加號在「課程內容」文字結尾右下方（平板專用標籤） */
+    #creative-math .teaching-content-block {
+        position: relative;
+    }
+
+    #creative-math .teaching-info > .teaching-media-decoration[src*="插圖1"] {
+        display: block;
+        top: -28px !important;
+        right: 221px !important;
+        width: 106px !important;
+        transform: rotate(15deg) !important;
+        z-index: -1;
+    }
+
+    #creative-math .teaching-media-decoration[src*="插圖2"] {
+        display: block;
+        top: -72px !important;
+        left: 414px !important;
+        width: 93px !important;
+        transform: rotate(27deg) !important;
+    }
+
+    #creative-math .teaching-media-decoration.is-tablet {
+        display: block;
+        z-index: -1;
+    }
+
+    #creative-math .is-tablet[src*="插圖3"] {
+        top: -71px;
+        left: 102px;
+        width: 142px;
+    }
+
+    #creative-math .is-tablet[src*="插圖4"] {
+        bottom: -59px;
+        right: 109px;
+        width: 112px;
+        transform: rotate(-32deg);
+    }
+
+    /* 潛能開發：拼圖插圖在「適用年齡層」右邊（平板專用標籤），128px、不旋轉，距右 46px */
+    #potential-development .teaching-media-decoration.is-tablet {
+        display: block;
+        z-index: -1;
+        top: -6px;
+        right: 46px;
+        width: 128px;
+        opacity: 0.8;
+    }
+
+    /* 輪播：高 240、padding 24 40、間距 12、圖高 192、圓角 8、無上方分隔線 */
+    .teaching-gallery-track {
+        height: 240px;
+        padding: 24px 40px;
+        gap: 12px;
+        border-top: 0;
+        scroll-padding-left: 40px;
+    }
+
+    .gallery-slide {
+        height: 192px;
+    }
+
+    .gallery-slide img {
+        border-radius: 8px;
+    }
+}
+
+
+@media (max-width: 1023px) {
+    .region-nav {
+        display: none;
+    }
+
+    .region-section {
+        padding: 32px 0 40px;
+    }
+
+    .region-container {
+        padding: 0 40px;
+    }
+
+    .region-title {
+        font: var(--text-heading-h4);
+    }
+
+    /* 插圖：台北 88px、新竹星星 71px 都在標題列右邊；台中水滴轉成橫向；
+       海外的花在最後一間校區右上方，所以從區塊底部往上定位 */
+    #taipei .region-deco {
+        top: 59px;
+        right: 87px;
+        width: 88px;
+        transform: none;
+    }
+
+    .region-deco--hsinchu {
+        top: 34px;
+        right: 73px;
+        width: 71px;
+    }
+
+    .region-deco--taichung {
+        top: 36px;
+        right: 106px;
+        width: 56px;
+        transform: rotate(-90deg);
+    }
+
+    .region-deco--overseas {
+        top: auto;
+        bottom: 172px;
+        right: 49px;
+        width: 116px;
+    }
+
+    /* 卡片：branch-info 攤平成格線，按鈕列獨立成最下面一整排 */
+    .branch-item {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        grid-template-rows: auto 1fr auto;
+        column-gap: 16px;
+        align-items: start;
+        padding: 16px 12px;
+    }
+
+    .branch-photo {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 96px;
+        height: 96px;
+    }
+
+    .branch-info {
+        display: contents;
+    }
+
+    .branch-name {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 8px;
+        color: #444444;
+    }
+
+    .branch-details {
+        grid-column: 2;
+        grid-row: 2;
+        color: #444444;
+    }
+
+    .branch-detail {
+        align-items: center;
+        gap: 4px;
+    }
+
+    .branch-detail-icon {
+        margin-top: 0;
+    }
+
+    .branch-btns {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        height: auto;
+        margin-top: 20px;
+        padding-bottom: 16px;
+    }
+
+    /* FB／IG：44px 圓形灰底，圖示 24px */
+    .branch-btn {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        background: #E8ECF0;
+        box-sizing: border-box;
+    }
+
+    .branch-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* 導航（淺藍底）、撥打（藍框）：平分剩餘寬度，高 44、圓角 8 */
+    .branch-btn--nav,
+    .branch-btn--call {
+        display: flex;
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        padding: 0 24px;
+        border-radius: 8px;
+        font: var(--text-ui-button);
+        color: #1E6EC8;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .branch-btn--nav {
+        background: #DCEEFF;
+    }
+
+    .branch-btn--nav svg {
+        display: none;
+    }
+
+    .branch-btn-text {
+        display: inline;
+    }
+
+    .branch-btn--call {
+        background: #FFFFFF;
+        border: 1px solid #1E6EC8;
+    }
+
+    /* 互動狀態（設計稿 05 States）：導航 hover #C7E2FF、按下 #B0D5FF；
+       撥打 hover #DCEEFF、按下 #C7E2FF＋深藍框；按下時文字都變深藍 #06478F */
+    .branch-btn--nav,
+    .branch-btn--call {
+        transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .branch-btn--nav:hover,
+    .branch-btn--call:hover {
+        opacity: 1;
+    }
+
+    .branch-btn--nav:hover {
+        background: #C7E2FF;
+    }
+
+    .branch-btn--nav:active {
+        background: #B0D5FF;
+        color: #06478F;
+    }
+
+    .branch-btn--call:hover {
+        background: #DCEEFF;
+    }
+
+    .branch-btn--call:active {
+        background: #C7E2FF;
+        border-color: #06478F;
+        color: #06478F;
+    }
+}
+
+/* ============================================================
+   平板版 768–1023px：最新消息
+   區塊 padding 32 0；內容左右 40；標題 H4 20
+   消息列改兩排：上排 日期（寬 68）＋標籤，下排 標題＋箭頭；padding 20
+   活動內文 16/1.8
+   ============================================================ */
+@media (max-width: 1023px) {
+    .news-body {
+        padding: 32px 0;
+    }
+
+    .news-main {
+        padding: 0 40px;
+    }
+
+    /* 標題的 flex-basis 接近整排，所以會自己換到第二排，箭頭跟在它後面 */
+    .news-acc-head {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 20px;
+    }
+
+    .news-date {
+        flex: 0 0 68px;
+    }
+
+    .news-title {
+        flex: 1 0 calc(100% - 26px);
+    }
+
+    .news-chevron {
+        margin-left: 4px;
+    }
+
+    .news-acc-body {
+        padding: 20px 20px 24px;
+    }
+
+    .news-event-desc {
+        font: var(--text-body-default);
+    }
+
+    /* 插圖：U 形在標題右邊、襪子在列表右下，尺寸位置照設計稿 */
+    .news-deco--left {
+        top: 58px;
+        left: auto;
+        right: 117px;
+        width: 82px;
+        opacity: 0.8;
+        transform: rotate(-65.83deg);
+    }
+
+    .news-deco--right {
+        bottom: 198px;
+        right: 158px;
+        width: 118px;
+    }
+}
+
+/* ============================================================
+   平板版 768–1023px：探索視角（文章列表）
+   區塊 padding 40 0 48；內容左右 40、間距 16
+   副標 H5 16/1.5 分兩行；文章卡：照片在左（335x225）、文字在右，間距 32
+   作者 18/1.9、標題 H4 20/1.4、摘要 18/1.9 最多三行
+   ============================================================ */
+@media (max-width: 1023px) {
+    .gallery-body {
+        padding: 40px 0 48px;
+    }
+
+    .gallery-container {
+        padding: 0 40px;
+        gap: 16px;
+    }
+
+    /* 副標在平板稿拆成兩行，行尾的逗號不顯示 */
+    .gallery-subtitle {
+        font: var(--text-heading-h5);
+    }
+
+    .gallery-subtitle-comma {
+        display: none;
+    }
+
+    .gallery-subtitle-line {
+        display: block;
+    }
+
+    .gallery-article {
+        flex-direction: row-reverse;
+        gap: 32px;
+        padding: 16px 0;
+    }
+
+    /* 照片寬 335 / 內容寬 688 = 48.7% */
+    .gallery-article-photo {
+        flex: 0 0 48.7%;
+        width: 48.7%;
+        height: auto;
+        aspect-ratio: 413 / 277;
+    }
+
+    .gallery-article-text {
+        gap: 16px;
+    }
+
+    .gallery-article-content {
+        height: auto;
+        gap: 8px;
+    }
+
+    .gallery-article-title {
+        font: var(--text-heading-h4);
+    }
+
+    .gallery-article-desc {
+        flex: none;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
+
+/* ============================================================
+   平板版 768–1023px：探索視角（文章內頁，三篇共用）
+   Banner：照片置中填滿；區塊 padding 40 0 48；內容左右 40、下 32
+   標題 H2 32/1.3、小標 H4 20/1.4、內文 18/1.9、麵包屑 16/1.8
+   ============================================================ */
+@media (max-width: 1023px) {
+    /* 桌機版的裁切寫在標籤上，平板改回置中填滿 */
+    .hero--article {
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    .post-body {
+        padding: 40px 0 48px;
+    }
+
+    .post-main {
+        padding: 0 40px 32px;
+    }
+
+    .post-section-title {
+        font: var(--text-heading-h4);
+    }
+
+    /* 第一篇插圖：蛋形照片在作者列右邊；水滴和圓形照片在文章結尾右側，
+       從區塊底部往上定位，文字換行變多變少都會跟著走 */
+    .post-deco--right-photo,
+    .post-deco--right-illust,
+    .post-deco--left-photo {
+        display: block;
+    }
+
+    .post-deco--right-photo {
+        top: 69px;
+        right: 117px;
+        width: 127px;
+        transform: rotate(7.63deg);
+    }
+
+    .post-deco--right-illust {
+        top: auto;
+        bottom: 208px;
+        right: 159px;
+        width: 44px;
+        transform: rotate(-90deg);
+    }
+
+    /* 第二篇插圖：黃色塗鴉在標題右邊；圓形照片在文章結尾右下角 */
+    .post2-deco--left-illust,
+    .post2-deco--right-photo {
+        display: block;
+    }
+
+    .post2-deco--left-illust {
+        top: 168px;
+        left: auto;
+        right: 97px;
+        width: 68px;
+    }
+
+    .post2-deco--right-photo {
+        top: auto;
+        bottom: 10px;
+        right: 128px;
+        width: 106px;
+    }
+
+    /* 第三篇：Banner 換成平板專用裁切（原始照片取中段，同設計稿）
+       蛋形照片在作者列右邊；圓形照片在文章結尾右下角；
+       漢堡改成接在第一段最後一個字後面，跟著文字換行走，負 margin 是為了不撐高那一行 */
+    .hero--post3 {
+        background-image: url('/images/journal/banner-4-tablet.jpg') !important;
+    }
+
+    .post3-deco--right-photo,
+    .post3-deco--left-photo {
+        display: block;
+    }
+
+    /* 圖檔的外框已轉 -21 度，這裡只補差的角度；寬度、位置換算成跟改圖前同樣大小、同中心 */
+    .post3-deco--right-photo {
+        top: 72px;
+        right: 101px;
+        width: 133px;
+        transform: none;
+    }
+
+    .post3-deco--left-photo {
+        top: auto;
+        bottom: 8px;
+        left: auto;
+        right: 96px;
+        width: 141px;
+    }
+
+    .post3-inline-illust {
+        display: inline-block;
+        position: relative;
+        top: 8px;
+        width: 44px;
+        height: 44px;
+        margin: -16px 0 -16px 3px;
+        vertical-align: middle;
+    }
+
+    .post-deco--left-photo {
+        top: auto;
+        bottom: 31px;
+        left: auto;
+        right: 74px;
+        width: 100px;
+        transform: rotate(8.6deg);
+    }
+}
+
+/* ============================================================
+   平板版 768–1023px：學員登入
+   Banner 照片置中填滿；區塊 padding 32 0；登入框寬 480、padding 32 20
+   ============================================================ */
+@media (max-width: 1023px) {
+    /* 桌機版的裁切寫在標籤上，平板改回置中填滿 */
+    .hero--login {
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    .login-body {
+        padding: 32px 16px;
+    }
+
+    .login-box {
+        width: 480px;
+        padding: 32px 20px;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px（設計稿寬 375，適用 320–767px）
+   Header／Footer 與內容左右 padding 20；內容寬度隨螢幕流動
+   這一段只放整站共用的基礎：文字樣式（Mobile/…）、Header、Footer
+   各頁的手機版面接在後面的區塊
+   ============================================================ */
+@media (max-width: 767px) {
+    :root {
+        /* 手機文字樣式：只列出跟平板不同的 */
+        --text-display-hero: 500 40px/1.45 var(--font-family-base);
+        --text-display-letter: 700 32px/1 var(--font-family-base);
+        --text-heading-h1: 700 30px/1.3 var(--font-family-base);
+        --text-heading-h2: 700 26px/1.3 var(--font-family-base);
+        --text-heading-subtitle: 500 16px/1.4 var(--font-family-base);
+        --text-heading-h3: 700 22px/1.4 var(--font-family-base);
+        --text-heading-h4: 700 18px/1.4 var(--font-family-base);
+        --text-body-lead: 500 18px/1.5 var(--font-family-base);
+        --text-body-large: 400 16px/1.9 var(--font-family-base);
+        --text-body-large-strong: 500 16px/1.9 var(--font-family-base);
+        --text-label-emphasis: 700 15px/1.8 var(--font-family-base);
+        --text-label-strong: 700 13px/1.7 var(--font-family-base);
+        --text-label-eyebrow: 400 13px/1.5 var(--font-family-base);
+        --text-ui-button: 700 15px/1.5 var(--font-family-base);
+    }
+
+    /* Header：外層 20 + 內層 16 */
+    .header-inner {
+        padding: 0 36px;
+    }
+
+    .header-nav {
+        padding: 8px 20px 24px;
+    }
+
+    .footer {
+        padding: 24px 20px;
+    }
+
+    .footer-container {
+        gap: 8px;
+    }
+
+    .footer-top {
+        gap: 16px;
+    }
+
+    /* Banner：手機稿 375 寬時，內頁高 220、首頁高 430，依比例縮放讓照片裁切範圍跟設計稿一致；
+       各有上限，避免手機版最寬那一段變得太高 */
+    .hero {
+        height: min(58.67vw, 430px);
+    }
+
+    .hero--home {
+        height: min(114.67vw, 560px);
+    }
+}
+
+
+/* ============================================================
+   手機版 < 768px：首頁
+   各區塊內容左右 20；標題 H3 22/1.4
+   ============================================================ */
+@media (max-width: 767px) {
+    /* ---- 品牌故事：文字在上、拼貼圖滿寬在下，間距 24 ---- */
+    .story-container {
+        padding: 0 20px;
+    }
+
+    .story-text h2 {
+        font: var(--text-heading-h3);
+    }
+
+    /* 寬度上限 578 = 平板 768 寬時的大小，剛切進手機版時不會突然放大 */
+    .story-image {
+        width: min(100%, 578px);
+        margin-top: 2px; 
+        margin-bottom: 67px;
+    }
+
+    /* 彩蛋插圖：左右置中，壓在拼貼圖上緣往下 14px 的位置 */
+    .story-icon {
+        left: calc(50% - 42px);
+        top: calc(100% + 42px); /* 疊進圖框上緣 16px（同設計稿） */
+        width: 85px;
+        transform: none;
+    }
+
+    
+    .meaning-container {
+        padding: 40px 20px;
+    }
+
+    .meaning-bg-illust {
+        display: none;
+    }
+
+    .meaning-title {
+        font: var(--text-heading-h3);
+    }
+
+    .verba-item {
+        grid-template-columns: 48px 1fr;
+    }
+
+    /* ---- 教學目標 ---- */
+    .philosophy-inner {
+        padding: 0 20px;
+    }
+
+    .philosophy-illust img {
+        max-width: 182px;
+    }
+
+    .philosophy-title {
+        font: var(--text-heading-h3);
+    }
+
+    /* ---- 教學方法、教學原則：插圖在手機版放回來，位於文字右下方 ---- */
+    .methods-container,
+    .principles-container {
+        padding: 0 20px;
+    }
+
+    .methods-title,
+    .principles-title {
+        font: var(--text-heading-h3);
+    }
+
+    /* 下方留白給插圖，不壓文字 */
+    .methods {
+        padding-bottom: 112px;
+    }
+
+    .principles {
+        padding-bottom: 132px;
+    }
+
+    .methods-illust {
+        display: block;
+        top: auto;
+        right: 64px;
+        bottom: -96px;
+        width: 126px;
+        opacity: 0.8;
+    }
+
+    .principles-illust {
+        display: block;
+        left: auto;
+        right: 37px;
+        bottom: 16px;
+        width: 147px;
+        opacity: 0.8;
+        transform: rotate(-6deg);
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：隱私權政策／服務條款／聯絡我們（三頁共用）
+   區塊 padding 48 0；內容左右 20、間距 32
+   麵包屑 16/1.8，目前頁 15 粗體；標題 H3 22/1.4；內文 16/1.8 置中
+   ============================================================ */
+@media (max-width: 767px) {
+    .policy-container {
+        padding: 0 20px;
+    }
+
+    .policy-breadcrumb-current {
+        font: var(--text-label-emphasis);
+    }
+
+    .policy-title {
+        font: var(--text-heading-h3);
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：關於我們
+   各區塊 padding 48 0、內容左右 20；標題圖置中
+   資訊列：標籤寬 73（13/1.5）＋內容左留白 20（16/1.9）
+   作息表改直排：時間膠囊在上、活動文字置中在下，不顯示星期表頭
+   ============================================================ */
+@media (max-width: 767px) {
+    
+    .campus,
+    .corporate-section {
+        padding: 48px 0;
+    }
+
+    .campus-container,
+    .corporate-container {
+        padding: 0 20px;
+    }
+
+    .campus-container {
+        gap: 16px;
+    }
+
+    .campus-title-image {
+        width: 213px;
+        height: 61px;
+        align-self: center;
+    }
+
+    .corporate-title {
+        width: 285px;
+        height: 69px;
+        align-self: center;
+    }
+
+    .school-info-label {
+        color: #787877;
+    }
+
+    .info-content,
+    .corporate-info-content {
+        padding-left: 20px;
+    }
+
+    .school-info-content-text,
+    .corporate-info-text {
+        font: var(--text-body-large);
+        color: #444444;
+    }
+
+    /* ---- 一日作息 ---- */
+    .schedule {
+        padding: 48px 0;
+    }
+
+    .schedule-container {
+        padding: 0 20px;
+        gap: 16px;
+    }
+
+    .schedule-title-row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .schedule-title {
+        width: 193px;
+        height: 71px;
+    }
+
+    .schedule-head {
+        display: none;
+    }
+
+    .schedule-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 0;
+        border-bottom-color: #E8ECF0;
+    }
+
+    .schedule-time {
+        flex: none;
+        width: auto;
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: #F8F9FA;
+    }
+
+    .schedule-activity {
+        flex: none;
+        width: 100%;
+        padding: 0 12px;
+    }
+
+    
+    .schedule-split-content {
+        flex: none;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .schedule-split-baby {
+        border-bottom: 0;
+    }
+
+    .schedule-split-baby-cell {
+        padding: 0;
+    }
+
+    .schedule-split-older {
+        flex-direction: column;
+        gap: 0;
+        padding: 4px 16px;
+        border-radius: 12px;
+        background: #F8F9FA;
+        box-sizing: border-box;
+    }
+
+    .schedule-split-older-cell {
+        flex: none;
+        padding: 12px 0;
+    }
+
+    .schedule-split-older-cell br {
+        display: none;
+    }
+
+    .schedule-split-older-cell::before {
+        flex: 0 0 92px;
+        font: var(--text-label-eyebrow);
+        letter-spacing: 0.02em;
+        text-align: left;
+    }
+
+    .schedule-split-older-cell:nth-child(1)::before { content: 'Monday'; }
+    .schedule-split-older-cell:nth-child(2)::before { content: 'Tuesday'; }
+    .schedule-split-older-cell:nth-child(3)::before { content: 'Wednesday'; }
+    .schedule-split-older-cell:nth-child(4)::before { content: 'Thursday'; }
+    .schedule-split-older-cell:nth-child(5)::before { content: 'Friday'; }
+
+    .schedule-note {
+        margin-top: 16px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* ---- 插圖：尺寸、角度照手機設計稿；位置各自跟著所在的標題或那一列 ---- */
+    .campus-decoration {
+        right: -13px;
+        bottom: 28px;
+        width: 241px;
+    }
+
+    
+    .corporate-decoration {
+        display: none;
+    }
+
+    .schedule-title-decoration {
+        left: calc(50% + 95px);
+        top: -23px;
+        width: 20px;
+        transform: rotate(-109.57deg);
+    }
+
+    .corporate-schedule-decoration {
+        left: calc(50% + 61px);
+        top: -16px;
+        width: 73px;
+        transform: rotate(-12.36deg);
+    }
+
+    .schedule-nap-decoration {
+        left: calc(50% + 26px);
+        top: 34px;
+        width: 63px;
+        transform: rotate(19.96deg);
+    }
+
+    .corporate-schedule-nap-decoration {
+        left: calc(50% + 31px);
+        top: 42px;
+        width: 63px;
+        transform: rotate(19.96deg);
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：語言課程（七個課程共用）與下拉選單
+   Banner 文字、下拉選單、內容左右留白都是 20
+   大標 H1 30、小標 H4 18、內文 16/1.9；條列縮排 24
+   輪播：左右 20、圖高 192
+   ============================================================ */
+@media (max-width: 767px) {
+    .hero-inner {
+        padding: 0 20px;
+    }
+
+    .region-dropdown {
+        padding: 16px 20px;
+    }
+
+    .teaching-system-title,
+    .teaching-images,
+    .teaching-media,
+    .teaching-info-section-title,
+    .teaching-info-section-body,
+    .teaching-content-block-title,
+    .teaching-content-block-body,
+    .teaching-content-sub-title {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* 大標題列不留桌機版的最小高度，標題上方才會是設計稿的 56px */
+    .teaching-system-title {
+        min-height: 0;
+    }
+
+    .teaching-content-list {
+        padding-right: 20px;
+        padding-left: calc(20px + 24px);
+    }
+
+    .teaching-content-list.is-nested {
+        padding-left: calc(20px + 48px);
+    }
+
+    .teaching-gallery-track {
+        padding: 24px 20px;
+        scroll-padding-left: 20px;
+    }
+
+    /* 插圖：平板版的位置在手機不適用，先全部隱藏；有手機設計稿的再個別放回來 */
+    .teaching-system-section .teaching-media-decoration,
+    .teaching-system-section .teaching-system-title-decoration {
+        display: none !important;
+    }
+
+    /* 第一個課程：69px、逆時針 22.35 度，掛在「系統概述」區塊上（手機專用標籤），
+       中心大約對齊「系統概述」標題，上面文字換幾行都會跟著走 */
+    #humanities .teaching-media-decoration.is-mobile {
+        display: block !important;
+        z-index: -1;
+        top: -41px;
+        right: 70px;
+        width: 69px;
+        opacity: 0.8;
+        transform: rotate(-22.35deg);
+    }
+
+    /* 人際智能：四個人偶，103px、不旋轉，掛在「系統概述」區塊右上方（手機專用標籤） */
+    #interpersonal .teaching-media-decoration.is-mobile {
+        display: block !important;
+        z-index: -1;
+        top: -57px;
+        right: 18px;
+        width: 103px;
+    }
+
+    /* ---- 中文正音 ----
+       主圖：圖檔四周有白邊，放大到去背人像寬約 77%（375 寬時 288px）並置中，
+       用負 margin 把白邊吃掉，版面佔高才會是設計稿的 375:316 */
+    #chinese-pronunciation .teaching-media {
+        padding: 0;
+    }
+
+    #chinese-pronunciation .teaching-media-main-image {
+        width: min(82.6vw, 359px);
+        margin: max(-6.9vw, -30px) auto max(-7.3vw, -32px);
+    }
+
+    /* 教學特色：第一項有圓點，其餘三項再縮一層（手機的縮排是 24） */
+    #chinese-pronunciation .teaching-info-list > .teaching-content-block:nth-child(4) li:not(:first-child) {
+        margin-left: 24px;
+    }
+
+    /* 輪播：前兩張只露出左半頁（寬 149），後兩張寬 300 */
+    #chinese-pronunciation .gallery-slide {
+        width: 300px !important;
+    }
+
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2) {
+        width: 149px !important;
+    }
+
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
+        object-position: left center;
+    }
+
+    /* 音樂律動、創思數學、潛能開發的輪播：圖檔是 2:1 的跨頁，手機稿每張寬 300、裁掉一部分
+       音樂第一張只露出右頁（封面）寬 149，第二張靠左裁；創思數學第一張靠右裁；其餘置中 */
+    #music .gallery-slide,
+    #creative-math .gallery-slide,
+    #potential-development .gallery-slide {
+        width: 300px !important;
+    }
+
+    #music .gallery-slide:first-child {
+        width: 149px !important;
+    }
+
+    #music .gallery-slide:first-child img {
+        object-position: 81.7% center;
+    }
+
+    #music .gallery-slide:nth-child(2) img {
+        object-position: left center;
+    }
+
+    #creative-math .gallery-slide:first-child img {
+        object-position: right center;
+    }
+
+
+    /* 插圖：書用手機專用標籤掛在「系統概述」右上；ㄅㄆㄇ 沿用平板的標籤，改手機的位置
+       ㄅ 在「各班課程重點」結尾右下、ㄆ 壓在「教學特色」標題上、ㄇ 在「課程內容」結尾右下 */
+    #chinese-pronunciation .teaching-media-decoration.is-mobile,
+    #chinese-pronunciation .teaching-media-decoration.is-tablet {
+        display: block !important;
+        z-index: -1;
+        opacity: 0.8;
+    }
+
+    #chinese-pronunciation .teaching-media-decoration.is-mobile {
+        top: -80px;
+        right: -1px;
+        width: 183px;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄅ"] {
+        top: auto;
+        bottom: -60px;
+        left: auto;
+        right: 41px;
+        width: 73px;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄆ"] {
+        top: -25px;
+        left: 82px;
+        width: 73px;
+    }
+
+    #chinese-pronunciation .is-tablet[src*="ㄇ"] {
+        top: auto;
+        bottom: -81px;
+        right: 60px;
+        width: 90px;
+    }
+
+    /* 生活美語：ABC 插圖沿用平板的標籤，105px，在「系統概述」標題右上方。
+       平板那個依換行切換高低的 is-raised 在手機不需要，兩種狀態都固定同一個位置 */
+    #english .teaching-media-decoration.is-tablet,
+    #english .teaching-media-decoration.is-tablet.is-raised {
+        display: block !important;
+        z-index: -1;
+        top: -42px;
+        right: 27px;
+        width: 105px;
+        opacity: 0.8;
+    }
+
+    /* ---- 音樂律動 ----
+       高音譜號（沿用桌機標籤）在「適用年齡層」右邊；灰色音符在「課程重點」右邊、
+       黃色音符在「教學特色」標題上方（這兩個是手機專用標籤）；粉紅音符沿用平板標籤，在「課程內容」標題右邊 */
+    #music .teaching-info > .teaching-media-decoration[src*="插圖1"] {
+        display: block !important;
+        top: 13px !important;
+        right: 31px !important;
+        width: 80px !important;
+        transform: rotate(15deg) !important;
+        z-index: -1;
+    }
+
+    #music .teaching-media-decoration.is-mobile,
+    #music .teaching-media-decoration.is-tablet[src*="插圖3"] {
+        display: block !important;
+        z-index: -1;
+    }
+
+    #music .is-mobile[src*="插圖4"] {
+        top: -12px;
+        right: 5px;
+        width: 117px;
+    }
+
+    #music .is-mobile[src*="插圖2"] {
+        top: -54px;
+        left: 92px;
+        width: 77px;
+    }
+
+    #music .is-tablet[src*="插圖3"] {
+        top: -68px;
+        right: -4px;
+        width: 118px;
+        transform: rotate(13deg);
+    }
+
+    /* ---- 創思數學 ----
+       思考泡泡在「系統概述」右上、乘號在「各班課程重點」右上、百分比在「教學特色」標題上方
+       （這三個是手機專用標籤）；加號沿用平板標籤，在「課程內容」文字結尾右下 */
+    #creative-math .teaching-media-decoration.is-mobile,
+    #creative-math .teaching-media-decoration.is-tablet[src*="插圖4"] {
+        display: block !important;
+        z-index: -1;
+    }
+
+    #creative-math .teaching-media-decoration.is-mobile[src*="插圖1"] {
+        top: -63px;
+        right: 56px;
+        width: 77px;
+        transform: rotate(17deg);
+    }
+
+    /* 寬 400 以上時，上面「教材配置」那行不再換行，泡泡顯得太高，往下 20px */
+    @media (min-width: 400px) {
+        #creative-math .teaching-media-decoration.is-mobile[src*="插圖1"] {
+            top: -43px;
+        }
+    }
+
+    #creative-math .teaching-media-decoration.is-mobile[src*="插圖2"] {
+        top: -48px !important;
+        left: auto !important;
+        right: 15px;
+        width: 93px !important;
+        transform: rotate(27deg) !important;
+    }
+
+    #creative-math .teaching-media-decoration.is-mobile[src*="插圖3"] {
+        top: -60px;
+        left: 90px;
+        width: 144px;
+    }
+
+    #creative-math .teaching-media-decoration.is-tablet[src*="插圖4"] {
+        bottom: -39px;
+        right: 17px;
+        width: 112px;
+        transform: rotate(-32deg);
+    }
+
+    /* ---- 潛能開發 ----
+       拼圖插圖沿用桌機那個掛在「各班課程內容」區塊上的標籤，101px，在標題右上方
+       （桌機的大小位置寫在標籤上，所以用 !important 蓋過） */
+    #potential-development .teaching-content-block > .teaching-media-decoration:not(.is-tablet):not(.is-mobile) {
+        display: block !important;
+        top: -54px !important;
+        right: 27px !important;
+        width: 101px !important;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：校區資訊
+   卡片排法同平板（上排照片＋文字、下排四顆按鈕），內容左右留白改 20
+   地區標題 H4 18；按鈕字 15；導航按鈕左右內距 12
+   ============================================================ */
+@media (max-width: 767px) {
+    .region-container {
+        padding: 0 20px;
+    }
+
+    .branch-btn--nav {
+        padding: 0 12px;
+    }
+
+    /* 插圖：其他地區的手機位置還沒有設計稿，先隱藏；
+       台北 66px，在第一、二間校區之間的右側 */
+    .region-deco {
+        display: none;
+    }
+
+    #taipei .region-deco {
+        display: block;
+        top: 269px;
+        right: 60px;
+        width: 66px;
+        z-index: 1; /* 疊在校區卡片的分隔線上面 */
+    }
+
+    /* 新竹：星星 48px，在第一、二間校區之間的右側，同樣疊在分隔線上 */
+    .region-deco--hsinchu {
+        display: block;
+        top: 265px;
+        right: 53px;
+        width: 48px;
+        z-index: 1;
+    }
+
+    /* 台中：水滴轉成橫向（橫向約 80px），在第二間校區按鈕列的右下方 */
+    .region-deco--taichung {
+        display: block;
+        top: 472px;
+        right: 61px;
+        width: 42px;
+        z-index: 1; /* 疊在按鈕和分隔線上面 */
+        transform: rotate(-90deg);
+    }
+
+    /* 海外：花 76px，在第一、二間校區之間的右側。
+       海外的地址會折成兩三行、卡片高度不固定，所以改掛在第一張卡片的右下角，不用區塊頂端算位置 */
+    #overseas .branch-item:first-child {
+        position: relative;
+    }
+
+    #overseas .branch-item:first-child::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        right: 21px;
+        bottom: -22px;
+        width: 76px;
+        height: 62px;
+        background: url('/images/deco/region-g.png') center / contain no-repeat;
+        opacity: 0.8;
+        pointer-events: none;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：最新消息
+   排法同平板（消息列兩排：日期＋標籤／標題＋箭頭），內容左右留白改 20
+   標題 H4 18；消息標題、活動名稱 15/1.8；活動內文 16/1.8
+   ============================================================ */
+@media (max-width: 767px) {
+    .news-main {
+        padding: 0 20px;
+    }
+
+    /* 插圖：U 形在第一則消息的右側；襪子在展開內容結尾的右側 */
+    .news-deco--left {
+        top: 144px;
+        right: 15px;
+    }
+
+    /* 襪子掛在消息的標題列上（往上凸出 63px），不用區塊頂端或底部算位置：
+       第一則展開時 → 掛在第二則，落在展開內容結尾和第二則之間的右側（同設計稿）
+       第一則收合時 → 改掛在最後一則，落在列表右下，避免往上跑去跟 U 形插圖疊在一起 */
+    .news-deco--right {
+        display: none;
+    }
+
+    /* 只顯示六則時，「最後一則」是第六則；按了查看更多才是真正的最後一則 */
+    .news-acc-item:first-child[open] + .news-acc-item .news-acc-head,
+    .news-accordion.is-expanded .news-acc-item:first-child:not([open]) ~ .news-acc-item:last-child .news-acc-head,
+    .news-accordion:not(.is-expanded) .news-acc-item:first-child:not([open]) ~ .news-acc-item:nth-child(6) .news-acc-head {
+        position: relative;
+    }
+
+    .news-acc-item:first-child[open] + .news-acc-item .news-acc-head::after,
+    .news-accordion.is-expanded .news-acc-item:first-child:not([open]) ~ .news-acc-item:last-child .news-acc-head::after,
+    .news-accordion:not(.is-expanded) .news-acc-item:first-child:not([open]) ~ .news-acc-item:nth-child(6) .news-acc-head::after {
+        content: '';
+        position: absolute;
+        z-index: -1; /* 壓在半透明白底的消息列後面，所以看起來比較淡 */
+        top: -63px;
+        right: 0;
+        width: 118px;
+        height: 92px;
+        background: url('/images/deco/news-right.png') center / contain no-repeat;
+        opacity: 0.8;
+        pointer-events: none;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：探索視角（文章列表）
+   內容左右 20；文章卡改直排：作者 → 標題 H3 22 → 摘要 16/1.9（最多三行）→ 照片滿寬
+   ============================================================ */
+@media (max-width: 767px) {
+    /* 這張圖檔是有白邊和插圖的海報，照片只佔中間 85%。
+       放大到 118% 讓照片剛好滿寬，再對到照片的垂直中段（同手機設計稿） */
+    .hero--gallery {
+        background-size: 118% auto !important;
+        background-position: 54.6% 50.5% !important;
+    }
+
+    .gallery-container {
+        padding: 0 20px;
+    }
+
+    .gallery-article {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .gallery-article-text {
+        gap: 4px;
+    }
+
+    .gallery-article-author {
+        gap: 4px;
+    }
+
+    .gallery-article-title {
+        font: var(--text-heading-h3);
+    }
+
+    .gallery-article-photo {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：探索視角（文章內頁，三篇共用）
+   內容左右 20、下 32；麵包屑可換行（行距 4），目前頁 15 粗體
+   文章標題依各篇設計稿（16 或 22）；小標 H4 18；內文 16/1.9
+   ============================================================ */
+@media (max-width: 767px) {
+    .post-main {
+        padding: 0 20px 32px;
+    }
+
+    /* 麵包屑維持同一排；文章標題太長時，在自己那一格裡折行（第二行對齊標題開頭） */
+    .post-breadcrumb {
+        flex-wrap: nowrap;
+        gap: 4px 8px;
+    }
+
+    .post-breadcrumb > * {
+        flex: none;
+        white-space: nowrap;
+    }
+
+    .post-breadcrumb > .post-breadcrumb-current {
+        flex: 1 1 0;
+        min-width: 0;
+        white-space: normal;
+        font: var(--text-label-emphasis);
+    }
+
+    /* 文章標題照各篇的手機設計稿：第一、二篇 16px 中等粗細（Subtitle），第三篇 22px 粗體（H3） */
+    .post-title {
+        font: var(--text-heading-subtitle);
+        letter-spacing: 0.02em;
+    }
+
+    .post-title--bold {
+        font: var(--text-heading-h3);
+        letter-spacing: 0;
+    }
+
+    /* 作者頭像：圖檔四周有透明留白，放大 1.2 倍讓看得到的圖案跟設計稿一樣大；
+       用 transform 放大，不改變佔位，旁邊的文字和下面的內容不會被推動 */
+    .post-author-avatar {
+        transform: scale(1.2);
+    }
+
+    /* ---- 第一篇插圖 ----
+       蛋形照片在作者列右邊；圓形照片在文章結尾右下（從區塊底部定位）；
+       水滴改接在第 2 點小標「感受愛與同理心：」後面，跟著文字走 */
+    .post-deco--right-photo {
+        top: 106px;
+        right: 44px;
+        width: 99px;
+        height: 122px; 
+        object-fit: cover;
+        transform: rotate(7.63deg); 
+    }
+
+    .post-deco--left-photo {
+        bottom: 11px;
+        right: 55px;
+        width: 101px;
+        transform: none;
+        z-index: 0; /* 壓在文字後面 */
+    }
+
+    .post-deco--right-illust {
+        display: none;
+    }
+
+    .post-list > li:nth-child(2) .post-list-head::after {
+        content: '';
+        display: inline-block;
+        width: 32px;
+        height: 59px;
+        margin: -14px 14px -14px 19px;
+        vertical-align: middle;
+        background: url('/images/deco/post1.png') center / contain no-repeat;
+        transform: translateY(-8px) rotate(-89.66deg);
+    }
+
+    /* ---- 第二篇插圖 ----
+       黃色塗鴉改掛在第一段結尾的右邊（貼螢幕右緣）；圓形照片在文章結尾右下 */
+    .post2-deco--left-illust {
+        display: none;
+    }
+
+    .post-body:has(.post2-deco--left-illust) .post-text p:first-child {
+        position: relative;
+    }
+
+    .post-body:has(.post2-deco--left-illust) .post-text p:first-child::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        right: -20px;
+        bottom: -28px;
+        width: 70px;
+        height: 68px;
+        background: url('/images/deco/post2.png') center / contain no-repeat;
+    }
+
+    /* 照片下緣超出區塊底部 7px，被裁掉一點（同設計稿） */
+    .post2-deco--right-photo {
+        bottom: -7px;
+        right: 42px;
+        width: 107px;
+        transform: none;
+    }
+
+    /* ---- 第三篇插圖 ----
+       蛋形照片在作者列右邊；漢堡接在第一段最後一個字後面；地球照片在結尾右下（右邊超出螢幕一點） */
+    /* 圖檔的外框已轉 -21 度，這裡只補差的角度；寬度、位置換算成跟改圖前同樣大小、同中心 */
+    .post3-deco--right-photo {
+        top: 109px;
+        right: 51px;
+        width: 108px;
+        transform: rotate(-0.81deg);
+    }
+
+    .post3-inline-illust {
+        top: 4px;
+        width: 45px;
+        height: 45px;
+        margin: -16px 0 -16px 24px;
+    }
+
+    /* 最後一行排滿、插圖被擠到下一行時：改靠右放在兩段之間的空白，不另外佔一行高度 */
+    .post3-inline-illust.is-wrapped {
+        display: block;
+        top: 0;
+        margin: -4px 0 -41px auto;
+    }
+
+    /* 照片右邊超出螢幕 18px、下緣超出區塊底部 7px，都被裁掉一點（同設計稿） */
+    .post3-deco--left-photo {
+        bottom: -7px;
+        right: -18px;
+        width: 141px;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：學員登入
+   區塊 padding 32 21；登入框滿寬、最寬 333、padding 32 20
+   標題 H4 18、輸入文字 16、按鈕字 15（吃手機文字樣式，不用另外設定）
+   ============================================================ */
+@media (max-width: 767px) {
+    /* Banner：手機稿把照片放大到 112% 並置中（平板是置中填滿） */
+    .hero--login {
+        background-size: 112% auto !important;
+        background-position: 50% 50% !important;
+    }
+
+    .login-body {
+        padding: 32px 21px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 333px;
+    }
+}
+
+/* ============================================================
+   手機版 < 768px：404
+   內容左右 20；說明文字固定在逗號後換行；按鈕滿寬
+   404 數字 40、標題 22、按鈕字 15 吃手機文字樣式
+   ============================================================ */
+@media (max-width: 767px) {
+    .notfound-container {
+        padding: 0 20px;
+    }
+
+    .notfound-text-line {
+        display: block;
+    }
+
+    /* 手機稿說明文字到按鈕是 40（間距 16 + 空白 8 + 間距 16） */
+    .notfound-btn {
+        width: 100%;
+        margin-top: 24px;
+    }
+}
+
+/* ============================================================
+   語音教學 audio.php 的平板、手機版（沒有設計稿，比照登入頁的規格）
+   平板：區塊 padding 32 40
+   手機：區塊 padding 32 21；標題 H4 18；項目內距 16 20；按鈕高 44（觸控最小尺寸）
+   ============================================================ */
+@media (max-width: 1023px) {
+    .audio-body {
+        padding: 32px 40px 48px;
+    }
+}
+
+@media (max-width: 767px) {
+    .audio-body {
+        padding: 32px 21px 48px;
+    }
+
+    .audio-semester-title {
+        font: var(--text-heading-h4);
+    }
+
+    .audio-item {
+        gap: 12px;
+        padding: 16px 20px;
+    }
+
+    .audio-logout,
+    .audio-download {
+        height: 44px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        font: var(--text-ui-button);
+    }
+
+    .audio-empty {
+        padding: 40px 20px;
+    }
+}
+
+/* ============================================================
+   平板版 768–1023px：語言課程輪播的縮圖寬度與裁切（只給平板，手機版另外獨立設定）
+   設計稿的縮圖高 192，寬度只有兩種：300（整張或跨頁裁掉一部分）和 149（只露出封面那一頁）
+   桌機版的寬度寫在標籤上，所以用 !important 蓋過
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+    #chinese-pronunciation .gallery-slide,
+    #english .gallery-slide,
+    #music .gallery-slide,
+    #creative-math .gallery-slide,
+    #potential-development .gallery-slide {
+        width: 300px !important;
+    }
+
+    /* 只露出封面：中文正音前兩張（左頁）、生活美語前兩張（右頁）、音樂律動第一張（右頁） */
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2),
+    #english .gallery-slide:nth-child(-n+2),
+    #music .gallery-slide:first-child {
+        width: 149px !important;
+    }
+
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
+        object-position: left center;
+    }
+
+    #english .gallery-slide:nth-child(-n+2) img {
+        object-position: right center;
+    }
+
+    #music .gallery-slide:first-child img {
+        object-position: 81.7% center;
+    }
+
+    /* 生活美語第三、四張是方形和直式的圖，放大到 300 寬後取中段和下段 */
+    #english .gallery-slide:nth-child(3) img {
+        object-position: center 45%;
+    }
+
+    #english .gallery-slide:nth-child(4) img {
+        object-position: center 90%;
+    }
+
+    /* 跨頁圖靠哪一邊裁 */
+    #music .gallery-slide:nth-child(2) img,
+    #music .gallery-slide:nth-child(3) img {
+        object-position: left center;
+    }
+}
+
+/* ============================================================
+   桌機版 ≥ 1024px：語言課程輪播的縮圖寬度與裁切（第 3–7 個系統，照桌機設計稿）
+   縮圖高 188；寬度寫在標籤上，所以用 !important 蓋過
+   「只露出封面」的做法：圖片拉成框的兩倍寬、往左推一半，只露出右頁的封面；
+   設計稿的封面是整頁拉寬填滿框（高度完整、寬度被拉開），照設計稿做
+   ============================================================ */
+@media (min-width: 1024px) {
+    .gallery-slide {
+        overflow: hidden;
+    }
+
+    /* ---- 中文正音：148、148、372、337；前兩張只露出左頁的封面 ---- */
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2) {
+        width: 148px !important;
+    }
+
+    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
+        object-position: left center;
+    }
+
+    #chinese-pronunciation .gallery-slide:nth-child(3) {
+        width: 372px !important;
+    }
+
+    /* ---- 生活美語：294、294、372、294；前兩張只露出右頁的封面 ---- */
+    #english .gallery-slide:nth-child(-n+2) {
+        width: 294px !important;
+    }
+
+    #english .gallery-slide:nth-child(-n+2) img {
+        width: 200%;
+        max-width: none;
+        margin-left: -100%;
+        object-fit: fill;
+    }
+
+    /* 第三張設計稿是把方形的圖壓扁成 372x188（看得到上面的書名和右下的 logo），照設計稿做 */
+    #english .gallery-slide:nth-child(3) {
+        width: 372px !important;
+    }
+
+    #english .gallery-slide:nth-child(3) img {
+        object-fit: fill;
+    }
+
+    #english .gallery-slide:nth-child(4) {
+        width: 294px !important;
+    }
+
+    #english .gallery-slide:nth-child(4) img {
+        object-position: center 85%;
+    }
+
+    /* ---- 音樂律動：221、294、372、294；第一張只露出右頁的封面 ---- */
+    #music .gallery-slide:first-child {
+        width: 221px !important;
+    }
+
+    #music .gallery-slide:first-child img {
+        width: 200%;
+        max-width: none;
+        margin-left: -100%;
+        object-fit: fill;
+    }
+
+    #music .gallery-slide:nth-child(2),
+    #music .gallery-slide:nth-child(4) {
+        width: 294px !important;
+    }
+
+    #music .gallery-slide:nth-child(4) img {
+        object-position: left center;
+    }
+
+    #music .gallery-slide:nth-child(3) {
+        width: 372px !important;
+    }
+
+    /* ---- 創思數學：294、294、372、294 ---- */
+    #creative-math .gallery-slide {
+        width: 294px !important;
+    }
+
+    #creative-math .gallery-slide:nth-child(3) {
+        width: 372px !important;
+    }
+
+    #creative-math .gallery-slide:nth-child(4) img {
+        object-position: left center;
+    }
+
+    /* ---- 潛能開發：四張都 294 ---- */
+    #potential-development .gallery-slide {
+        width: 294px !important;
+    }
+
+    #potential-development .gallery-slide:nth-child(4) img {
+        object-position: left center;
+    }
+}
+
+/* ============================================================
+   小桌機 1024–1300px：探索視角文章內頁的插圖
+   這段寬度兩側放不下桌機版的插圖（上面有一條規則把它們全部隱藏），
+   改用平板設計稿的擺法：放在作者列右邊、文章結尾右下、段落結尾。
+   --post-edge 是內容欄（900px 置中）右緣到區塊右緣的距離，
+   位置數值 = 平板的數值換算到這個內容欄；結尾的照片放在最後一行文字的下方，
+   因為這段寬度最後一行常常是滿的，放旁邊會壓到字
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1300px) {
+    .post-body {
+        --post-edge: calc((100% - 900px) / 2);
+    }
+
+    .post-deco--right-photo,
+    .post-deco--right-illust,
+    .post-deco--left-photo,
+    .post2-deco--left-illust,
+    .post2-deco--right-photo,
+    .post3-deco--right-photo,
+    .post3-deco--left-photo {
+        display: block;
+        top: auto;
+        left: auto;
+    }
+
+    /* 第一篇 */
+    .post-deco--right-photo {
+        top: 93px;
+        right: calc(var(--post-edge) + 77px);
+        width: 127px;
+        transform: rotate(7.63deg);
+    }
+
+    .post-deco--right-illust {
+        bottom: 256px;
+        right: calc(var(--post-edge) + 119px);
+        width: 44px;
+        transform: rotate(-90deg);
+    }
+
+    .post-deco--left-photo {
+        bottom: 20px;
+        right: calc(var(--post-edge) + 34px);
+        width: 100px;
+        transform: rotate(8.6deg);
+    }
+
+    /* 第二篇 */
+    .post2-deco--left-illust {
+        top: 192px;
+        right: calc(var(--post-edge) + 57px);
+        width: 68px;
+    }
+
+    .post2-deco--right-photo {
+        bottom: 14px;
+        right: calc(var(--post-edge) + 88px);
+        width: 106px;
+    }
+
+    /* 第三篇：漢堡改用接在第一段結尾的那一個 */
+    .post3-deco--right-photo {
+        top: 96px;
+        right: calc(var(--post-edge) + 61px);
+        width: 133px;
+        transform: none;
+    }
+
+    .post3-deco--left-photo {
+        bottom: 10px;
+        right: calc(var(--post-edge) + 56px);
+        width: 141px;
+    }
+
+    .post3-inline-illust {
+        display: inline-block;
+        position: relative;
+        top: 8px;
+        width: 44px;
+        height: 44px;
+        margin: -16px 0 -16px 3px;
+        vertical-align: middle;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .story-image {
+        width: min(100%, 688px); /* 設計稿 768 寬時是 688；平板寬一點也不再放大，置中 */
+        margin-top: -5px; /* 彩蛋插圖到左邊照片上緣 107px（同設計稿） */
+    }
+}
+
+/* 語言課程主圖外包 <picture>（平板換專用圖）時，讓 img 照樣當排版項目，套用上面同一組規則 */
+.teaching-images > picture {
+    display: contents;
+}
+
+.teaching-images > picture > source {
+    display: none;
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    #humanities .teaching-images {
+        align-items: center;
+    }
+
+    #humanities .teaching-images > picture > img {
+        aspect-ratio: 676 / 807;
+        border-radius: 0;
+    }
+}
+
+/* 平板：第三篇漢堡改回疊在右上蛋形照片的左下角（新版設計稿），不再接在第一段文字後面 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .post3-inline-illust {
+        display: none;
+    }
+
+    .post3-deco--right-illust {
+        display: block;
+        top: 163px;
+        right: 200px;
+        width: 44px;
+        z-index: 2;
+    }
+}
+
+/* 手機：第三篇漢堡同平板，改疊在蛋形照片的左下角（新版設計稿），不再接在第一段文字後面 */
+@media (max-width: 767px) {
+    .post3-inline-illust,
+    .post3-inline-illust.is-wrapped {
+        display: none;
+    }
+
+    .post3-deco--right-illust {
+        display: block;
+        top: 184px;
+        right: 133px;
+        width: 40px;
+        z-index: 2;
+    }
+}
+
+/* 桌機：第一個課程兩張都照原圖比例顯示到欄寬 562，不再平分欄高而被縮小（同設計稿）；兩張間距 32、整組垂直置中 */
+@media (min-width: 1024px) {
+    #humanities .teaching-images > img:not(.teaching-media-decoration),
+    #humanities .teaching-images > picture > img {
+        flex: 0 0 auto;
+        height: auto;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    /* 兩張不再置中：第一張貼齊欄頂、第二張貼齊欄底（同設計稿，拍立得底框上緣對齊右欄「引起動機」） */
+    #humanities .teaching-images {
+        justify-content: space-between;
+    }
+
+    #humanities .teaching-images > picture > img {
+        width: 562px;
+        height: 940px;
+        object-fit: cover;
+    }
+}
+
+/* 桌機：生活美語右下彩蛋拼貼縮小到 83%，中心不動（同設計稿：GREAT 上緣約對齊「外國語言學習時間」那行） */
+@media (min-width: 1024px) {
+    #english .teaching-images > img:nth-child(2) {
+        transform: scale(0.83);
+    }
+}
+
+/* 桌機：創思數學兩張照原比例顯示。第一張維持原位置；第二張（圓形照片，圖檔已裁到圓形邊緣）562x541，
+   上緣對齊右欄「評量與複習」那段（同設計稿） */
+@media (min-width: 1024px) {
+    #creative-math .teaching-images {
+        justify-content: flex-start;
+    }
+
+    #creative-math .teaching-images > picture > img {
+        flex: 0 0 auto;
+        height: auto;
+    }
+
+    #creative-math .teaching-images > picture:nth-child(1) > img {
+        margin-top: 226px;
+    }
+
+    #creative-math .teaching-images > picture:nth-child(2) > img {
+        margin-top: 554px;
+    }
+}
+
+/* 桌機：潛能開發兩張改成 3:4（562x749，同設計稿），各自對齊右欄文字：
+   第一張上緣在「經由故事、影片…」那行下方約 25px，第二張上緣在「Share Time（分享時間）」那行下方約 10px */
+@media (min-width: 1024px) {
+    #potential-development .teaching-images {
+        justify-content: flex-start;
+    }
+
+    #potential-development .teaching-images > picture > img {
+        flex: 0 0 auto;
+        height: auto;
+    }
+
+    #potential-development .teaching-images > picture:nth-child(1) > img {
+        margin-top: 232px;
+    }
+
+    #potential-development .teaching-images > picture:nth-child(2) > img {
+        margin-top: 470px; /* 上緣在「Share Time」那行下方約 10px（同設計稿） */
+    }
+}
+
+/* 平板：教學方法、教學原則的照片都放在段落右下 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* 照片放在文字下方，不壓文字 */
+    .methods {
+        padding-bottom: 128px;
+    }
+
+    .methods-illust {
+        display: block;
+        top: auto;
+        right: 66px;
+        bottom: -100px;
+        width: 130px;
+        opacity: 0.8;
+    }
+
+    .principles-illust {
+        display: block;
+        left: auto;
+        right: 138px;
+        bottom: 8px;
+        width: 100px; 
+        opacity: 0.8;
+        transform: rotate(86.68deg);
+    }
+
+    /* 下方留白給插圖，不壓文字 */
+    .principles {
+        padding-bottom: 128px;
+    }
+}
+
+/* 教學原則插圖外包 <picture>（平板換圖），不影響原本的絕對定位 */
+.principles-illust-picture {
+    display: contents;
+}
+
+
+/* 手機：第二篇插圖改位置（新版設計稿）
+   黃色塗鴉：從第一段結尾移到作者列右邊（標題右上）；圓形照片：在最後一行下方右側，下半部超出區塊被裁掉 */
+@media (max-width: 767px) {
+    .post-body:has(.post2-deco--left-illust) .post-text p:first-child::after {
+        content: none;
+    }
+
+    .post2-deco--left-illust {
+        display: block;
+        top: 150px;
+        left: auto;
+        right: 18px;
+        width: 78px;
+        transform: none;
+    }
+
+    /* 區塊高度不變，照片往下超出區塊、下緣被裁掉，看起來像躲在 footer 後面 */
+    .post2-deco--right-photo {
+        bottom: -6px;
+        transform: rotate(15deg);
+    }
+}
+
+/* 文章插圖外包 <picture>（手機換圖），不影響原本的絕對定位 */
+.post-deco-picture {
+    display: contents;
+}
+
+
+/* 桌機：探索視角列表的摘要最多 4 行，超過的部分用「…」收尾，看得出有延伸內容
+   （原本只用 overflow 裁掉，最後一行會直接切斷、沒有省略號） */
+@media (min-width: 1024px) {
+    .gallery-article-desc {
+        flex: none;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
+}
+
+
+
+.region-deco--taipei2 {
+    top: auto;
+    bottom: -52px;
+    right: -69px;
+    width: 588px;
+    transform: none;
+}
+
+@media (max-width: 1023px) {
+    #taipei .region-deco--taipei2 {
+        display: none;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    #taipei .region-deco:not(.region-deco--taipei2) {
+        top: 284px;
+        right: 302px;
+        width: 240px;
+    }
+}
+
+/* 新竹地區插圖（新版設計稿）：桌機在標題列到第一間校區右側，星球＋大星星＋小星星。
+   星球圖檔四周有大片透明留白；小星星是同一張星星圖縮小壓扁。平板、手機只保留原本的大星星 */
+@media (min-width: 1024px) {
+    .region-deco--hsinchu {
+        top: 228px;
+        right: 90px;
+        width: 106px;
+        transform: none;
+    }
+
+    .region-deco--hsinchu-b {
+        top: -36px;
+        right: 107px;
+        width: 311px;
+        transform: none;
+    }
+
+    .region-deco--hsinchu-c {
+        top: 181px;
+        right: 346px;
+        width: 46px;
+        transform: scaleY(0.85) rotate(-130deg);
+    }
+}
+
+@media (max-width: 1023px) {
+    #hsinchu .region-deco--hsinchu-b,
+    #hsinchu .region-deco--hsinchu-c {
+        display: none;
+    }
+}
+
+/* 台中地區插圖（新版設計稿）：桌機水滴移到第二、三間校區之間，跨在分隔線上；
+   新增腳印（台中地區-插圖2，圖檔四周有透明留白）在標題列到第一間校區右側。平板、手機只保留原本的水滴 */
+@media (min-width: 1024px) {
+    .region-deco--taichung {
+        
+        top: 682px;
+        right: auto;
+        left: calc(50% - 217.53px);
+        width: 121.79px;
+        transform-origin: 0 0;
+        transform: rotate(-81.01deg);
+    }
+
+    .region-deco--taichung-b {
+        top: -26px;
+        right: 47px;
+        width: 527px;
+        transform: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    #taichung .region-deco--taichung-b {
+        display: none;
+    }
+}
+
+/* 校區列表拿掉照片（新版設計稿，三個版本都沒有照片）：
+   平板、手機原本是「照片＋文字」兩欄格線，改成單欄，名稱和地址電話從左邊開始 */
+@media (max-width: 1023px) {
+    .branch-item {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .branch-name,
+    .branch-details {
+        grid-column: 1;
+    }
+}
+
+/* 海外地區插圖（新版設計稿）：桌機花朵縮小、移到第一間校區右上；新增兔子（海外地區-插圖2）跨在第二條分隔線上。
+   兔子圖檔四周有透明留白，原圖是躺著的，順時針轉 36 度變成站姿。平板、手機只保留原本的花朵 */
+@media (min-width: 1024px) {
+    .region-deco--overseas {
+        top: 46px;
+        right: 197px;
+        width: 230px;
+        transform: none;
+    }
+
+    .region-deco--overseas-b {
+        top: 478px;
+        right: 570px;
+        width: 236px;
+        transform: rotate(36deg);
+    }
+}
+
+@media (max-width: 1023px) {
+    #overseas .region-deco--overseas-b {
+        display: none;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    #taipei .region-deco:not(.region-deco--taipei2) {
+        top: 99px;
+        right: 136px;
+        width: 96px;
+        transform: rotate(-15deg);
+    }
+
+    #taipei .region-deco--taipei2 {
+        display: block;
+        top: 1091px;
+        bottom: auto;
+        right: 53px;
+        width: 237px;
+        transform: none;
+        z-index: 1; /* 疊在分隔線上面 */
+    }
+}
+
+/* 平板：新竹地區插圖（新版設計稿）。星球在標題右側、大星星在星球右下、小星星在星球左下，都在第一間校區上方 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    #hsinchu .region-deco--hsinchu-b,
+    #hsinchu .region-deco--hsinchu-c {
+        display: block;
+    }
+
+    #hsinchu .region-deco--hsinchu-b {
+        top: -6px;
+        right: 231px;
+        width: 147px;
+        transform: none;
+    }
+
+    #hsinchu .region-deco--hsinchu {
+        top: 86px;
+        right: 185px;
+        width: 70px;
+        transform: rotate(10deg);
+    }
+
+    #hsinchu .region-deco--hsinchu-c {
+        top: 81px;
+        right: 337px;
+        width: 44px;
+        transform: scaleY(0.85) rotate(-130deg);
+    }
+}
+
+/* 平板：台中地區插圖（新版設計稿）。腳印在標題到第一間校區右側；水滴移到第三間校區（小巨匠）名稱右側 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    #taichung .region-deco--taichung-b {
+        display: block;
+        top: -2px;
+        right: 159px;
+        width: 203px;
+        transform: none;
+    }
+
+    #taichung .region-deco--taichung {
+        top: 519px;
+        right: 404px;
+        width: 47px;
+        transform: rotate(-80deg);
+    }
+}
+
+/* 平板：海外地區插圖（新版設計稿）。花朵縮小移到第一間校區右上；兔子（原本平板不顯示）在第三間校區名稱右側 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    #overseas .region-deco--overseas {
+        top: 67px;
+        bottom: auto;
+        right: 117px;
+        width: 92px;
+        transform: none;
+    }
+
+    #overseas .region-deco--overseas-b {
+        display: block;
+        top: 489px;
+        right: 232px;
+        width: 135px;
+        transform: rotate(36deg);
+    }
+}
+
+
+@media (max-width: 767px) {
+    #taipei .region-deco:not(.region-deco--taipei2) {
+        top: 239px;
+        right: 65px;
+        width: 62.56px; 
+        transform: rotate(-16.75deg);
+    }
+
+    #taipei .region-deco--taipei2 {
+        display: block;
+        top: 1140px;
+        bottom: auto;
+        right: -13px;
+        width: 148px;
+        transform: none;
+        z-index: 1;
+    }
+}
+
+/* 手機：新竹地區插圖（新版設計稿）。星球在標題右側、小星星在第一間校區名稱右側、大星星在按鈕列右上（貼螢幕右緣） */
+@media (max-width: 767px) {
+    #hsinchu .region-deco--hsinchu-b,
+    #hsinchu .region-deco--hsinchu-c {
+        display: block;
+    }
+
+    #hsinchu .region-deco--hsinchu-b {
+        top: 16px;
+        right: 8px;
+        width: 81.12px; 
+        transform: none;
+    }
+
+    #hsinchu .region-deco--hsinchu-c {
+        top: 123px;
+        right: 78px;
+        width: 11.44px; 
+        transform: rotate(-125.43deg);
+    }
+
+    #hsinchu .region-deco--hsinchu {
+        top: 187px;
+        right: 0;
+        width: 27.57px; 
+        transform: none;
+    }
+}
+
+/* 手機：台中地區插圖（新版設計稿）。腳印在第一間校區右側（貼螢幕右緣）；水滴在第二條分隔線上、畫面中間 */
+@media (max-width: 767px) {
+    #taichung .region-deco--taichung-b {
+        display: block;
+        top: 89px;
+        right: -3px;
+        width: 130px;
+        transform: none;
+    }
+
+    #taichung .region-deco--taichung {
+        top: 485px;
+        right: 152px;
+        width: 31px;
+        transform: rotate(-80deg);
+    }
+}
+
+/* 手機：海外地區插圖（新版設計稿）。花朵在標題列右側；兔子（原本手機不顯示）在第二間校區按鈕列下方、跨在分隔線上 */
+@media (max-width: 767px) {
+    #overseas .region-deco--overseas {
+        display: block;
+        top: 52px;
+        bottom: auto;
+        right: 36px;
+        width: 52px;
+        transform: none;
+    }
+
+    /* 原本手機版的花朵是掛在第一間校區下緣的偽元素，改用上面的插圖後拿掉 */
+    #overseas .branch-item:first-child::after {
+        content: none;
+    }
+
+    #overseas .region-deco--overseas-b {
+        display: block;
+        top: 472px;
+        right: 139px;
+        width: 60px;
+        transform: rotate(41deg);
+        z-index: 1;
+    }
+}
+
+/* 學員音檔：每本教材一組，組標題在列表上方 */
+.audio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.audio-group + .audio-group {
+    margin-top: 16px;
+}
+
+.audio-group-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--neutral-body);
+}
+
+
+.audio-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 24px 20px;
+    margin-bottom: 16px;
+}
+
+.audio-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.audio-book-cover {
+    display: block;
+    width: 100%;
+    max-width: 150px; /* 封面原圖 150px 寬，不放大，保持清楚 */
+    aspect-ratio: 150 / 192; 
+    border-radius: 4px;
+    overflow: hidden;
+    background: transparent;
+    transition: transform 0.15s;
+}
+
+.audio-book:hover .audio-book-cover {
+    transform: translateY(-3px);
+}
+
+.audio-book-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.audio-book-title {
+    font-size: 15px;
+    line-height: 1.4;
+    text-align: center;
+    color: #1E6EC8;
+}
+
+.audio-group {
+    scroll-margin-top: 90px;
+}
+
+@media (max-width: 767px) {
+    .audio-books {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 16px;
+    }
+}
+
+/* 學員音檔：教材切換。選中的那本封面加藍框、名稱加粗；其他本封面淡一點 */
+.audio-book .audio-book-cover {
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+    transition: transform 0.15s, outline-color 0.15s, opacity 0.15s;
+}
+
+.audio-book:not(.is-active) .audio-book-cover {
+    opacity: 0.6;
+}
+
+.audio-book:not(.is-active):hover .audio-book-cover {
+    opacity: 1;
+}
+
+.audio-book.is-active .audio-book-cover {
+    outline-color: #1E6EC8;
+}
+
+.audio-book.is-active .audio-book-title {
+    font-weight: 700;
+}
+
+.audio-group[hidden] {
+    display: none;
+}
+
+/* 學員音檔：線上播放 */
+.audio-play {
+    flex-shrink: 0;
+    padding: 8px 20px;
+    border: 1px solid #1E6EC8;
+    border-radius: 4px;
+    background: #FFFFFF;
+    font: inherit;
+    font-size: 14px;
+    color: #1E6EC8;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.audio-play:hover,
+.audio-play.is-playing {
+    background: #1E6EC8;
+    color: #FFFFFF;
+}
+
+.audio-item.is-current {
+    border-color: #1E6EC8;
+    background: #F2F8FF;
+}
+
+/* 播放器固定在畫面下方 */
+.audio-player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    background: #FFFFFF;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.audio-player[hidden] {
+    display: none;
+}
+
+.audio-player-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+.audio-player-title {
+    flex: 0 0 auto;
+    max-width: 40%;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1E6EC8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.audio-player audio {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+}
+
+/* 播放器出現時，頁尾往上留空間，不被擋住 */
+body.has-audio-player {
+    padding-bottom: 72px;
+}
+
+@media (max-width: 767px) {
+    .audio-item {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .audio-track-name {
+        flex: 1 0 100%;
+    }
+
+    .audio-play {
+        flex: 1;
+        text-align: center;
+    }
+
+    .audio-player-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .audio-player-title {
+        max-width: none;
+    }
+
+    .audio-player audio {
+        width: 100%;
+    }
+
+    body.has-audio-player {
+        padding-bottom: 104px;
+    }
+}
+
+/* 學員音檔：自製播放控制列（取代瀏覽器內建播放器，各手機看起來一致、進度條一定看得到） */
+.audio-player audio {
+    display: none;
+}
+
+.audio-player-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+}
+
+.audio-player-toggle {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: #1E6EC8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* 播放鍵：三角形；播放中：兩條直線（暫停） */
+.audio-player-icon {
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent transparent transparent #FFFFFF;
+}
+
+.audio-player-toggle.is-playing .audio-player-icon {
+    width: 14px;
+    height: 16px;
+    margin-left: 0;
+    border: 0;
+    border-left: 4px solid #FFFFFF;
+    border-right: 4px solid #FFFFFF;
+    box-sizing: border-box;
+}
+
+.audio-player-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.audio-player-main .audio-player-title {
+    max-width: none;
+}
+
+.audio-player-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.audio-player-time {
+    flex: 0 0 auto;
+    font-size: 13px;
+    color: var(--neutral-body);
+    font-variant-numeric: tabular-nums;
+}
+
+/* 進度條：已播放的部分藍色、未播放灰色；圓點好按（手機上手指也拖得到） */
+.audio-player-seek {
+    --pct: 0%;
+    flex: 1;
+    min-width: 0;
+    height: 24px;
+    margin: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.audio-player-seek::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #1E6EC8 var(--pct), #DDE3EC var(--pct));
+}
+
+.audio-player-seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: #1E6EC8;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.audio-player-seek::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #DDE3EC;
+}
+
+.audio-player-seek::-moz-range-progress {
+    height: 6px;
+    border-radius: 3px;
+    background: #1E6EC8;
+}
+
+.audio-player-seek::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1E6EC8;
+    border: 2px solid #FFFFFF;
+}
+
+@media (max-width: 767px) {
+    .audio-player-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    body.has-audio-player {
+        padding-bottom: 88px;
+    }
+}
