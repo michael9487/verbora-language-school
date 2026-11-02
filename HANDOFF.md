@@ -73,8 +73,20 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 **目前狀態：**
 
 - 網站和上述功能的程式都已完成，production build、lint、型別檢查通過。
+- GitHub repo：`michael9487/verbora-language-school`（public）。
+- 正式網站：<https://verbora-language-school.vercel.app/>，推到 `main` 會自動部署。
+- Google 試算表活動消息已在正式站顯示。
 - LIFF、LINE 會員和 Supabase 還沒有實際設定，也沒在真實手機測試過。
-- GitHub 和 Vercel 由使用者自己設定。若 README 的「上線」項目還沒勾，先問使用者目前做到哪。
+
+**接下來的順序：**
+
+1. 請使用者在 Vercel 設定 `NEXT_PUBLIC_SITE_URL=https://verbora-language-school.vercel.app`，再 Redeploy。目前 sitemap 輸出的網址還是 `http://localhost:3000`。
+2. 請使用者建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://verbora-language-school.vercel.app/member`，再把 LINE 環境變數設到 Vercel。
+3. 請使用者用真實手機測試 LIFF 和 LINE 會員。
+4. 要做掃碼報到時，才接 Supabase 並執行 `supabase/schema.sql`。
+5. 完整待辦看 `README.md` 的「上線」和「手機開發」，開始前先問使用者哪些已經做了。
+
+**之後可考慮的新功能：** 預約體驗課加 LINE 通知，並用圖文選單當入口。等現有功能實機測過再做。
 
 **手機開發注意事項：**
 

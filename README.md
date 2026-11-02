@@ -2,6 +2,8 @@
 
 語言學校官方網站作品集。將純 HTML + PHP 的多頁網站重構為 Next.js 應用，並串接 LINE LIFF 會員功能與 Google 試算表活動消息。
 
+線上網站：<https://verbora-language-school.vercel.app/>
+
 ## 重點功能
 
 - **LINE LIFF 串接**：在 LINE 內開啟網站，可分享卡片、掃碼報到；LIFF SDK 延遲載入，不影響其他頁面。
@@ -60,13 +62,13 @@
 
 ### 上線
 
-- [ ] 建立 GitHub public repo 並推上程式碼
+- [x] 建立 GitHub public repo 並推上程式碼
 - [ ] 在 GitHub 設定 Description 和 Topics
-- [ ] Vercel 匯入專案並完成第一次部署
-- [ ] Vercel 設定 `NEWS_SHEET_ID`、`NEWS_SHEET_GID`
+- [x] Vercel 匯入專案並完成第一次部署
+- [x] 正式站讀到 Google 試算表的活動消息
 - [ ] 正式站改試算表，確認活動消息有更新
 - [ ] Vercel 設定 `NEXT_PUBLIC_SITE_URL`，填入正式網址後重新部署
-- [ ] 把正式網址補到這份 README
+- [x] 把正式網址補到這份 README
 - [ ] 建立 Supabase 專案並執行 `supabase/schema.sql`
 - [ ] Vercel 設定 Supabase 環境變數
 - [ ] 建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://你的網域/member`
