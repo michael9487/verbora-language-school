@@ -67,6 +67,7 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
   const profile = useLiffProfile();
   const [friend, setFriend] = useState<boolean | null>(null);
   const [checkin, setCheckin] = useState<CheckinResult>(null);
+  const [scannedUrl, setScannedUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const autoChecked = useRef(false);
   const canScan = liff.isApiAvailable("scanCodeV2");
@@ -118,16 +119,19 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
   }, [submitCheckin]);
 
   async function scan() {
+    setCheckin(null);
+    setScannedUrl(null);
     try {
       const { value } = await liff.scanCodeV2();
       if (!value) return;
       const code = parseCheckinCode(value);
       if (code) return submitCheckin(code);
-      // 不是報到碼：如果是網址（例如教室資訊頁）就打開，其他直接顯示內容
-      if (/^https?:\/\//.test(value)) liff.openWindow({ url: value, external: false });
+      // 不是報到碼：如果是網址（例如教室資訊頁）先顯示出來，使用者確認後自己點開，其他直接顯示內容
+      if (/^https?:\/\//.test(value)) setScannedUrl(value);
       else setCheckin({ kind: "error", text: `這不是報到 QR Code：${value}` });
     } catch {
-      // 使用者取消掃描
+      // 使用者取消或掃描失敗都會走到這裡
+      setCheckin({ kind: "error", text: "沒有取得掃描結果，請再試一次。" });
     }
   }
 
@@ -212,6 +216,15 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
             >
               {checkin.text}
             </p>
+          )}
+          {scannedUrl && (
+            <div role="status" className="mt-4 rounded-lg bg-[#F8F9FA] p-3 dark:bg-[#1d2530]">
+              <p className="text-sm font-bold text-ink dark:text-[#e8ebef]">掃描到網址</p>
+              <p className="mt-1 text-sm break-all text-ink-muted dark:text-[#9aa5b3]">{scannedUrl}</p>
+              <a href={scannedUrl} className="mt-2 inline-block font-bold text-brand underline dark:text-(--dk-link)">
+                開啟網址
+              </a>
+            </div>
           )}
         </div>
 
