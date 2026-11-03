@@ -46,8 +46,10 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 - 首頁學習法固定用 VERBA 五個字母：Voice、Ear、Reflect、Bridge、Aim。
 - VERBA 配色用 `--verba-1` 到 `--verba-5`，定義在 `site.css`，深色版在 `globals.css`。
 - VERBA 維持單欄橫列。不要改回六宮格卡片，也不要改回彩虹配色。
-- 首頁「教學方法」和「教學原則」的照片不能壓在文字上，也不要用半透明框墊文字。
-- 教學原則的菱形書架照片要保留。
+- 首頁「在使用中學會」和「堅持的四件事」的照片不能壓在文字上，也不要用半透明框墊文字。
+- 首頁照片用對話框形狀（`--bubble-r`），直角朝向旁邊的文字。不要改回旋轉、菱形或拼貼。
+- 頁尾（`src/components/SiteFooter.tsx`）、關於我們頁（`src/app/about/page.tsx`）和校區資訊頁（`src/components/branches/BranchFinder.tsx`）已改用 Tailwind，不要把樣式加回 `site.css`，也不要改回左右兩欄的表格或地區分頁。
+- 不要嵌入 Google 地圖：網站地址是虛構的，地圖會標到真實地點。
 - 新素材只用 CC0 或公有領域，並記錄到 `MEDIA_CREDITS.md`。
 
 ## 本機與示範資料

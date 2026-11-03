@@ -26,6 +26,8 @@
     --verba-3: #0B8F80;
     --verba-4: #C77700;
     --verba-5: #D6336C;
+    /* 首頁照片的對話框圓角；直角那一角朝向文字 */
+    --bubble-r: 64px;
     --neutral-black: #000000;
     --neutral-muted: #666666;
     --neutral-gray-737373: #737373;
@@ -106,7 +108,6 @@ a { text-decoration: none; color: inherit; }
     position: sticky;
     top: 0;
     z-index: 500;
-    max-width: var(--content-max);
     margin: 0 auto;
     background: #FFFFFF;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -168,7 +169,6 @@ a { text-decoration: none; color: inherit; }
 
 .hero {
     position: relative;
-    max-width: var(--content-max);
     margin: 0 auto;
     height: 693px;
     background-size: cover;
@@ -474,7 +474,6 @@ a { text-decoration: none; color: inherit; }
 .philosophy-illust img {
     width: 100%;
     max-width: 380px;
-    transform: rotate(15deg);
 }
 
 .philosophy-text {
@@ -559,7 +558,6 @@ a { text-decoration: none; color: inherit; }
     height: auto;
     pointer-events: none;
     z-index: 0;
-    transform: rotate(45deg);
 }
 
 .principles-container {
@@ -603,7 +601,7 @@ a { text-decoration: none; color: inherit; }
     position: absolute;
     right: 30px;
     top:20px;
-    width: 260px;
+    width: 300px;
     z-index: 0;
 }
 
@@ -611,11 +609,22 @@ a { text-decoration: none; color: inherit; }
     width: 100%;
 }
 
+/* 對話框形狀：照片在文字右邊時直角在左下，在左邊時直角在右下 */
+.story-image img,
+.methods-illust img {
+    border-radius: var(--bubble-r) var(--bubble-r) var(--bubble-r) 0;
+}
+
+.philosophy-illust img,
+.principles-illust {
+    border-radius: var(--bubble-r) var(--bubble-r) 0 var(--bubble-r);
+}
+
 /* 桌機：照片不壓文字，標題和內文都讓出照片的寬度 */
 @media (min-width: 1024px) {
     .methods-title,
     .methods-text {
-        padding-right: 300px;
+        padding-right: 340px;
     }
 
     .methods-illust {
@@ -630,359 +639,15 @@ a { text-decoration: none; color: inherit; }
     .principles-illust {
         top: 50%;
         bottom: auto;
-        transform: translateY(-50%) rotate(45deg);
+        width: clamp(260px, 28vw, 400px);
+        transform: translateY(-50%);
     }
 }
 
-
-.footer {
-    max-width: var(--content-max);
-    margin: 0 auto;
-    padding: 32px 0;
-    background: #E8ECF0;
-    box-sizing: border-box;
-}
-
-.footer-container {
-    width: 100%;
-    max-width: 1280px;
-    min-height: 234px;
-    margin: 0 auto;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.footer-top {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 80px;
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.footer-logo {
-    width: 314px;
-    height: 48px;
-    object-fit: contain;
-    display: block;
-}
-
-.footer-contact {
-    width: 314px;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 1.7;
-    letter-spacing: 0;
-    color: #444444;
-}
-
-/* 設計稿固定 532px，依開發備註改彈性寬度：空間不足時縮小、換行 */
-.footer-nav {
-    flex: 0 1 532px;
-    min-width: 0;
-    padding: 16px 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.footer-nav-primary,
-.footer-nav-secondary {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px 32px;
-    white-space: nowrap;
-}
-
-.footer-nav-primary a,
-.footer-nav-secondary a {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.8;
-    color: #444444;
-    text-decoration: none;
-}
-
-.footer-bottom {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.footer-copyright {
-    width: 350px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-family-base);
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.7;
-    letter-spacing: 0;
-    text-align: center;
-    color: #444444;
-}
-
-
-.campus {
-    position: relative;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    width: 100%;
-    padding: 80px 0;
-    background-color: #F8F9FA;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.campus-decoration {
-    position: absolute;
-    right: -100px;
-    bottom: 0;
-    width: 60%;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.campus-container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.campus-title-image {
-    width: 420px;
-    height: 120px;
-    max-width: 100%;
-    object-fit: cover;
-    display: block;
-    align-self: flex-start;
-}
-
-.school-info-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.school-info-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 32px 0;
-    box-sizing: border-box;
-    border-bottom: 1px solid #787877;
-}
-
-.school-info-label {
-    flex: 0 0 73px;
-    width: 73px;
-    font: var(--text-label-eyebrow);
-    letter-spacing: 0.02em;
-    text-align: center;
-    color: #666666;
-}
-
-.info-content {
-    flex: 1;
-    min-width: 0;
-    padding-left: 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.school-info-content-text {
-    margin: 0;
-    font: var(--text-body-large-strong);
-    letter-spacing: 0;
-    color: #2C2C2C;
-    text-align: left;
-}
-
-
-.schedule {
-    position: relative;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    width: 100%;
-    padding: 80px 0;
-    background: #FFFFFF;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.schedule-container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.schedule-title-row {
-    position: relative;
-}
-
-.schedule-title {
-    width: 290px;
-    height: 106px;
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-}
-
-.schedule-title-decoration {
-    position: absolute;
-    left: 360px;
-    top: -40px;
-    width: 56px;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-    transform: rotate(-105deg);
-}
-
-.schedule-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.schedule-head {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #444444;
-}
-
-.schedule-head-time {
-    flex: 0 0 88px;
-    width: 88px;
-    height: 100px;
-    box-sizing: border-box;
-    padding: 8px 16px 20px 0;
-}
-
-.schedule-day {
-    flex: 0 0 146.4px;
-    width: 146.4px;
-    box-sizing: border-box;
-    padding: 8px 12px 20px;
-    font: var(--text-label-eyebrow);
-    letter-spacing: 0.02em;
-    text-align: center;
-    color: #444444;
-}
-
-.schedule-row {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    border-bottom: 1px solid #444444;
-}
-
-.schedule-row:last-child {
-    border-bottom: none;
-}
-
-.schedule-time {
-    flex: 0 0 88px;
-    width: 88px;
-    box-sizing: border-box;
-    padding: 24px 16px 24px 0;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    font: var(--text-body-micro);
-    letter-spacing: 0;
-    color: #444444;
-}
-
-.schedule-activity {
-    flex: 0 0 732px;
-    width: 732px;
-    box-sizing: border-box;
-    padding: 24px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font: var(--text-body-large);
-    letter-spacing: 0;
-    color: #444444;
-}
-
-.schedule-nap-decoration {
-    position: absolute;
-    left: calc(50% + 71px);
-    top: -21px;
-    width: 95px;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-    transform: rotate(17deg);
-}
-
-.corporate-schedule-nap-decoration {
-    position: absolute;
-    left: calc(50% + 72px);
-    top: -5px;
-    width: 69px;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-    transform: rotate(6deg);
-}
-
-.schedule-note {
-    width: 100%;
-    min-height: 63px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    text-align: right;
-    font: var(--text-body-large);
-    letter-spacing: 0;
-    color: #444444;
+@media (max-width: 1023px) {
+    :root {
+        --bubble-r: 40px;
+    }
 }
 
 /* ============================================================
@@ -995,154 +660,6 @@ a { text-decoration: none; color: inherit; }
     color: #999;
     font-size: 0.9rem;
     text-align: center;
-}
-
-
-.corporate-section {
-    position: relative;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    width: 100%;
-    padding: 80px 0;
-    background-color: #F8F9FA;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.corporate-decoration {
-    position: absolute;
-    right: 50px;
-    top: -200px;
-    width: 30%;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-    transform: rotate(-20deg);
-}
-
-.corporate-container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.corporate-title {
-    width: 420px;
-    height: 102px;
-    max-width: 100%;
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-}
-
-.corporate-info-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.corporate-info-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 32px 0;
-    box-sizing: border-box;
-    border-bottom: 1px solid #444444;
-}
-
-.corporate-info-label {
-    flex: 0 0 73px;
-    width: 73px;
-    font: var(--text-label-eyebrow);
-    letter-spacing: 0.02em;
-    text-align: center;
-    color: #444444;
-}
-
-.corporate-info-content {
-    flex: 1;
-    min-width: 0;
-    padding-left: 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.corporate-info-text {
-    margin: 0;
-    font: var(--text-body-large-strong);
-    letter-spacing: 0;
-    color: #444444;
-    text-align: left;
-}
-
-
-.corporate-schedule-decoration {
-    position: absolute;
-    left: 257px;
-    top: -6px;
-    width: 104px;
-    height: auto;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
-    transform: rotate(-8deg);
-}
-
-.schedule-split-content {
-    flex: 0 0 732px;
-    width: 732px;
-    display: flex;
-    flex-direction: column;
-}
-
-.schedule-split-baby {
-    width: 732px;
-    border-bottom: 1px solid #666666;
-}
-
-.schedule-split-baby-cell {
-    width: 100%;
-    padding: 24px 12px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font: var(--text-body-large);
-    letter-spacing: 0;
-    color: #444444;
-}
-
-.schedule-split-older {
-    width: 732px;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-}
-
-.schedule-split-older-cell {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 24px 12px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font: var(--text-body-large);
-    letter-spacing: 0;
-    color: #444444;
 }
 
 
@@ -1199,13 +716,6 @@ a { text-decoration: none; color: inherit; }
     transform: rotate(24deg);
 }
 
-/* 第一個課程的標題插圖：桌機再往下 30px（其他系統沿用上面的共用位置） */
-@media (min-width: 1024px) {
-    #humanities .teaching-system-title-decoration {
-        top: 20px;
-    }
-}
-
 .teaching-system-content {
     width: 100%;
     padding: 40px 0;
@@ -1235,15 +745,16 @@ a { text-decoration: none; color: inherit; }
     gap: 32px;
 }
 
-.teaching-images > img:not(.teaching-media-decoration),
+/* 照片填滿 3:2 的框再切成對話框形狀（照片在文字左邊，直角在右下） */
+.teaching-images > img,
 .teaching-images > picture > img {
-    flex: 1 1 0;
-    min-height: 0;
-    width: 562px;
-    max-width: 100%;
+    flex: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
     display: block;
-    object-fit: contain;
-    object-position: center bottom;
+    object-fit: cover;
+    border-radius: var(--bubble-r) var(--bubble-r) 0 var(--bubble-r);
 }
 
 .teaching-media {
@@ -1259,22 +770,6 @@ a { text-decoration: none; color: inherit; }
     height: 670px;
     object-fit: contain;
     display: block;
-}
-
-.teaching-media-decoration {
-    position: absolute;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* 平板、手機專用的插圖標籤，桌機不顯示。
-   手機專用的加 !important，避免被平板那些用圖檔名選取的規則誤顯示 */
-.teaching-media-decoration.is-tablet {
-    display: none;
-}
-
-.teaching-media-decoration.is-mobile {
-    display: none !important;
 }
 
 .teaching-content-block.is-relative {
@@ -1378,376 +873,6 @@ a { text-decoration: none; color: inherit; }
     font: var(--text-body-large);
     letter-spacing: 0;
     color: #444444;
-}
-
-/* ---- Gallery（各語言課程共用）---- */
-.teaching-gallery {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.teaching-gallery-track {
-    width: 100%;
-    height: 253px;
-    padding: 32px 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-top: 1px solid #787877;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-
-.teaching-gallery-track::-webkit-scrollbar {
-    display: none;
-}
-
-.gallery-slide {
-    flex-shrink: 0;
-    height: 188px;
-    scroll-snap-align: start;
-}
-
-.gallery-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.teaching-gallery-nav {
-    width: 100%;
-    height: 56px;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.gallery-arrow {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-}
-
-
-.gallery-arrow svg,
-.gallery-arrow img {
-    width: 24px;
-    height: 24px;
-    display: block;
-}
-
-.gallery-indicators {
-    width: fit-content;
-    height: 32px;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.gallery-dot {
-    flex: 0 0 12px;
-    width: 12px;
-    height: 12px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: #D9D9D9;
-    cursor: pointer;
-}
-
-.gallery-dot.is-active {
-    flex-basis: 16px;
-    width: 16px;
-    height: 16px;
-    background: #444444;
-}
-
-/* ---- Lightbox（共用，點擊 Gallery 圖片放大用） ---- */
-.gallery-slide img {
-    cursor: zoom-in;
-}
-
-.lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    box-sizing: border-box;
-}
-
-.lightbox[hidden] {
-    display: none;
-}
-
-.lightbox-image {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    object-position: center bottom;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    border: 0;
-    background: transparent;
-    color: #FFFFFF;
-    font-size: 32px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-
-.region-nav {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background: #FFFFFF;
-    /* 不加底部分隔線（依設計稿） */
-    box-sizing: border-box;
-}
-
-.region-nav-inner {
-    width: 100%;
-    max-width: 1100px;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
-    overflow-x: auto;
-}
-
-.region-tab {
-    flex: 0 0 144px;
-    width: 144px;
-    padding: 16px 8px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    font: var(--text-ui-menu);
-    letter-spacing: 0;
-    color: #666666;
-    text-decoration: none;
-    border-bottom: 3px solid transparent;
-}
-
-.region-tab.is-active {
-    color: #1E6EC8;
-    border-bottom-color: #1E6EC8;
-}
-
-
-.region-section {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 1440px; /* 限制在設計稿寬度內，插圖才會貼著內容區，不會跑到寬螢幕最右邊 */
-    margin: 0 auto;
-    padding: 40px 0 64px;
-    background: #FFFFFF;
-    box-sizing: border-box;
-}
-
-.region-deco {
-    position: absolute;
-    top: 154px;
-    right: -90px;
-    width: 337px;
-    height: auto;
-    opacity: 0.8;
-    transform: rotate(-15deg);
-    pointer-events: none;
-}
-
-.region-container {
-    position: relative;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.region-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    color: #444444;
-    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-}
-
-.region-title {
-    margin: 0;
-    font: var(--text-heading-h3);
-}
-
-.region-count {
-    font: var(--text-body-small);
-}
-
-.branch-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.branch-item {
-    display: flex;
-    align-items: center;
-    padding: 24px 12px;
-    border-bottom: 2px solid #E8ECF0;
-}
-
-.branch-photo {
-    flex: 0 0 160px;
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    display: block;
-}
-
-.branch-info {
-    flex: 1;
-    min-width: 0;
-    padding: 20px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    color: #444444;
-    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-}
-
-.branch-name {
-    margin: 0;
-    font: var(--text-heading-h5);
-}
-
-.branch-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.branch-detail {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font: var(--text-body-caption);
-}
-
-.branch-detail-icon {
-    flex: 0 0 16px;
-    width: 16px;
-    height: 16px;
-    margin-top: 2px;
-}
-
-.branch-btns {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 33px;
-}
-
-.branch-btn {
-    display: flex;
-    width: 29px;
-    height: 29px;
-    color: #444444;
-    transition: opacity 0.2s;
-}
-
-.branch-btn svg {
-    width: 100%;
-    height: 100%;
-}
-
-.branch-btn:hover {
-    opacity: 0.7;
-}
-
-/* 「導航」文字和「撥打」按鈕只在平板、手機版出現 */
-.branch-btn-text,
-.branch-btn--call {
-    display: none;
-}
-
-/* 新竹地區插圖（星星）：原圖 216x232 以 @2x 顯示 */
-.region-deco--hsinchu {
-    top: 272px;
-    right: 205px;
-    width: 108px;
-    transform: none;
-}
-
-/* 台中地區插圖（水滴）：原圖直向，旋轉 -90 度成橫向 */
-.region-deco--taichung {
-    top: 419px;
-    right: 177px;
-    width: 152px;
-    transform: rotate(-80deg);
-}
-
-/* 海外地區插圖（花）：原圖 502x410 以 @2x 顯示，位於標題列右上 */
-.region-deco--overseas {
-    top: 12px;
-    right: 195px;
-    width: 251px;
-    transform: none;
-}
-
-
-.region-tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 16px;
-    border-radius: 20px;
-    background: #1E6EC8;
-    color: #FFFFFF;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 19px;
-    white-space: nowrap;
-}
-
-/* 有標籤的標題列（海外），所數文字改用 #666666 */
-.region-tag ~ .region-count {
-    color: #666666;
 }
 
 
@@ -1893,10 +1018,10 @@ a { text-decoration: none; color: inherit; }
     font: var(--text-label-tag);
 }
 
-.news-tag--hsinchu { background: #D5F2EF; color: #2A9D8F; }
-.news-tag--taipei { background: #DCEEFF; color: #1E6EC8; }
-.news-tag--taichung  { background: #D8F0E3; color: #4A9E6B; }
-.news-tag--overseas { background: #EEDFF7; color: #9B59B6; }
+.news-tag--north { background: #DCEEFF; color: #1E6EC8; }
+.news-tag--central { background: #D8F0E3; color: #4A9E6B; }
+.news-tag--south { background: #FCE9D4; color: #C77700; }
+.news-tag--east { background: #EEDFF7; color: #9B59B6; }
 
 .news-title {
     flex: 1;
@@ -2939,13 +2064,11 @@ a { text-decoration: none; color: inherit; }
 
     .philosophy-illust {
         flex: none;
-        height: 156px;
         align-items: center;
-        overflow: hidden;
     }
 
     .philosophy-illust img {
-        max-width: 163px;
+        max-width: 240px;
     }
 
     .philosophy-title {
@@ -3003,65 +2126,6 @@ a { text-decoration: none; color: inherit; }
         font-size: 24px;
         line-height: 1.4;
     }
-
-    /* ---- Footer：置中直排，九個連結排成一列自動換行 ---- */
-    .footer {
-        padding: 24px 40px;
-    }
-
-    .footer-container {
-        min-height: 0;
-        padding: 0;
-        gap: 16px;
-    }
-
-    .footer-top {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .footer-brand {
-        align-items: center;
-        gap: 16px;
-    }
-
-    .footer-logo {
-        width: 189px;
-        height: 27px;
-    }
-
-    .footer-contact {
-        width: auto;
-        line-height: 1.8;
-        text-align: center;
-    }
-
-    .footer-nav {
-        flex: none;
-        width: 100%;
-        padding: 16px 0;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .footer-nav-primary,
-    .footer-nav-secondary {
-        display: contents;
-    }
-
-    .footer-nav-primary a,
-    .footer-nav-secondary a {
-        font-size: 12px;
-    }
-
-    .footer-copyright {
-        width: 100%;
-        height: auto;
-        line-height: 1.8;
-    }
 }
 
 
@@ -3069,60 +2133,6 @@ a { text-decoration: none; color: inherit; }
    平板版 768–1023px：關於我們
    區塊留白、資訊列、字級同桌機；作息表欄寬改為隨螢幕伸縮
    ============================================================ */
-@media (max-width: 1023px) {
-    .schedule-day,
-    .schedule-activity,
-    .schedule-split-content {
-        flex: 1 1 0;
-        width: auto;
-        min-width: 0;
-    }
-
-    .schedule-split-baby,
-    .schedule-split-older {
-        width: 100%;
-    }
-
-    /* 插圖：由平板設計稿畫面換算（已扣除圖檔透明邊） */
-    .campus-decoration {
-        right: 73px;
-        bottom: 46px;
-        width: 324px;
-    }
-
-    .schedule-title-decoration {
-        left: 305px;
-        top: 0;
-        width: 30px;
-    }
-
-    .schedule-nap-decoration {
-        left: calc(50% + 67px);
-        top: -21px;
-        width: 96px;
-        transform: rotate(10deg);
-    }
-
-    .corporate-decoration {
-        top: -23px;
-        right: 15px;
-        width: 208px;
-    }
-
-    .corporate-schedule-decoration {
-        left: 283px;
-        top: 16px;
-        width: 74px;
-        transform: none;
-    }
-
-    .corporate-schedule-nap-decoration {
-        left: calc(50% + 67px);
-        top: -22px;
-        width: 88px;
-        transform: none;
-    }
-}
 
 
 /* ============================================================
@@ -3229,7 +2239,7 @@ a { text-decoration: none; color: inherit; }
         cursor: pointer;
     }
 
-    /* 語言課程內容：區塊 padding 40 0；大標 H1 40px；兩張照片並排在上、文字在下 */
+    /* 語言課程區塊：區塊 padding 40 0；大標 H1 40px；兩張照片並排在上、文字在下 */
     .teaching-system-section {
         padding: 40px 0;
     }
@@ -3262,7 +2272,7 @@ a { text-decoration: none; color: inherit; }
         gap: 12px;
     }
 
-    .teaching-images > img:not(.teaching-media-decoration),
+    .teaching-images > img,
     .teaching-images > picture > img {
         flex: 1 1 0;
         width: auto;
@@ -3270,7 +2280,6 @@ a { text-decoration: none; color: inherit; }
         height: auto;
         aspect-ratio: 338 / 386;
         object-fit: cover;
-        border-radius: 12px;
     }
 
     .teaching-media {
@@ -3306,381 +2315,8 @@ a { text-decoration: none; color: inherit; }
     .teaching-content-list.is-nested {
         padding-left: calc(40px + 54px);
     }
-
-    /* 插圖：桌機版的位置在平板不適用，先隱藏；第一個課程的標題插圖依設計稿定位 */
-    .teaching-media-decoration,
     .teaching-system-title-decoration {
         display: none;
-    }
-
-    /* top 跟著照片高度變化：照片寬 = (螢幕寬 - 左右留白 80 - 間距 12) / 2，高 = 寬 × 386/338 */
-    #humanities .teaching-system-title-decoration {
-        display: block;
-        top: calc(112px + (100vw - 92px) * 0.571);
-        right: 128px;
-        width: 85px;
-        opacity: 0.8;
-        transform: rotate(-22.35deg);
-        z-index: 2; /* 疊在照片上面，不被第二張圖的白底蓋住 */
-    }
-
-    /* 人際智能：插圖 125px、不旋轉，頂端對齊文字區上緣（照片下方 24px），距右 116px
-       桌機版的大小和位置寫在標籤上，所以這裡用 !important 蓋過 */
-    #interpersonal .teaching-system-title-decoration {
-        display: block;
-        top: calc(108px + (100vw - 92px) * 0.571);
-        right: 116px !important;
-        width: 125px !important;
-        transform: none !important;
-    }
-
-    /* 中文正音「教學特色」：第一項有圓點，其餘三項是它的子項目，再縮一層（同平板、手機設計稿的層次） */
-    #chinese-pronunciation .teaching-info-list > .teaching-content-block:nth-child(4) li:not(:first-child) {
-        margin-left: 27px;
-    }
-
-    /* 中文正音：主圖縮成 359px 置中（圖檔上下有白邊，用負 margin 讓版面佔高維持 386）
-       書疊在主圖右下；ㄅㄆㄇ 改用平板專用的標籤，各自跟著所在的文字區塊走 */
-    #chinese-pronunciation .teaching-media-main-image {
-        width: 359px;
-        margin: -12px auto -29px;
-    }
-
-    #chinese-pronunciation .teaching-media > .teaching-media-decoration[src*="書"] {
-        display: block;
-        top: 285px !important;
-        left: calc(50% + 65px) !important;
-        width: 187px !important;
-        transform: none !important;
-    }
-
-    #chinese-pronunciation .teaching-media-decoration.is-tablet {
-        display: block;
-        z-index: -1;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄅ"] {
-        top: -63px;
-        left: 141px;
-        width: 73px;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄆ"] {
-        top: -32px;
-        left: 129px;
-        width: 73px;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄇ"] {
-        top: -61px;
-        right: 105px;
-        width: 90px;
-    }
-
-    /* 生活美語：右圖（去背彩蛋）在設計稿比照片略小，左右內縮讓圖縮 2.6%，
-       上下裁切變少，底部珠子的字才會完整露出；
-       ABC 插圖改用平板專用標籤，放在「系統概述」標題右上方 */
-    #english .teaching-images > img:nth-child(2) {
-        box-sizing: border-box;
-        padding: 0 0.97% 0 0.33%;
-    }
-
-    #english .teaching-media-decoration.is-tablet {
-        display: block;
-        z-index: -1;
-        top: -51px;
-        right: 72px;
-        width: 106px;
-    }
-
-    /* 上方文字最後一行右邊有空位時（由 systems.html 的 script 判斷），照設計稿往上靠 */
-    #english .teaching-media-decoration.is-tablet.is-raised {
-        top: -70px;
-    }
-
-    /* 音樂律動：高音譜號（沿用桌機標籤）和灰色音符在「適用年齡層」右邊，
-       黃色音符在「課程重點」標題右邊，粉紅音符在「課程內容」標題右上方 */
-    #music .teaching-content-block {
-        position: relative;
-    }
-
-    #music .teaching-info > .teaching-media-decoration[src*="插圖1"] {
-        display: block;
-        top: -7px !important;
-        right: 200px !important;
-        width: 67px !important;
-        transform: rotate(15deg) !important;
-    }
-
-    #music .teaching-media-decoration.is-tablet {
-        display: block;
-        z-index: -1;
-    }
-
-    #music .is-tablet[src*="插圖4"] {
-        top: 11px;
-        right: 131px;
-        width: 120px;
-    }
-
-    #music .is-tablet[src*="插圖2"] {
-        top: -42px;
-        left: 122px;
-        width: 77px;
-    }
-
-    #music .is-tablet[src*="插圖3"] {
-        top: -51px;
-        right: 59px;
-        width: 98px;
-        transform: rotate(15deg);
-    }
-
-    /* 創思數學：思考泡泡在「適用年齡層」右邊、乘號在「四大教學步驟」標題右上方（沿用桌機標籤），
-       百分比在「課程內容」標題右上方、加號在「課程內容」文字結尾右下方（平板專用標籤） */
-    #creative-math .teaching-content-block {
-        position: relative;
-    }
-
-    #creative-math .teaching-info > .teaching-media-decoration[src*="插圖1"] {
-        display: block;
-        top: -28px !important;
-        right: 221px !important;
-        width: 106px !important;
-        transform: rotate(15deg) !important;
-        z-index: -1;
-    }
-
-    #creative-math .teaching-media-decoration[src*="插圖2"] {
-        display: block;
-        top: -72px !important;
-        left: 414px !important;
-        width: 93px !important;
-        transform: rotate(27deg) !important;
-    }
-
-    #creative-math .teaching-media-decoration.is-tablet {
-        display: block;
-        z-index: -1;
-    }
-
-    #creative-math .is-tablet[src*="插圖3"] {
-        top: -71px;
-        left: 102px;
-        width: 142px;
-    }
-
-    #creative-math .is-tablet[src*="插圖4"] {
-        bottom: -59px;
-        right: 109px;
-        width: 112px;
-        transform: rotate(-32deg);
-    }
-
-    /* 潛能開發：拼圖插圖在「適用年齡層」右邊（平板專用標籤），128px、不旋轉，距右 46px */
-    #potential-development .teaching-media-decoration.is-tablet {
-        display: block;
-        z-index: -1;
-        top: -6px;
-        right: 46px;
-        width: 128px;
-        opacity: 0.8;
-    }
-
-    /* 輪播：高 240、padding 24 40、間距 12、圖高 192、圓角 8、無上方分隔線 */
-    .teaching-gallery-track {
-        height: 240px;
-        padding: 24px 40px;
-        gap: 12px;
-        border-top: 0;
-        scroll-padding-left: 40px;
-    }
-
-    .gallery-slide {
-        height: 192px;
-    }
-
-    .gallery-slide img {
-        border-radius: 8px;
-    }
-}
-
-
-@media (max-width: 1023px) {
-    .region-nav {
-        display: none;
-    }
-
-    .region-section {
-        padding: 32px 0 40px;
-    }
-
-    .region-container {
-        padding: 0 40px;
-    }
-
-    .region-title {
-        font: var(--text-heading-h4);
-    }
-
-    /* 插圖：台北 88px、新竹星星 71px 都在標題列右邊；台中水滴轉成橫向；
-       海外的花在最後一間校區右上方，所以從區塊底部往上定位 */
-    #taipei .region-deco {
-        top: 59px;
-        right: 87px;
-        width: 88px;
-        transform: none;
-    }
-
-    .region-deco--hsinchu {
-        top: 34px;
-        right: 73px;
-        width: 71px;
-    }
-
-    .region-deco--taichung {
-        top: 36px;
-        right: 106px;
-        width: 56px;
-        transform: rotate(-90deg);
-    }
-
-    .region-deco--overseas {
-        top: auto;
-        bottom: 172px;
-        right: 49px;
-        width: 116px;
-    }
-
-    /* 卡片：branch-info 攤平成格線，按鈕列獨立成最下面一整排 */
-    .branch-item {
-        display: grid;
-        grid-template-columns: 96px minmax(0, 1fr);
-        grid-template-rows: auto 1fr auto;
-        column-gap: 16px;
-        align-items: start;
-        padding: 16px 12px;
-    }
-
-    .branch-photo {
-        grid-column: 1;
-        grid-row: 1 / 3;
-        width: 96px;
-        height: 96px;
-    }
-
-    .branch-info {
-        display: contents;
-    }
-
-    .branch-name {
-        grid-column: 2;
-        grid-row: 1;
-        margin-bottom: 8px;
-        color: #444444;
-    }
-
-    .branch-details {
-        grid-column: 2;
-        grid-row: 2;
-        color: #444444;
-    }
-
-    .branch-detail {
-        align-items: center;
-        gap: 4px;
-    }
-
-    .branch-detail-icon {
-        margin-top: 0;
-    }
-
-    .branch-btns {
-        grid-column: 1 / -1;
-        grid-row: 3;
-        height: auto;
-        margin-top: 20px;
-        padding-bottom: 16px;
-    }
-
-    /* FB／IG：44px 圓形灰底，圖示 24px */
-    .branch-btn {
-        flex: 0 0 44px;
-        width: 44px;
-        height: 44px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 22px;
-        background: #E8ECF0;
-        box-sizing: border-box;
-    }
-
-    .branch-btn svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    /* 導航（淺藍底）、撥打（藍框）：平分剩餘寬度，高 44、圓角 8 */
-    .branch-btn--nav,
-    .branch-btn--call {
-        display: flex;
-        flex: 1 1 0;
-        width: auto;
-        min-width: 0;
-        padding: 0 24px;
-        border-radius: 8px;
-        font: var(--text-ui-button);
-        color: #1E6EC8;
-        text-decoration: none;
-        white-space: nowrap;
-    }
-
-    .branch-btn--nav {
-        background: #DCEEFF;
-    }
-
-    .branch-btn--nav svg {
-        display: none;
-    }
-
-    .branch-btn-text {
-        display: inline;
-    }
-
-    .branch-btn--call {
-        background: #FFFFFF;
-        border: 1px solid #1E6EC8;
-    }
-
-    /* 互動狀態（設計稿 05 States）：導航 hover #C7E2FF、按下 #B0D5FF；
-       撥打 hover #DCEEFF、按下 #C7E2FF＋深藍框；按下時文字都變深藍 #06478F */
-    .branch-btn--nav,
-    .branch-btn--call {
-        transition: background 0.15s, color 0.15s, border-color 0.15s;
-    }
-
-    .branch-btn--nav:hover,
-    .branch-btn--call:hover {
-        opacity: 1;
-    }
-
-    .branch-btn--nav:hover {
-        background: #C7E2FF;
-    }
-
-    .branch-btn--nav:active {
-        background: #B0D5FF;
-        color: #06478F;
-    }
-
-    .branch-btn--call:hover {
-        background: #DCEEFF;
-    }
-
-    .branch-btn--call:active {
-        background: #C7E2FF;
-        border-color: #06478F;
-        color: #06478F;
     }
 }
 
@@ -3978,18 +2614,6 @@ a { text-decoration: none; color: inherit; }
         padding: 8px 20px 24px;
     }
 
-    .footer {
-        padding: 24px 20px;
-    }
-
-    .footer-container {
-        gap: 8px;
-    }
-
-    .footer-top {
-        gap: 16px;
-    }
-
     /* Banner：手機稿 375 寬時，內頁高 220、首頁高 430，依比例縮放讓照片裁切範圍跟設計稿一致；
        各有上限，避免手機版最寬那一段變得太高 */
     .hero {
@@ -4054,7 +2678,7 @@ a { text-decoration: none; color: inherit; }
     }
 
     .philosophy-illust img {
-        max-width: 182px;
+        max-width: 220px;
     }
 
     .philosophy-title {
@@ -4072,32 +2696,29 @@ a { text-decoration: none; color: inherit; }
         font: var(--text-heading-h3);
     }
 
-    /* 下方留白給插圖，不壓文字 */
+    /* 下方留白給照片，不壓文字 */
     .methods {
-        padding-bottom: 112px;
+        padding-bottom: 184px;
     }
 
     .principles {
-        padding-bottom: 132px;
+        padding-bottom: 204px;
     }
 
     .methods-illust {
         display: block;
         top: auto;
-        right: 64px;
-        bottom: -96px;
-        width: 126px;
-        opacity: 0.8;
+        right: 20px;
+        bottom: -143px;
+        width: 180px;
     }
 
     .principles-illust {
         display: block;
         left: auto;
-        right: 37px;
-        bottom: 16px;
-        width: 147px;
-        opacity: 0.8;
-        transform: rotate(-6deg);
+        right: 20px;
+        bottom: 40px;
+        width: 220px;
     }
 }
 
@@ -4126,187 +2747,6 @@ a { text-decoration: none; color: inherit; }
    資訊列：標籤寬 73（13/1.5）＋內容左留白 20（16/1.9）
    作息表改直排：時間膠囊在上、活動文字置中在下，不顯示星期表頭
    ============================================================ */
-@media (max-width: 767px) {
-    
-    .campus,
-    .corporate-section {
-        padding: 48px 0;
-    }
-
-    .campus-container,
-    .corporate-container {
-        padding: 0 20px;
-    }
-
-    .campus-container {
-        gap: 16px;
-    }
-
-    .campus-title-image {
-        width: 213px;
-        height: 61px;
-        align-self: center;
-    }
-
-    .corporate-title {
-        width: 285px;
-        height: 69px;
-        align-self: center;
-    }
-
-    .school-info-label {
-        color: #787877;
-    }
-
-    .info-content,
-    .corporate-info-content {
-        padding-left: 20px;
-    }
-
-    .school-info-content-text,
-    .corporate-info-text {
-        font: var(--text-body-large);
-        color: #444444;
-    }
-
-    /* ---- 一日作息 ---- */
-    .schedule {
-        padding: 48px 0;
-    }
-
-    .schedule-container {
-        padding: 0 20px;
-        gap: 16px;
-    }
-
-    .schedule-title-row {
-        display: flex;
-        justify-content: center;
-    }
-
-    .schedule-title {
-        width: 193px;
-        height: 71px;
-    }
-
-    .schedule-head {
-        display: none;
-    }
-
-    .schedule-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        padding: 20px 0;
-        border-bottom-color: #E8ECF0;
-    }
-
-    .schedule-time {
-        flex: none;
-        width: auto;
-        padding: 4px 12px;
-        border-radius: 999px;
-        background: #F8F9FA;
-    }
-
-    .schedule-activity {
-        flex: none;
-        width: 100%;
-        padding: 0 12px;
-    }
-
-    
-    .schedule-split-content {
-        flex: none;
-        width: 100%;
-        gap: 12px;
-    }
-
-    .schedule-split-baby {
-        border-bottom: 0;
-    }
-
-    .schedule-split-baby-cell {
-        padding: 0;
-    }
-
-    .schedule-split-older {
-        flex-direction: column;
-        gap: 0;
-        padding: 4px 16px;
-        border-radius: 12px;
-        background: #F8F9FA;
-        box-sizing: border-box;
-    }
-
-    .schedule-split-older-cell {
-        flex: none;
-        padding: 12px 0;
-    }
-
-    .schedule-split-older-cell br {
-        display: none;
-    }
-
-    .schedule-split-older-cell::before {
-        flex: 0 0 92px;
-        font: var(--text-label-eyebrow);
-        letter-spacing: 0.02em;
-        text-align: left;
-    }
-
-    .schedule-split-older-cell:nth-child(1)::before { content: 'Monday'; }
-    .schedule-split-older-cell:nth-child(2)::before { content: 'Tuesday'; }
-    .schedule-split-older-cell:nth-child(3)::before { content: 'Wednesday'; }
-    .schedule-split-older-cell:nth-child(4)::before { content: 'Thursday'; }
-    .schedule-split-older-cell:nth-child(5)::before { content: 'Friday'; }
-
-    .schedule-note {
-        margin-top: 16px;
-        justify-content: center;
-        text-align: center;
-    }
-
-    /* ---- 插圖：尺寸、角度照手機設計稿；位置各自跟著所在的標題或那一列 ---- */
-    .campus-decoration {
-        right: -13px;
-        bottom: 28px;
-        width: 241px;
-    }
-
-    
-    .corporate-decoration {
-        display: none;
-    }
-
-    .schedule-title-decoration {
-        left: calc(50% + 95px);
-        top: -23px;
-        width: 20px;
-        transform: rotate(-109.57deg);
-    }
-
-    .corporate-schedule-decoration {
-        left: calc(50% + 61px);
-        top: -16px;
-        width: 73px;
-        transform: rotate(-12.36deg);
-    }
-
-    .schedule-nap-decoration {
-        left: calc(50% + 26px);
-        top: 34px;
-        width: 63px;
-        transform: rotate(19.96deg);
-    }
-
-    .corporate-schedule-nap-decoration {
-        left: calc(50% + 31px);
-        top: 42px;
-        width: 63px;
-        transform: rotate(19.96deg);
-    }
-}
 
 /* ============================================================
    手機版 < 768px：語言課程（七個課程共用）與下拉選單
@@ -4349,231 +2789,12 @@ a { text-decoration: none; color: inherit; }
         padding-left: calc(20px + 48px);
     }
 
-    .teaching-gallery-track {
-        padding: 24px 20px;
-        scroll-padding-left: 20px;
-    }
-
     /* 插圖：平板版的位置在手機不適用，先全部隱藏；有手機設計稿的再個別放回來 */
-    .teaching-system-section .teaching-media-decoration,
     .teaching-system-section .teaching-system-title-decoration {
         display: none !important;
     }
 
-    /* 第一個課程：69px、逆時針 22.35 度，掛在「系統概述」區塊上（手機專用標籤），
-       中心大約對齊「系統概述」標題，上面文字換幾行都會跟著走 */
-    #humanities .teaching-media-decoration.is-mobile {
-        display: block !important;
-        z-index: -1;
-        top: -41px;
-        right: 70px;
-        width: 69px;
-        opacity: 0.8;
-        transform: rotate(-22.35deg);
-    }
-
-    /* 人際智能：四個人偶，103px、不旋轉，掛在「系統概述」區塊右上方（手機專用標籤） */
-    #interpersonal .teaching-media-decoration.is-mobile {
-        display: block !important;
-        z-index: -1;
-        top: -57px;
-        right: 18px;
-        width: 103px;
-    }
-
-    /* ---- 中文正音 ----
-       主圖：圖檔四周有白邊，放大到去背人像寬約 77%（375 寬時 288px）並置中，
-       用負 margin 把白邊吃掉，版面佔高才會是設計稿的 375:316 */
-    #chinese-pronunciation .teaching-media {
-        padding: 0;
-    }
-
-    #chinese-pronunciation .teaching-media-main-image {
-        width: min(82.6vw, 359px);
-        margin: max(-6.9vw, -30px) auto max(-7.3vw, -32px);
-    }
-
-    /* 教學特色：第一項有圓點，其餘三項再縮一層（手機的縮排是 24） */
-    #chinese-pronunciation .teaching-info-list > .teaching-content-block:nth-child(4) li:not(:first-child) {
-        margin-left: 24px;
-    }
-
-    /* 輪播：前兩張只露出左半頁（寬 149），後兩張寬 300 */
-    #chinese-pronunciation .gallery-slide {
-        width: 300px !important;
-    }
-
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2) {
-        width: 149px !important;
-    }
-
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
-        object-position: left center;
-    }
-
-    /* 音樂律動、創思數學、潛能開發的輪播：圖檔是 2:1 的跨頁，手機稿每張寬 300、裁掉一部分
-       音樂第一張只露出右頁（封面）寬 149，第二張靠左裁；創思數學第一張靠右裁；其餘置中 */
-    #music .gallery-slide,
-    #creative-math .gallery-slide,
-    #potential-development .gallery-slide {
-        width: 300px !important;
-    }
-
-    #music .gallery-slide:first-child {
-        width: 149px !important;
-    }
-
-    #music .gallery-slide:first-child img {
-        object-position: 81.7% center;
-    }
-
-    #music .gallery-slide:nth-child(2) img {
-        object-position: left center;
-    }
-
-    #creative-math .gallery-slide:first-child img {
-        object-position: right center;
-    }
-
-
-    /* 插圖：書用手機專用標籤掛在「系統概述」右上；ㄅㄆㄇ 沿用平板的標籤，改手機的位置
-       ㄅ 在「各班課程重點」結尾右下、ㄆ 壓在「教學特色」標題上、ㄇ 在「課程內容」結尾右下 */
-    #chinese-pronunciation .teaching-media-decoration.is-mobile,
-    #chinese-pronunciation .teaching-media-decoration.is-tablet {
-        display: block !important;
-        z-index: -1;
-        opacity: 0.8;
-    }
-
-    #chinese-pronunciation .teaching-media-decoration.is-mobile {
-        top: -80px;
-        right: -1px;
-        width: 183px;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄅ"] {
-        top: auto;
-        bottom: -60px;
-        left: auto;
-        right: 41px;
-        width: 73px;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄆ"] {
-        top: -25px;
-        left: 82px;
-        width: 73px;
-    }
-
-    #chinese-pronunciation .is-tablet[src*="ㄇ"] {
-        top: auto;
-        bottom: -81px;
-        right: 60px;
-        width: 90px;
-    }
-
-    /* 生活美語：ABC 插圖沿用平板的標籤，105px，在「系統概述」標題右上方。
-       平板那個依換行切換高低的 is-raised 在手機不需要，兩種狀態都固定同一個位置 */
-    #english .teaching-media-decoration.is-tablet,
-    #english .teaching-media-decoration.is-tablet.is-raised {
-        display: block !important;
-        z-index: -1;
-        top: -42px;
-        right: 27px;
-        width: 105px;
-        opacity: 0.8;
-    }
-
-    /* ---- 音樂律動 ----
-       高音譜號（沿用桌機標籤）在「適用年齡層」右邊；灰色音符在「課程重點」右邊、
-       黃色音符在「教學特色」標題上方（這兩個是手機專用標籤）；粉紅音符沿用平板標籤，在「課程內容」標題右邊 */
-    #music .teaching-info > .teaching-media-decoration[src*="插圖1"] {
-        display: block !important;
-        top: 13px !important;
-        right: 31px !important;
-        width: 80px !important;
-        transform: rotate(15deg) !important;
-        z-index: -1;
-    }
-
-    #music .teaching-media-decoration.is-mobile,
-    #music .teaching-media-decoration.is-tablet[src*="插圖3"] {
-        display: block !important;
-        z-index: -1;
-    }
-
-    #music .is-mobile[src*="插圖4"] {
-        top: -12px;
-        right: 5px;
-        width: 117px;
-    }
-
-    #music .is-mobile[src*="插圖2"] {
-        top: -54px;
-        left: 92px;
-        width: 77px;
-    }
-
-    #music .is-tablet[src*="插圖3"] {
-        top: -68px;
-        right: -4px;
-        width: 118px;
-        transform: rotate(13deg);
-    }
-
-    /* ---- 創思數學 ----
-       思考泡泡在「系統概述」右上、乘號在「各班課程重點」右上、百分比在「教學特色」標題上方
-       （這三個是手機專用標籤）；加號沿用平板標籤，在「課程內容」文字結尾右下 */
-    #creative-math .teaching-media-decoration.is-mobile,
-    #creative-math .teaching-media-decoration.is-tablet[src*="插圖4"] {
-        display: block !important;
-        z-index: -1;
-    }
-
-    #creative-math .teaching-media-decoration.is-mobile[src*="插圖1"] {
-        top: -63px;
-        right: 56px;
-        width: 77px;
-        transform: rotate(17deg);
-    }
-
-    /* 寬 400 以上時，上面「教材配置」那行不再換行，泡泡顯得太高，往下 20px */
-    @media (min-width: 400px) {
-        #creative-math .teaching-media-decoration.is-mobile[src*="插圖1"] {
-            top: -43px;
-        }
-    }
-
-    #creative-math .teaching-media-decoration.is-mobile[src*="插圖2"] {
-        top: -48px !important;
-        left: auto !important;
-        right: 15px;
-        width: 93px !important;
-        transform: rotate(27deg) !important;
-    }
-
-    #creative-math .teaching-media-decoration.is-mobile[src*="插圖3"] {
-        top: -60px;
-        left: 90px;
-        width: 144px;
-    }
-
-    #creative-math .teaching-media-decoration.is-tablet[src*="插圖4"] {
-        bottom: -39px;
-        right: 17px;
-        width: 112px;
-        transform: rotate(-32deg);
-    }
-
-    /* ---- 潛能開發 ----
-       拼圖插圖沿用桌機那個掛在「各班課程內容」區塊上的標籤，101px，在標題右上方
-       （桌機的大小位置寫在標籤上，所以用 !important 蓋過） */
-    #potential-development .teaching-content-block > .teaching-media-decoration:not(.is-tablet):not(.is-mobile) {
-        display: block !important;
-        top: -54px !important;
-        right: 27px !important;
-        width: 101px !important;
-    }
+    /* 寬 400 以上時，上面「程度與教材」那行不再換行，泡泡顯得太高，往下 20px */
 }
 
 /* ============================================================
@@ -4581,67 +2802,6 @@ a { text-decoration: none; color: inherit; }
    卡片排法同平板（上排照片＋文字、下排四顆按鈕），內容左右留白改 20
    地區標題 H4 18；按鈕字 15；導航按鈕左右內距 12
    ============================================================ */
-@media (max-width: 767px) {
-    .region-container {
-        padding: 0 20px;
-    }
-
-    .branch-btn--nav {
-        padding: 0 12px;
-    }
-
-    /* 插圖：其他地區的手機位置還沒有設計稿，先隱藏；
-       台北 66px，在第一、二間校區之間的右側 */
-    .region-deco {
-        display: none;
-    }
-
-    #taipei .region-deco {
-        display: block;
-        top: 269px;
-        right: 60px;
-        width: 66px;
-        z-index: 1; /* 疊在校區卡片的分隔線上面 */
-    }
-
-    /* 新竹：星星 48px，在第一、二間校區之間的右側，同樣疊在分隔線上 */
-    .region-deco--hsinchu {
-        display: block;
-        top: 265px;
-        right: 53px;
-        width: 48px;
-        z-index: 1;
-    }
-
-    /* 台中：水滴轉成橫向（橫向約 80px），在第二間校區按鈕列的右下方 */
-    .region-deco--taichung {
-        display: block;
-        top: 472px;
-        right: 61px;
-        width: 42px;
-        z-index: 1; /* 疊在按鈕和分隔線上面 */
-        transform: rotate(-90deg);
-    }
-
-    /* 海外：花 76px，在第一、二間校區之間的右側。
-       海外的地址會折成兩三行、卡片高度不固定，所以改掛在第一張卡片的右下角，不用區塊頂端算位置 */
-    #overseas .branch-item:first-child {
-        position: relative;
-    }
-
-    #overseas .branch-item:first-child::after {
-        content: '';
-        position: absolute;
-        z-index: 1;
-        right: 21px;
-        bottom: -22px;
-        width: 76px;
-        height: 62px;
-        background: url('/images/deco/region-g.png') center / contain no-repeat;
-        opacity: 0.8;
-        pointer-events: none;
-    }
-}
 
 /* ============================================================
    手機版 < 768px：最新消息
@@ -4953,156 +3113,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ============================================================
-   平板版 768–1023px：語言課程輪播的縮圖寬度與裁切（只給平板，手機版另外獨立設定）
-   設計稿的縮圖高 192，寬度只有兩種：300（整張或跨頁裁掉一部分）和 149（只露出封面那一頁）
-   桌機版的寬度寫在標籤上，所以用 !important 蓋過
-   ============================================================ */
-@media (min-width: 768px) and (max-width: 1023px) {
-    #chinese-pronunciation .gallery-slide,
-    #english .gallery-slide,
-    #music .gallery-slide,
-    #creative-math .gallery-slide,
-    #potential-development .gallery-slide {
-        width: 300px !important;
-    }
-
-    /* 只露出封面：中文正音前兩張（左頁）、生活美語前兩張（右頁）、音樂律動第一張（右頁） */
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2),
-    #english .gallery-slide:nth-child(-n+2),
-    #music .gallery-slide:first-child {
-        width: 149px !important;
-    }
-
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
-        object-position: left center;
-    }
-
-    #english .gallery-slide:nth-child(-n+2) img {
-        object-position: right center;
-    }
-
-    #music .gallery-slide:first-child img {
-        object-position: 81.7% center;
-    }
-
-    /* 生活美語第三、四張是方形和直式的圖，放大到 300 寬後取中段和下段 */
-    #english .gallery-slide:nth-child(3) img {
-        object-position: center 45%;
-    }
-
-    #english .gallery-slide:nth-child(4) img {
-        object-position: center 90%;
-    }
-
-    /* 跨頁圖靠哪一邊裁 */
-    #music .gallery-slide:nth-child(2) img,
-    #music .gallery-slide:nth-child(3) img {
-        object-position: left center;
-    }
-}
-
-/* ============================================================
-   桌機版 ≥ 1024px：語言課程輪播的縮圖寬度與裁切（第 3–7 個系統，照桌機設計稿）
-   縮圖高 188；寬度寫在標籤上，所以用 !important 蓋過
-   「只露出封面」的做法：圖片拉成框的兩倍寬、往左推一半，只露出右頁的封面；
-   設計稿的封面是整頁拉寬填滿框（高度完整、寬度被拉開），照設計稿做
-   ============================================================ */
-@media (min-width: 1024px) {
-    .gallery-slide {
-        overflow: hidden;
-    }
-
-    /* ---- 中文正音：148、148、372、337；前兩張只露出左頁的封面 ---- */
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2) {
-        width: 148px !important;
-    }
-
-    #chinese-pronunciation .gallery-slide:nth-child(-n+2) img {
-        object-position: left center;
-    }
-
-    #chinese-pronunciation .gallery-slide:nth-child(3) {
-        width: 372px !important;
-    }
-
-    /* ---- 生活美語：294、294、372、294；前兩張只露出右頁的封面 ---- */
-    #english .gallery-slide:nth-child(-n+2) {
-        width: 294px !important;
-    }
-
-    #english .gallery-slide:nth-child(-n+2) img {
-        width: 200%;
-        max-width: none;
-        margin-left: -100%;
-        object-fit: fill;
-    }
-
-    /* 第三張設計稿是把方形的圖壓扁成 372x188（看得到上面的書名和右下的 logo），照設計稿做 */
-    #english .gallery-slide:nth-child(3) {
-        width: 372px !important;
-    }
-
-    #english .gallery-slide:nth-child(3) img {
-        object-fit: fill;
-    }
-
-    #english .gallery-slide:nth-child(4) {
-        width: 294px !important;
-    }
-
-    #english .gallery-slide:nth-child(4) img {
-        object-position: center 85%;
-    }
-
-    /* ---- 音樂律動：221、294、372、294；第一張只露出右頁的封面 ---- */
-    #music .gallery-slide:first-child {
-        width: 221px !important;
-    }
-
-    #music .gallery-slide:first-child img {
-        width: 200%;
-        max-width: none;
-        margin-left: -100%;
-        object-fit: fill;
-    }
-
-    #music .gallery-slide:nth-child(2),
-    #music .gallery-slide:nth-child(4) {
-        width: 294px !important;
-    }
-
-    #music .gallery-slide:nth-child(4) img {
-        object-position: left center;
-    }
-
-    #music .gallery-slide:nth-child(3) {
-        width: 372px !important;
-    }
-
-    /* ---- 創思數學：294、294、372、294 ---- */
-    #creative-math .gallery-slide {
-        width: 294px !important;
-    }
-
-    #creative-math .gallery-slide:nth-child(3) {
-        width: 372px !important;
-    }
-
-    #creative-math .gallery-slide:nth-child(4) img {
-        object-position: left center;
-    }
-
-    /* ---- 潛能開發：四張都 294 ---- */
-    #potential-development .gallery-slide {
-        width: 294px !important;
-    }
-
-    #potential-development .gallery-slide:nth-child(4) img {
-        object-position: left center;
-    }
-}
-
-/* ============================================================
    小桌機 1024–1300px：探索視角文章內頁的插圖
    這段寬度兩側放不下桌機版的插圖（上面有一條規則把它們全部隱藏），
    改用平板設計稿的擺法：放在作者列右邊、文章結尾右下、段落結尾。
@@ -5205,18 +3215,6 @@ a { text-decoration: none; color: inherit; }
     display: none;
 }
 
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    #humanities .teaching-images {
-        align-items: center;
-    }
-
-    #humanities .teaching-images > picture > img {
-        aspect-ratio: 676 / 807;
-        border-radius: 0;
-    }
-}
-
 /* 平板：第三篇漢堡改回疊在右上蛋形照片的左下角（新版設計稿），不再接在第一段文字後面 */
 @media (min-width: 768px) and (max-width: 1023px) {
     .post3-inline-illust {
@@ -5249,106 +3247,33 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* 桌機：第一個課程兩張都照原圖比例顯示到欄寬 562，不再平分欄高而被縮小（同設計稿）；兩張間距 32、整組垂直置中 */
-@media (min-width: 1024px) {
-    #humanities .teaching-images > img:not(.teaching-media-decoration),
-    #humanities .teaching-images > picture > img {
-        flex: 0 0 auto;
-        height: auto;
-    }
-}
-
-
-@media (min-width: 1024px) {
-    /* 兩張不再置中：第一張貼齊欄頂、第二張貼齊欄底（同設計稿，拍立得底框上緣對齊右欄「引起動機」） */
-    #humanities .teaching-images {
-        justify-content: space-between;
-    }
-
-    #humanities .teaching-images > picture > img {
-        width: 562px;
-        height: 940px;
-        object-fit: cover;
-    }
-}
-
-/* 桌機：生活美語右下彩蛋拼貼縮小到 83%，中心不動（同設計稿：GREAT 上緣約對齊「外國語言學習時間」那行） */
-@media (min-width: 1024px) {
-    #english .teaching-images > img:nth-child(2) {
-        transform: scale(0.83);
-    }
-}
-
-/* 桌機：創思數學兩張照原比例顯示。第一張維持原位置；第二張（圓形照片，圖檔已裁到圓形邊緣）562x541，
-   上緣對齊右欄「評量與複習」那段（同設計稿） */
-@media (min-width: 1024px) {
-    #creative-math .teaching-images {
-        justify-content: flex-start;
-    }
-
-    #creative-math .teaching-images > picture > img {
-        flex: 0 0 auto;
-        height: auto;
-    }
-
-    #creative-math .teaching-images > picture:nth-child(1) > img {
-        margin-top: 226px;
-    }
-
-    #creative-math .teaching-images > picture:nth-child(2) > img {
-        margin-top: 554px;
-    }
-}
-
-/* 桌機：潛能開發兩張改成 3:4（562x749，同設計稿），各自對齊右欄文字：
-   第一張上緣在「經由故事、影片…」那行下方約 25px，第二張上緣在「Share Time（分享時間）」那行下方約 10px */
-@media (min-width: 1024px) {
-    #potential-development .teaching-images {
-        justify-content: flex-start;
-    }
-
-    #potential-development .teaching-images > picture > img {
-        flex: 0 0 auto;
-        height: auto;
-    }
-
-    #potential-development .teaching-images > picture:nth-child(1) > img {
-        margin-top: 232px;
-    }
-
-    #potential-development .teaching-images > picture:nth-child(2) > img {
-        margin-top: 470px; /* 上緣在「Share Time」那行下方約 10px（同設計稿） */
-    }
-}
 
 /* 平板：教學方法、教學原則的照片都放在段落右下 */
 @media (min-width: 768px) and (max-width: 1023px) {
     /* 照片放在文字下方，不壓文字 */
     .methods {
-        padding-bottom: 128px;
+        padding-bottom: 200px;
     }
 
     .methods-illust {
         display: block;
         top: auto;
-        right: 66px;
-        bottom: -100px;
-        width: 130px;
-        opacity: 0.8;
+        right: 40px;
+        bottom: -157px;
+        width: 200px;
     }
 
     .principles-illust {
         display: block;
         left: auto;
-        right: 138px;
-        bottom: 8px;
-        width: 100px; 
-        opacity: 0.8;
-        transform: rotate(86.68deg);
+        right: 40px;
+        bottom: 40px;
+        width: 140px;
     }
 
-    /* 下方留白給插圖，不壓文字 */
+    /* 下方留白給照片，不壓文字 */
     .principles {
-        padding-bottom: 128px;
+        padding-bottom: 262px;
     }
 }
 
@@ -5399,305 +3324,29 @@ a { text-decoration: none; color: inherit; }
     }
 }
 
-
-
-.region-deco--taipei2 {
-    top: auto;
-    bottom: -52px;
-    right: -69px;
-    width: 588px;
-    transform: none;
-}
-
-@media (max-width: 1023px) {
-    #taipei .region-deco--taipei2 {
-        display: none;
-    }
-}
-
-
-@media (min-width: 1024px) {
-    #taipei .region-deco:not(.region-deco--taipei2) {
-        top: 284px;
-        right: 302px;
-        width: 240px;
-    }
-}
-
-/* 新竹地區插圖（新版設計稿）：桌機在標題列到第一間校區右側，星球＋大星星＋小星星。
+/* 南部地區插圖（新版設計稿）：桌機在標題列到第一間校區右側，星球＋大星星＋小星星。
    星球圖檔四周有大片透明留白；小星星是同一張星星圖縮小壓扁。平板、手機只保留原本的大星星 */
-@media (min-width: 1024px) {
-    .region-deco--hsinchu {
-        top: 228px;
-        right: 90px;
-        width: 106px;
-        transform: none;
-    }
 
-    .region-deco--hsinchu-b {
-        top: -36px;
-        right: 107px;
-        width: 311px;
-        transform: none;
-    }
-
-    .region-deco--hsinchu-c {
-        top: 181px;
-        right: 346px;
-        width: 46px;
-        transform: scaleY(0.85) rotate(-130deg);
-    }
-}
-
-@media (max-width: 1023px) {
-    #hsinchu .region-deco--hsinchu-b,
-    #hsinchu .region-deco--hsinchu-c {
-        display: none;
-    }
-}
-
-/* 台中地區插圖（新版設計稿）：桌機水滴移到第二、三間校區之間，跨在分隔線上；
-   新增腳印（台中地區-插圖2，圖檔四周有透明留白）在標題列到第一間校區右側。平板、手機只保留原本的水滴 */
-@media (min-width: 1024px) {
-    .region-deco--taichung {
-        
-        top: 682px;
-        right: auto;
-        left: calc(50% - 217.53px);
-        width: 121.79px;
-        transform-origin: 0 0;
-        transform: rotate(-81.01deg);
-    }
-
-    .region-deco--taichung-b {
-        top: -26px;
-        right: 47px;
-        width: 527px;
-        transform: none;
-    }
-}
-
-@media (max-width: 1023px) {
-    #taichung .region-deco--taichung-b {
-        display: none;
-    }
-}
+/* 中部地區插圖（新版設計稿）：桌機水滴移到第二、三間校區之間，跨在分隔線上；
+   新增腳印（中部地區-插圖2，圖檔四周有透明留白）在標題列到第一間校區右側。平板、手機只保留原本的水滴 */
 
 /* 校區列表拿掉照片（新版設計稿，三個版本都沒有照片）：
    平板、手機原本是「照片＋文字」兩欄格線，改成單欄，名稱和地址電話從左邊開始 */
-@media (max-width: 1023px) {
-    .branch-item {
-        grid-template-columns: minmax(0, 1fr);
-    }
 
-    .branch-name,
-    .branch-details {
-        grid-column: 1;
-    }
-}
-
-/* 海外地區插圖（新版設計稿）：桌機花朵縮小、移到第一間校區右上；新增兔子（海外地區-插圖2）跨在第二條分隔線上。
+/* 東部地區插圖（新版設計稿）：桌機花朵縮小、移到第一間校區右上；新增兔子（東部地區-插圖2）跨在第二條分隔線上。
    兔子圖檔四周有透明留白，原圖是躺著的，順時針轉 36 度變成站姿。平板、手機只保留原本的花朵 */
-@media (min-width: 1024px) {
-    .region-deco--overseas {
-        top: 46px;
-        right: 197px;
-        width: 230px;
-        transform: none;
-    }
 
-    .region-deco--overseas-b {
-        top: 478px;
-        right: 570px;
-        width: 236px;
-        transform: rotate(36deg);
-    }
-}
+/* 平板：南部地區插圖（新版設計稿）。星球在標題右側、大星星在星球右下、小星星在星球左下，都在第一間校區上方 */
 
-@media (max-width: 1023px) {
-    #overseas .region-deco--overseas-b {
-        display: none;
-    }
-}
+/* 平板：中部地區插圖（新版設計稿）。腳印在標題到第一間校區右側；水滴移到第三間校區（小巨匠）名稱右側 */
 
+/* 平板：東部地區插圖（新版設計稿）。花朵縮小移到第一間校區右上；兔子（原本平板不顯示）在第三間校區名稱右側 */
 
-@media (min-width: 768px) and (max-width: 1023px) {
-    #taipei .region-deco:not(.region-deco--taipei2) {
-        top: 99px;
-        right: 136px;
-        width: 96px;
-        transform: rotate(-15deg);
-    }
+/* 手機：南部地區插圖（新版設計稿）。星球在標題右側、小星星在第一間校區名稱右側、大星星在按鈕列右上（貼螢幕右緣） */
 
-    #taipei .region-deco--taipei2 {
-        display: block;
-        top: 1091px;
-        bottom: auto;
-        right: 53px;
-        width: 237px;
-        transform: none;
-        z-index: 1; /* 疊在分隔線上面 */
-    }
-}
+/* 手機：中部地區插圖（新版設計稿）。腳印在第一間校區右側（貼螢幕右緣）；水滴在第二條分隔線上、畫面中間 */
 
-/* 平板：新竹地區插圖（新版設計稿）。星球在標題右側、大星星在星球右下、小星星在星球左下，都在第一間校區上方 */
-@media (min-width: 768px) and (max-width: 1023px) {
-    #hsinchu .region-deco--hsinchu-b,
-    #hsinchu .region-deco--hsinchu-c {
-        display: block;
-    }
-
-    #hsinchu .region-deco--hsinchu-b {
-        top: -6px;
-        right: 231px;
-        width: 147px;
-        transform: none;
-    }
-
-    #hsinchu .region-deco--hsinchu {
-        top: 86px;
-        right: 185px;
-        width: 70px;
-        transform: rotate(10deg);
-    }
-
-    #hsinchu .region-deco--hsinchu-c {
-        top: 81px;
-        right: 337px;
-        width: 44px;
-        transform: scaleY(0.85) rotate(-130deg);
-    }
-}
-
-/* 平板：台中地區插圖（新版設計稿）。腳印在標題到第一間校區右側；水滴移到第三間校區（小巨匠）名稱右側 */
-@media (min-width: 768px) and (max-width: 1023px) {
-    #taichung .region-deco--taichung-b {
-        display: block;
-        top: -2px;
-        right: 159px;
-        width: 203px;
-        transform: none;
-    }
-
-    #taichung .region-deco--taichung {
-        top: 519px;
-        right: 404px;
-        width: 47px;
-        transform: rotate(-80deg);
-    }
-}
-
-/* 平板：海外地區插圖（新版設計稿）。花朵縮小移到第一間校區右上；兔子（原本平板不顯示）在第三間校區名稱右側 */
-@media (min-width: 768px) and (max-width: 1023px) {
-    #overseas .region-deco--overseas {
-        top: 67px;
-        bottom: auto;
-        right: 117px;
-        width: 92px;
-        transform: none;
-    }
-
-    #overseas .region-deco--overseas-b {
-        display: block;
-        top: 489px;
-        right: 232px;
-        width: 135px;
-        transform: rotate(36deg);
-    }
-}
-
-
-@media (max-width: 767px) {
-    #taipei .region-deco:not(.region-deco--taipei2) {
-        top: 239px;
-        right: 65px;
-        width: 62.56px; 
-        transform: rotate(-16.75deg);
-    }
-
-    #taipei .region-deco--taipei2 {
-        display: block;
-        top: 1140px;
-        bottom: auto;
-        right: -13px;
-        width: 148px;
-        transform: none;
-        z-index: 1;
-    }
-}
-
-/* 手機：新竹地區插圖（新版設計稿）。星球在標題右側、小星星在第一間校區名稱右側、大星星在按鈕列右上（貼螢幕右緣） */
-@media (max-width: 767px) {
-    #hsinchu .region-deco--hsinchu-b,
-    #hsinchu .region-deco--hsinchu-c {
-        display: block;
-    }
-
-    #hsinchu .region-deco--hsinchu-b {
-        top: 16px;
-        right: 8px;
-        width: 81.12px; 
-        transform: none;
-    }
-
-    #hsinchu .region-deco--hsinchu-c {
-        top: 123px;
-        right: 78px;
-        width: 11.44px; 
-        transform: rotate(-125.43deg);
-    }
-
-    #hsinchu .region-deco--hsinchu {
-        top: 187px;
-        right: 0;
-        width: 27.57px; 
-        transform: none;
-    }
-}
-
-/* 手機：台中地區插圖（新版設計稿）。腳印在第一間校區右側（貼螢幕右緣）；水滴在第二條分隔線上、畫面中間 */
-@media (max-width: 767px) {
-    #taichung .region-deco--taichung-b {
-        display: block;
-        top: 89px;
-        right: -3px;
-        width: 130px;
-        transform: none;
-    }
-
-    #taichung .region-deco--taichung {
-        top: 485px;
-        right: 152px;
-        width: 31px;
-        transform: rotate(-80deg);
-    }
-}
-
-/* 手機：海外地區插圖（新版設計稿）。花朵在標題列右側；兔子（原本手機不顯示）在第二間校區按鈕列下方、跨在分隔線上 */
-@media (max-width: 767px) {
-    #overseas .region-deco--overseas {
-        display: block;
-        top: 52px;
-        bottom: auto;
-        right: 36px;
-        width: 52px;
-        transform: none;
-    }
-
-    /* 原本手機版的花朵是掛在第一間校區下緣的偽元素，改用上面的插圖後拿掉 */
-    #overseas .branch-item:first-child::after {
-        content: none;
-    }
-
-    #overseas .region-deco--overseas-b {
-        display: block;
-        top: 472px;
-        right: 139px;
-        width: 60px;
-        transform: rotate(41deg);
-        z-index: 1;
-    }
-}
+/* 手機：東部地區插圖（新版設計稿）。花朵在標題列右側；兔子（原本手機不顯示）在第二間校區按鈕列下方、跨在分隔線上 */
 
 /* 學員音檔：每本教材一組，組標題在列表上方 */
 .audio-group {

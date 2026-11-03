@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { LightboxProvider } from "@/components/systems/Lightbox";
 import { CourseTabs } from "@/components/systems/CourseSection";
 import { pageMetadata } from "@/lib/site";
 
@@ -7,7 +6,7 @@ export const metadata: Metadata = pageMetadata({ title: "語言課程", descript
 
 export default function Page() {
   return (
-    <LightboxProvider>
+    <>
       {/* HERO */}
       <section className="hero" style={{ backgroundImage: "url('/images/courses/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="hero-inner">
@@ -16,6 +15,6 @@ export default function Page() {
         </div>
       </section>
       <CourseTabs />
-    </LightboxProvider>
+    </>
   );
 }

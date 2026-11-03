@@ -32,7 +32,7 @@ export function validateField(field: keyof ContactFields, raw: string): string |
       if (!EMAIL.test(value) || value.length > 254) return "Email 格式不正確";
       return;
     case "branch":
-      if (value && !BRANCHES.includes(value)) return "請從清單選擇校區";
+      if (value && !BRANCHES.includes(value)) return "請從清單選擇分校";
       return;
     case "message":
       if (value.length < MESSAGE_MIN) return `請至少輸入 ${MESSAGE_MIN} 個字，讓我們了解您的需求`;

@@ -2,7 +2,9 @@
 export type Course = {
   id: string;
   name: string;
-  /** 適用程度／教材配置 */
+  /** 標題旁兩個對話泡泡裡的字（大泡泡、小泡泡） */
+  bubbles: [string, string];
+  /** 程度與教材 */
   summary: string;
   overview: string;
   levels: string[];
@@ -21,6 +23,7 @@ export const CLASS_STEPS = [
 export const COURSES: Course[] = [
   {
     id: "english",
+    bubbles: ["Aa", "Hi"],
     name: "英語課程",
     summary: "初級到高級，共 12 階｜主教材、聽力音檔、線上單字卡",
     overview: "以 CEFR 為架構，從日常會話一路銜接職場簡報與檢定考。課程把聽說放在第一順位，文法在對話裡自然帶入，讓學員不只看得懂，也能在需要的時候開口。",
@@ -30,6 +33,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "japanese",
+    bubbles: ["あ", "カ"],
     name: "日語課程",
     summary: "五十音到 N1，共 10 階｜主教材、聽力音檔、漢字練習本",
     overview: "從五十音與發音打底，銜接日本生活與職場常用表現。課堂大量使用情境對話，並透過敬語練習與文化解說，理解日本人說話背後的分寸。",
@@ -39,6 +43,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "korean",
+    bubbles: ["한", "ㄱ"],
     name: "韓語課程",
     summary: "韓文字母到 TOPIK 6 級，共 8 階｜主教材、聽力音檔、書寫本",
     overview: "兩週學會韓文字母，接著用韓劇與流行文化中的實用句型練習對話。課程重視連音與語調，讓發音更自然，也幫助學員建立正確的敬語語感。",
@@ -48,6 +53,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "french",
+    bubbles: ["é", "Ç"],
     name: "法語課程",
     summary: "A1 到 B2，共 8 階｜主教材、聽力音檔、動詞變化手冊",
     overview: "從法語發音與基本句型開始，透過美食、藝術與旅行主題學習表達。課堂練習說出完整想法，同時熟悉法語區的生活文化與溝通習慣。",
@@ -57,6 +63,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "german",
+    bubbles: ["ß", "Ü"],
     name: "德語課程",
     summary: "A1 到 C1，共 10 階｜主教材、聽力音檔、文法練習本",
     overview: "用清楚的結構掌握德語文法，再把規則放進實際情境。課程特別適合留學、工作與技術領域的學習者，著重正確度和流暢度的平衡。",
@@ -66,6 +73,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "spanish",
+    bubbles: ["ñ", "¿"],
     name: "西班牙語課程",
     summary: "A1 到 B2，共 8 階｜主教材、聽力音檔、動詞變化手冊",
     overview: "西班牙語發音規則清楚，很快就能開口。課程涵蓋西班牙與拉丁美洲的用語差異，透過旅行、音樂和飲食主題，輕鬆累積實用表達。",
@@ -75,6 +83,7 @@ export const COURSES: Course[] = [
   },
   {
     id: "chinese",
+    bubbles: ["中", "ㄅ"],
     name: "華語課程",
     summary: "初級到高級，共 9 階｜主教材、聽力音檔、漢字練習本",
     overview: "專為外籍人士設計的華語課，以注音或拼音入門，學習台灣生活最實用的對話。課程結合夜市、捷運、職場等在地情境，幫助學員快速融入生活。",

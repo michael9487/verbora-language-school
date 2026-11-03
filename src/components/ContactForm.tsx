@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useActionState, useState } from "react";
 import { submitContact, type ContactState } from "@/app/contact/actions";
 import { BRANCHES, MESSAGE_MAX, validateField, type ContactErrors, type ContactFields } from "@/lib/contact";
@@ -41,9 +42,20 @@ function Field({
   );
 }
 
-export function ContactForm() {
+// 從校區資訊頁按「預約參觀」過來時，網址帶 ?branch=分校名稱，幫忙填好分校和開頭的留言
+function presetValues(branch: string | null): ContactFields {
+  if (!branch || !BRANCHES.includes(branch)) return EMPTY;
+  return { ...EMPTY, branch, message: `我想預約參觀${branch}，方便的時間是：` };
+}
+
+export function ContactFormWithPreset() {
+  const branch = useSearchParams().get("branch");
+  return <ContactForm key={branch} presetBranch={branch} />;
+}
+
+export function ContactForm({ presetBranch = null }: { presetBranch?: string | null }) {
   const [state, formAction, pending] = useActionState<ContactState, FormData>(submitContact, { status: "idle" });
-  const [values, setValues] = useState<ContactFields>(EMPTY);
+  const [values, setValues] = useState<ContactFields>(() => presetValues(presetBranch));
   const [touched, setTouched] = useState<Partial<Record<keyof ContactFields, boolean>>>({});
   const [lastState, setLastState] = useState(state);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -116,7 +128,7 @@ export function ContactForm() {
       <Field id="contact-email" label="Email" required error={errors.email}>
         <input type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" {...bind("email")} />
       </Field>
-      <Field id="contact-branch" label="想詢問的校區" error={errors.branch}>
+      <Field id="contact-branch" label="想詢問的分校" error={errors.branch}>
         <select {...bind("branch")}>
           <option value="">不指定</option>
           {BRANCHES.map((b) => (

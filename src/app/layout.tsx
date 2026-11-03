@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_TC } from "next/font/google";
 import Script from "next/script";
+import { BackToTop } from "@/components/BackToTop";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeToggle, themeInitScript } from "@/components/ThemeToggle";
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />
+          <BackToTop />
           <ThemeToggle />
         </LiffProvider>
       </body>

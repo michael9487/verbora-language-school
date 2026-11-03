@@ -14,6 +14,9 @@ const SHEET_GID = process.env.NEWS_SHEET_GID ?? "0";
 /** 試算表更新後，網站最多隔幾秒會更新 */
 export const NEWS_REVALIDATE_SECONDS = 60;
 
+/** 切回視窗時用這個 tag 讓快取立刻失效（app/news/actions.ts） */
+export const NEWS_CACHE_TAG = "news";
+
 export type NewsItem = {
   id: string;
   /** YYYY-MM-DD；C 欄空白或看不懂時是 null */
@@ -24,8 +27,20 @@ export type NewsItem = {
   tag: { label: string; key: string } | null;
 };
 
-// 對應 site.css 的 news-tag--{key} 顏色
-const TAG_KEYS: Record<string, string> = { 台北: "taipei", 新竹: "hsinchu", 台中: "taichung", 海外: "overseas" };
+// 標題開頭的城市對應到分區顏色（site.css 的 news-tag--{key}）
+const TAG_KEYS: Record<string, string> = {
+  台北: "north",
+  新北: "north",
+  基隆: "north",
+  桃園: "north",
+  新竹: "north",
+  台中: "central",
+  彰化: "central",
+  台南: "south",
+  高雄: "south",
+  花蓮: "east",
+  台東: "east",
+};
 
 export function parseDate(raw: string): string | null {
   const m = raw.trim().match(/^(\d{4})\D(\d{1,2})\D(\d{1,2})/);
@@ -69,7 +84,7 @@ export async function getNews(): Promise<{ items: NewsItem[]; ok: boolean }> {
   const url = process.env.NEWS_SHEET_CSV_URL ?? (SHEET_ID && `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`);
   if (!url) return { items: rowsToNews(DEMO_NEWS_ROWS), ok: true };
   try {
-    const res = await fetch(url, { next: { revalidate: NEWS_REVALIDATE_SECONDS } });
+    const res = await fetch(url, { next: { revalidate: NEWS_REVALIDATE_SECONDS, tags: [NEWS_CACHE_TAG] } });
     // 試算表沒公開時 Google 會導到登入頁（HTML），不是 CSV
     if (!res.ok || !res.headers.get("content-type")?.includes("text/csv")) {
       throw new Error(`HTTP ${res.status} ${res.headers.get("content-type")}`);

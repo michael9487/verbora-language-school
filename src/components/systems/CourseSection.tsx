@@ -1,6 +1,5 @@
 import { SectionTabs, TabPanel } from "@/components/SectionTabs";
 import { CLASS_STEPS, COURSES, type Course } from "@/data/courses";
-import { TeachingGallery } from "./TeachingGallery";
 
 function Block({ title, items }: { title: string; items: string[] }) {
   return (
@@ -15,6 +14,20 @@ function Block({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+// 標題旁的兩個對話泡泡，字依語言不同；位置沿用 .teaching-system-title-decoration，但不整組旋轉，字才好讀
+function LangBubbles({ chars: [big, small] }: { chars: [string, string] }) {
+  return (
+    <span className="teaching-system-title-decoration h-[128px] transform-none" aria-hidden="true">
+      <span className="absolute top-0 right-0 flex size-[76px] rotate-[8deg] items-center justify-center rounded-[50%_50%_50%_14%] bg-[#C9E3F8] text-[28px] font-bold text-[#4A82CF]">
+        {big}
+      </span>
+      <span className="absolute bottom-1 left-3 flex size-[62px] -rotate-[6deg] items-center justify-center rounded-[50%_50%_14%_50%] bg-[#F9CDD8] text-[24px] font-bold text-[#C2577A]">
+        {small}
+      </span>
+    </span>
+  );
+}
+
 function CourseSection({ course }: { course: Course }) {
   const { id, name } = course;
   return (
@@ -22,7 +35,7 @@ function CourseSection({ course }: { course: Course }) {
       <div className="teaching-system-main">
         <div className="teaching-system-title">
           <h2>{name}</h2>
-          <img loading="lazy" className="teaching-system-title-decoration" src="/images/deco/course.png" alt="" />
+          <LangBubbles chars={course.bubbles} />
         </div>
         <div className="teaching-system-content">
           <div className="teaching-main-grid">
@@ -32,23 +45,21 @@ function CourseSection({ course }: { course: Course }) {
             </div>
             <div className="teaching-info">
               <div className="teaching-info-section">
-                <p className="teaching-info-section-title">適用程度 ／ 教材配置</p>
+                <p className="teaching-info-section-title">程度與教材</p>
                 <p className="teaching-info-section-body">{course.summary}</p>
               </div>
               <div className="teaching-info-list">
                 <div className="teaching-content-block is-relative">
-                  <img loading="lazy" className="teaching-media-decoration is-mobile" src="/images/deco/course.png" alt="" />
-                  <h3 className="teaching-content-block-title">課程概述</h3>
+                  <h3 className="teaching-content-block-title">這門課怎麼學</h3>
                   <p className="teaching-content-block-body">{course.overview}</p>
                 </div>
-                <Block title="各級課程重點" items={course.levels} />
-                <Block title="四大上課步驟" items={CLASS_STEPS} />
-                <Block title="教學特色" items={course.features} />
-                <Block title="課程內容" items={course.topics} />
+                <Block title="每一階學會什麼" items={course.levels} />
+                <Block title="一堂課的節奏" items={CLASS_STEPS} />
+                <Block title="加分安排" items={course.features} />
+                <Block title="主題班別" items={course.topics} />
               </div>
             </div>
           </div>
-          <TeachingGallery slides={[1, 2].map((n) => ({ src: `/images/courses/${id}-slide-${n}.jpg`, alt: "", width: "376px" }))} />
         </div>
       </div>
     </TabPanel>

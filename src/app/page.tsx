@@ -18,7 +18,7 @@ export default function Page() {
     <>
       {/* HERO：next/image 優先載入、自動轉 AVIF/WebP、依螢幕寬度給適當尺寸（LCP 元素） */}
       <section className="hero hero--home isolate">
-        <Image src="/images/home/hero.jpg" alt="" fill priority sizes="(max-width: 1440px) 100vw, 1440px" className="-z-10 object-cover" />
+        <Image src="/images/home/hero.jpg" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
         <div className="hero-inner">
           <div className="hero-logo">
             <img className="hero-logo-word" src="/images/hero-word.png" alt="Verbora" />
@@ -93,7 +93,7 @@ export default function Page() {
             <img loading="lazy" src="/images/home/goals.jpg" alt="筆記本與便利貼" />
           </div>
           <div className="philosophy-text">
-            <h2 className="philosophy-title">教學目標</h2>
+            <h2 className="philosophy-title">帶得走的能力</h2>
             <p>我們希望學員離開教室時，帶走的不只是分數，而是敢開口的自信。課程以 CEFR 語言能力指標規劃，從生活會話、職場溝通到學術應用，逐步建立聽、說、讀、寫四項能力。</p>
             <p>同時，我們重視跨文化理解。了解一個語言背後的習慣與思考方式，才能真正用對語氣、說對話，與世界各地的人建立連結。</p>
           </div>
@@ -106,7 +106,7 @@ export default function Page() {
           <div className="methods-illust">
             <img loading="lazy" src="/images/home/methods.jpg" alt="正在書寫的手" />
           </div>
-          <h2 className="methods-title">教學方法</h2>
+          <h2 className="methods-title">在使用中學會</h2>
           <div className="methods-text">
             <p>語言是在使用中學會的。每堂課以任務為中心，透過情境對話、角色扮演與小組討論，讓學員在真實的溝通需求裡學習文法和單字，再用課後聽力和線上練習把內容記牢。</p>
           </div>
@@ -121,7 +121,7 @@ export default function Page() {
         </picture>
         <div className="principles-container">
           <div className="principles-title-row">
-            <h2 className="principles-title">教學原則</h2>
+            <h2 className="principles-title">堅持的四件事</h2>
           </div>
           <div className="principles-text">
             <p>以學員為中心：學員是課堂的主角，老師負責設計任務、引導對話與給予回饋。每班人數不超過 8 位，確保每個人都被看見。</p>

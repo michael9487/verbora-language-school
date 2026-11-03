@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ContactForm } from "@/components/ContactForm";
+import { Suspense } from "react";
+import { ContactForm, ContactFormWithPreset } from "@/components/ContactForm";
 import { CONTACT, pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({ title: "聯絡我們", description: "沃語國際語言學校聯絡資訊與線上聯絡表單。" });
@@ -25,7 +26,10 @@ export default function Page() {
               線上留言
             </h2>
             <p className="mb-8 text-center text-ink-muted dark:text-[#9aa5b3]">留下您的聯絡方式與問題，我們會盡快回覆。</p>
-            <ContactForm />
+            {/* 表單維持預先渲染；瀏覽器讀到網址參數後再換成帶入分校的版本 */}
+            <Suspense fallback={<ContactForm />}>
+              <ContactFormWithPreset />
+            </Suspense>
           </section>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { NewsAccordion } from "@/components/news/NewsAccordion";
+import { RefreshOnFocus } from "@/components/news/RefreshOnFocus";
 import { getNews } from "@/lib/news";
 import { CONTACT, pageMetadata } from "@/lib/site";
 
@@ -13,6 +14,7 @@ export default async function Page() {
   const { items, ok } = await getNews();
   return (
     <>
+      <RefreshOnFocus />
       {/* HERO */}
       <section className="hero" style={{ backgroundImage: "url('/images/news/banner.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="hero-inner">
