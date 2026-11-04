@@ -79,7 +79,7 @@
 ### 上線
 
 - [x] 建立 GitHub public repo 並推上程式碼
-- [ ] 在 GitHub 設定 Description 和 Topics
+- [x] 在 GitHub 設定 Description 和 Topics
 - [x] Vercel 匯入專案並完成第一次部署
 - [x] 正式站讀到 Google 試算表的活動消息
 - [x] 正式站改試算表，確認活動消息有更新
@@ -92,16 +92,11 @@
 - [x] 真實手機測試 LIFF：登入、分享卡片、掃描 QR Code
 - [x] 建立官方帳號並連結 channel，測試加好友提醒
 - [x] 設定圖文選單，連到活動、課程、校區、諮詢、會員專區和語音教材
-- [ ] 資料庫新增留言狀態欄位，Vercel 設定 `ADMIN_LINE_USER_IDS`，上線測試管理後台
+- [x] 資料庫新增留言狀態欄位，Vercel 設定 `ADMIN_LINE_USER_IDS`，上線測試管理後台
 - [x] 接上 Supabase 後，用手機測試掃碼報到完成寫入
 - [x] 真實環境測試聯絡表單
 - [ ] 收到聯絡表單時通知管理者（目前只存進資料庫）
 - [x] Vercel 設定 `SESSION_SECRET` 並用手機和電腦測試 LINE 學員登入
-
-### 手機開發
-
-- [ ] 在 claude.ai/code 連接 GitHub 並授權這個 repo
-- [ ] 用手機 Claude App 改一項小功能，確認 Vercel 預覽網址可以開啟
 
 ## 功能
 
