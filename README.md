@@ -63,6 +63,12 @@
 - [x] 伺服器向 LINE 驗證 ID Token
 - [x] LIFF SDK 延遲載入
 
+### 管理後台
+
+- [x] 留言列表：依狀態篩選、標記已聯絡
+- [x] 報到名單：各活動的報到人數和名單
+- [x] 管理者權限由伺服器檢查，頁面和寫入動作都驗證
+
 ### 專案整理
 
 - [x] Production build、lint、型別檢查通過
@@ -84,7 +90,9 @@
 - [x] 建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://你的網域/member`
 - [x] Vercel 設定 LINE 環境變數
 - [x] 真實手機測試 LIFF：登入、分享卡片、掃描 QR Code
-- [ ] 建立官方帳號並連結 channel，測試加好友提醒
+- [x] 建立官方帳號並連結 channel，測試加好友提醒
+- [x] 設定圖文選單，連到活動、課程、校區、諮詢、會員專區和語音教材
+- [ ] 資料庫新增留言狀態欄位，Vercel 設定 `ADMIN_LINE_USER_IDS`，上線測試管理後台
 - [x] 接上 Supabase 後，用手機測試掃碼報到完成寫入
 - [x] 真實環境測試聯絡表單
 - [ ] 收到聯絡表單時通知管理者（目前只存進資料庫）

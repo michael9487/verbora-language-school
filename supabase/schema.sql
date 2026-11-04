@@ -12,6 +12,7 @@ create table public.contact_messages (
   email text not null check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' and char_length(email) <= 254),
   branch text,
   message text not null check (char_length(message) between 10 and 1000),
+  status text not null default 'new' check (status in ('new', 'contacted')),  -- 管理後台的處理狀態
   created_at timestamptz not null default now()
 );
 alter table public.contact_messages enable row level security;

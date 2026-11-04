@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AudioLibrary } from "@/components/audio/AudioLibrary";
+import { isAdminSession } from "@/lib/admin";
 import { getAudioBooks } from "@/lib/audio";
 import { getSession } from "@/lib/session";
 import { logout } from "../login/actions";
@@ -32,6 +34,11 @@ export default async function Page() {
         <div className="audio-container">
           <div className="audio-header">
             <h2 className="audio-semester-title">{heading}</h2>
+            {isAdminSession(session) && (
+              <Link href="/admin" className="font-bold text-brand underline dark:text-(--dk-link)">
+                管理後台
+              </Link>
+            )}
             <form action={logout}>
               <button type="submit" className="audio-logout cursor-pointer bg-transparent font-[inherit] hover:bg-brand hover:text-white">
                 登出

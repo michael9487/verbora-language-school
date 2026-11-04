@@ -80,17 +80,18 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 - Google 試算表活動消息已在正式站顯示。
 - LIFF 已設定並用 iPhone 實測：LINE 登入、分享卡片、掃描 QR Code 都正常。入口：<https://liff.line.me/2012358470-MrC07YH9>。
 - `NEXT_PUBLIC_LIFF_ID`、`LINE_LOGIN_CHANNEL_ID`、`NEXT_PUBLIC_SITE_URL` 已設到 Vercel。
-- 官方帳號還沒建立，加好友提醒沒測過；`NEXT_PUBLIC_LINE_OA_ID` 還沒設。
+- 官方帳號已建立並連結 channel，`NEXT_PUBLIC_LINE_OA_ID` 已設，加好友提醒已實測。Messaging API 沒有設定 Webhook。
 - Supabase 已接上（Vercel 三個變數已設），掃碼報到和聯絡表單都已實測寫入資料庫。聯絡表單目前只存資料，不會通知管理者。
 - LINE 學員登入已上線並實測：伺服器驗證 ID Token 後發出簽章 cookie，`SESSION_SECRET` 已設到 Vercel。
+- 管理後台 `/admin`：留言列表和報到名單，只有 `ADMIN_LINE_USER_IDS` 裡的 LINE 使用者能進；頁面和 Server Action 都會檢查。
+- 圖文選單已在官方帳號後台設定，六格連到網站和 LIFF，手機已實測。
 - 示範音檔放在 `public/audio`，來源見 `MEDIA_CREDITS.md`；私有音檔不需要，Supabase 的 `audio_tracks` 保持空的。
 
 **接下來的順序：**
 
-1. 請使用者建立官方帳號：Messaging API 要選和 channel 相同的 Provider，再到 channel 的 Linked LINE Official Account 連結；LIFF 的 Add friend option 改成 On (aggressive)，Vercel 加 `NEXT_PUBLIC_LINE_OA_ID` 後 Redeploy，測試加好友提醒。
-2. 視需要加上聯絡表單通知（例如 Email 或 LINE）。
-3. 小型管理後台：留言列表和報到名單，管理者權限由伺服器檢查 LINE 使用者 ID。
-5. 完整待辦看 `README.md` 的「上線」和「手機開發」，開始前先問使用者哪些已經做了。
+1. 面試前收尾：刪除測試留言和報到資料，活動標題改回正式內容。
+2. 視需要加上聯絡表單通知（例如 Email 或 LINE），也可以用圖文選單當入口。
+3. 完整待辦看 `README.md` 的「上線」和「手機開發」，開始前先問使用者哪些已經做了。
 
 **之後可考慮的新功能：** 預約體驗課加 LINE 通知，並用圖文選單當入口。等現有功能實機測過再做。
 
