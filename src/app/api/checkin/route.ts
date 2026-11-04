@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
+import { verifyLineIdToken } from "@/lib/line-auth";
 import { adminClient } from "@/lib/supabase/clients";
 
 // 活動報到：前端送來 LIFF ID Token + 活動代碼
-// 不能相信前端送來的 userId，所以先向 LINE 驗證 ID Token，從 LINE 回傳的結果取得使用者身分，再寫入資料庫
-
-type VerifyResult = { sub: string; name?: string; error_description?: string };
+// 先向 LINE 驗證 ID Token 確認身分，再寫入資料庫
 
 export async function POST(req: Request) {
   const { idToken, code } = (await req.json().catch(() => ({}))) as { idToken?: string; code?: string };
@@ -12,17 +11,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "缺少登入資訊或活動代碼格式不正確" }, { status: 400 });
   }
 
-  const channelId = process.env.LINE_LOGIN_CHANNEL_ID;
   const supabase = adminClient();
-  if (!channelId || !supabase) return NextResponse.json({ error: "報到服務尚未設定" }, { status: 503 });
+  if (!process.env.LINE_LOGIN_CHANNEL_ID || !supabase) return NextResponse.json({ error: "報到服務尚未設定" }, { status: 503 });
 
-  const verify = await fetch("https://api.line.me/oauth2/v2.1/verify", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ id_token: idToken, client_id: channelId }),
-  });
-  const user = (await verify.json()) as VerifyResult;
-  if (!verify.ok) return NextResponse.json({ error: "LINE 登入已過期，請重新登入" }, { status: 401 });
+  const user = await verifyLineIdToken(idToken);
+  if (!user) return NextResponse.json({ error: "LINE 登入已過期，請重新登入" }, { status: 401 });
 
   const { data: event } = await supabase.from("checkin_events").select("code, name, location, ends_at").eq("code", code).maybeSingle();
   if (!event) return NextResponse.json({ error: "找不到這個活動，請確認 QR Code" }, { status: 404 });

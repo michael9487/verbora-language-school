@@ -1,6 +1,6 @@
 import "server-only";
-import { cookies } from "next/headers";
-import { ACCOUNTS, AUDIO_COOKIE, AUDIO_LINK_DAYS, BOOKS, findAccount } from "@/lib/audio-catalog";
+import { AUDIO_LINK_DAYS, BOOKS } from "@/lib/audio-catalog";
+import type { Session } from "@/lib/session";
 import { adminClient } from "@/lib/supabase/clients";
 
 export type AudioBook = {
@@ -9,13 +9,6 @@ export type AudioBook = {
   cover: string;
   tracks: { id: number; title: string; url: string }[];
 };
-
-/** 目前登入的帳號；沒登入或帳號已不在清單裡就回傳 null */
-export async function currentAccount() {
-  return findAccount((await cookies()).get(AUDIO_COOKIE)?.value);
-}
-
-const accountBooks = (account: string) => BOOKS.filter((b) => ACCOUNTS[account].books.includes(b.key));
 
 // 每種語言兩段示範音檔，放在 public/audio（來源見 MEDIA_CREDITS.md）
 const DEMO_TITLES: Record<string, string> = {
@@ -29,8 +22,8 @@ const DEMO_TITLES: Record<string, string> = {
   "korean-2": "玄鎮健〈鋼琴〉節選",
 };
 
-function demoBooks(account: string): AudioBook[] {
-  return accountBooks(account).map((book, i) => ({
+function demoBooks(): AudioBook[] {
+  return BOOKS.map((book, i) => ({
     key: book.key,
     title: book.title,
     cover: book.cover,
@@ -39,22 +32,20 @@ function demoBooks(account: string): AudioBook[] {
 }
 
 /**
- * 取得帳號可以聽的教材與音檔。
+ * 取得登入者可以聽的教材與音檔。示範模式一律只拿公開示範音檔，私有教材要 LINE 登入。
  * Supabase 的 audio_tracks 有資料時，用私有 bucket 的限時簽名網址播放，Range（拖曳進度條）由 Storage 處理；
  * 沒有設定或沒有資料就用公開的示範音檔，作品集不用任何設定也能體驗播放器
  */
-export async function getAudioBooks(account: string): Promise<AudioBook[]> {
-  const supabase = adminClient();
-  if (!supabase) return demoBooks(account);
+export async function getAudioBooks(session: Session): Promise<AudioBook[]> {
+  const supabase = session.kind === "line" ? adminClient() : null;
+  if (!supabase) return demoBooks();
 
-  const books = accountBooks(account);
   const { data: tracks, error } = await supabase
     .from("audio_tracks")
     .select("id, book_key, position, title, storage_path")
-    .in("book_key", books.map((b) => b.key))
     .order("position");
   if (error) throw new Error(`讀取音檔清單失敗：${error.message}`);
-  if (!tracks.length) return demoBooks(account);
+  if (!tracks.length) return demoBooks();
 
   const { data: signed, error: signError } = await supabase.storage
     .from("audio")
@@ -65,14 +56,12 @@ export async function getAudioBooks(account: string): Promise<AudioBook[]> {
   if (signError) throw new Error(`產生播放網址失敗：${signError.message}`);
   const urlByPath = new Map(signed.map((s) => [s.path, s.signedUrl]));
 
-  return books
-    .map((book) => ({
-      key: book.key,
-      title: book.title,
-      cover: book.cover,
-      tracks: tracks
-        .filter((t) => t.book_key === book.key && urlByPath.get(t.storage_path))
-        .map((t) => ({ id: t.id, title: t.title, url: urlByPath.get(t.storage_path)! })),
-    }))
-    .filter((b) => b.tracks.length > 0);
+  return BOOKS.map((book) => ({
+    key: book.key,
+    title: book.title,
+    cover: book.cover,
+    tracks: tracks
+      .filter((t) => t.book_key === book.key && urlByPath.get(t.storage_path))
+      .map((t) => ({ id: t.id, title: t.title, url: urlByPath.get(t.storage_path)! })),
+  })).filter((b) => b.tracks.length > 0);
 }

@@ -130,23 +130,6 @@
 :root.dark .login-title {
     color: var(--dk-link)
 }
-:root.dark .login-label {
-    color: var(--dk-text)
-}
-:root.dark .login-input {
-    background: var(--dk-bg);
-    border: 1px solid var(--dk-border);
-    color: var(--dk-text-strong)
-}
-:root.dark .login-input::placeholder {
-    color: var(--dk-text-muted)
-}
-:root.dark .login-input-password input {
-    color: var(--dk-text-strong)
-}
-:root.dark .login-input-password input::placeholder {
-    color: var(--dk-text-muted)
-}
 :root.dark .audio-body {
     background: var(--dk-bg)
 }

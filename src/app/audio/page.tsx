@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AudioLibrary } from "@/components/audio/AudioLibrary";
-import { currentAccount, getAudioBooks } from "@/lib/audio";
-import { ACCOUNTS } from "@/lib/audio-catalog";
+import { getAudioBooks } from "@/lib/audio";
+import { getSession } from "@/lib/session";
 import { logout } from "../login/actions";
 
 export const metadata: Metadata = {
@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  // 沒登入或帳號已不在清單裡，一律請重新登入
-  const account = await currentAccount();
-  if (!account) redirect("/login");
+  // 頁面由伺服器判斷登入狀態：沒登入、cookie 被改過或已過期，一律請重新登入
+  const session = await getSession();
+  if (!session) redirect("/login");
 
-  const books = await getAudioBooks(account);
+  const books = await getAudioBooks(session);
+  const heading = session.kind === "demo" ? "示範模式教材" : session.name ? `${session.name} 的教材` : "我的教材";
 
   return (
     <>
@@ -30,7 +31,7 @@ export default async function Page() {
       <section className="audio-body">
         <div className="audio-container">
           <div className="audio-header">
-            <h2 className="audio-semester-title">{ACCOUNTS[account].label}教材</h2>
+            <h2 className="audio-semester-title">{heading}</h2>
             <form action={logout}>
               <button type="submit" className="audio-logout cursor-pointer bg-transparent font-[inherit] hover:bg-brand hover:text-white">
                 登出

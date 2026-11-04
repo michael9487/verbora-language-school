@@ -1,28 +1,37 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AUDIO_COOKIE, AUDIO_COOKIE_DAYS, findAccount } from "@/lib/audio-catalog";
+import { verifyLineIdToken } from "@/lib/line-auth";
+import { clearSession, getSession, startDemoSession, startLineSession } from "@/lib/session";
 
-export type LoginState = { error?: string; username?: string };
+export async function lineLogin(idToken: string): Promise<{ error: string }> {
+  if (typeof idToken !== "string" || !idToken) return { error: "LINE 登入已過期，請重新登入" };
 
-export async function login(_prev: LoginState, formData: FormData): Promise<LoginState> {
-  const username = String(formData.get("username") ?? "").trim();
-  // 只需輸入帳號（不分大小寫、忽略前後空白），不用密碼
-  const account = findAccount(username);
-  if (!account) return { error: "查無此帳號，請重新輸入", username };
-
-  (await cookies()).set(AUDIO_COOKIE, account, {
-    maxAge: AUDIO_COOKIE_DAYS * 86400,
-    path: "/",
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-  });
+  let user;
+  try {
+    user = await verifyLineIdToken(idToken);
+  } catch (err) {
+    console.error("LINE ID Token 驗證失敗：", err);
+    return { error: "暫時無法連線 LINE，請稍後再試" };
+  }
+  if (!user) return { error: "LINE 登入已過期，請重新登入" };
+  if (!(await startLineSession(user))) return { error: "登入服務尚未設定" };
   redirect("/audio");
 }
 
+export async function demoLogin() {
+  await startDemoSession();
+  redirect("/audio");
+}
+
+/** 語音教材頁的登出：LINE 使用者回會員專區，順便登出瀏覽器裡的 LINE 登入 */
 export async function logout() {
-  (await cookies()).delete(AUDIO_COOKIE);
-  redirect("/login");
+  const session = await getSession();
+  await clearSession();
+  redirect(session?.kind === "line" ? "/member?logout=1" : "/login");
+}
+
+/** 會員專區的登出按鈕：頁面自己會重新載入，不用導頁 */
+export async function endSession() {
+  await clearSession();
 }

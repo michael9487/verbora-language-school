@@ -1,7 +1,8 @@
 "use client";
 
 import type { Liff } from "@line/liff";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { endSession, lineLogin } from "@/app/login/actions";
 import { parseCheckinCode } from "@/lib/checkin";
 import { useLiff, useLiffProfile } from "./LiffProvider";
 import { ShareButton } from "./ShareButton";
@@ -17,6 +18,19 @@ const btn =
 
 export function MemberArea() {
   const { state } = useLiff();
+
+  // 從語音教材頁登出會帶 ?logout=1，要連瀏覽器裡的 LINE 登入一起登出。LINE App 裡沒有登出的概念，只清網址
+  useEffect(() => {
+    if (state.status !== "ready") return;
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("logout")) return;
+    url.searchParams.delete("logout");
+    history.replaceState(null, "", url);
+    if (state.loggedIn && !state.inClient) {
+      state.liff.logout();
+      window.location.reload();
+    }
+  }, [state]);
 
   if (state.status === "idle" || state.status === "loading") {
     return (
@@ -69,7 +83,10 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
   const [checkin, setCheckin] = useState<CheckinResult>(null);
   const [scannedUrl, setScannedUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
+  const [enteringAudio, startEnteringAudio] = useTransition();
   const autoChecked = useRef(false);
+  const autoEntered = useRef(false);
   const canScan = liff.isApiAvailable("scanCodeV2");
 
   // 加好友提醒：需要在 LINE Developers 把 LIFF 連結到官方帳號
@@ -118,6 +135,34 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
     submitCheckin(code);
   }, [submitCheckin]);
 
+  // 語音教材頁由伺服器判斷身分：把 ID Token 交給伺服器驗證，通過才發登入狀態並導頁
+  const enterAudio = useCallback(() => {
+    setAudioError(null);
+    const idToken = liff.getIDToken();
+    if (!idToken) return setAudioError("請在 LIFF 設定勾選 openid 權限");
+    startEnteringAudio(async () => {
+      const result = await lineLogin(idToken);
+      if (result?.error) setAudioError(result.error);
+    });
+  }, [liff]);
+
+  // 從學員登入頁過來（網址帶 ?to=audio），登入 LINE 後直接進語音教材
+  useEffect(() => {
+    if (autoEntered.current) return;
+    autoEntered.current = true;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("to") !== "audio") return;
+    url.searchParams.delete("to");
+    history.replaceState(null, "", url);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 網址參數只有瀏覽器讀得到，掛載時觸發一次
+    enterAudio();
+  }, [enterAudio]);
+
+  function relogin() {
+    liff.logout();
+    window.location.reload();
+  }
+
   async function scan() {
     setCheckin(null);
     setScannedUrl(null);
@@ -151,9 +196,9 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
         {!inClient && (
           <button
             type="button"
-            onClick={() => {
-              liff.logout();
-              window.location.reload();
+            onClick={async () => {
+              await endSession();
+              relogin();
             }}
             className="shrink-0 cursor-pointer rounded-full border border-[#DDE3EC] bg-transparent px-4 py-2 text-sm text-ink-muted dark:border-[#2c3644] dark:text-[#9aa5b3]"
           >
@@ -180,6 +225,27 @@ function LoggedIn({ liff, inClient }: { liff: Liff; inClient: boolean }) {
           </a>
         </div>
       )}
+
+      {/* 語音教材 */}
+      <div className={card}>
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          <div className="flex-1">
+            <h2 className="text-lg font-bold text-ink dark:text-[#e8ebef]">語音教材</h2>
+            <p className="mt-2 text-ink-muted dark:text-[#9aa5b3]">用 LINE 身分進入聽力教材，七種語言隨選隨聽。</p>
+          </div>
+          <button type="button" onClick={enterAudio} disabled={enteringAudio} className={`${btn} bg-brand text-white hover:bg-[#185CA8] focus-visible:outline-brand`}>
+            {enteringAudio ? "驗證中…" : "進入語音教材"}
+          </button>
+        </div>
+        {audioError && (
+          <p role="alert" className="mt-4 rounded-lg bg-[#FDECEE] p-3 font-bold text-[#D91E33] dark:bg-[#3a1418] dark:text-[#ff8a95]">
+            {audioError}
+            <button type="button" onClick={relogin} className="ml-2 cursor-pointer border-0 bg-transparent p-0 font-[inherit] font-bold underline">
+              重新登入
+            </button>
+          </p>
+        )}
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* 掃碼報到 */}

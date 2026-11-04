@@ -55,7 +55,7 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 ## 本機與示範資料
 
 - `npm run dev`，預設 port 3000
-- 學員登入示範帳號：`DEMO`
+- 學員登入：`/login` 用 LINE 登入，或選示範模式；LINE 登入需要 `SESSION_SECRET`
 - 所有環境變數都是選填，清單在 `.env.example`
 
 ## 進度
@@ -88,8 +88,7 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 
 1. 請使用者建立官方帳號：Messaging API 要選和 channel 相同的 Provider，再到 channel 的 Linked LINE Official Account 連結；LIFF 的 Add friend option 改成 On (aggressive)，Vercel 加 `NEXT_PUBLIC_LINE_OA_ID` 後 Redeploy，測試加好友提醒。
 2. 視需要加上聯絡表單通知（例如 Email 或 LINE）。
-3. 把學員登入改成 LINE，目前 `/login` 是寫死的帳號。
-4. 隱私權政策補上 LINE 登入會取得名稱、頭像和使用者 ID。
+3. 小型管理後台：留言列表和報到名單，管理者權限由伺服器檢查 LINE 使用者 ID。
 5. 完整待辦看 `README.md` 的「上線」和「手機開發」，開始前先問使用者哪些已經做了。
 
 **之後可考慮的新功能：** 預約體驗課加 LINE 通知，並用圖文選單當入口。等現有功能實機測過再做。
