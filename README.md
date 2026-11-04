@@ -76,7 +76,7 @@
 - [ ] 在 GitHub 設定 Description 和 Topics
 - [x] Vercel 匯入專案並完成第一次部署
 - [x] 正式站讀到 Google 試算表的活動消息
-- [ ] 正式站改試算表，確認活動消息有更新
+- [x] 正式站改試算表，確認活動消息有更新
 - [x] Vercel 設定 `NEXT_PUBLIC_SITE_URL`，填入正式網址後重新部署
 - [x] 把正式網址補到這份 README
 - [x] 建立 Supabase 專案並執行 `supabase/schema.sql`
@@ -88,7 +88,7 @@
 - [x] 接上 Supabase 後，用手機測試掃碼報到完成寫入
 - [x] 真實環境測試聯絡表單
 - [ ] 收到聯絡表單時通知管理者（目前只存進資料庫）
-- [ ] Vercel 設定 `SESSION_SECRET` 並用手機和電腦測試 LINE 學員登入
+- [x] Vercel 設定 `SESSION_SECRET` 並用手機和電腦測試 LINE 學員登入
 
 ### 手機開發
 

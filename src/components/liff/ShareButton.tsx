@@ -6,18 +6,32 @@ import { useLiffContext } from "./LiffProvider";
 
 type Status = { kind: "idle" | "busy" } | { kind: "done" | "error"; text: string };
 
+// LIFF 只保證在 Endpoint URL（/member）底下能用
+const LIFF_PATH = "/member";
+
+// LINE 官方的網站分享頁，電腦和手機瀏覽器都走這裡
+function openLineShare(url: string, text: string) {
+  const shareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+  // 加 noopener 參數時 window.open 一律回傳 null，就分不出有沒有被擋，所以開好再切斷 opener
+  const opened = window.open(shareUrl, "_blank");
+  if (opened) opened.opener = null;
+  else window.location.href = shareUrl;
+}
+
 // 分享給 LINE 好友：
-// 1. 有 LIFF 且支援 shareTargetPicker → 選好友/群組，送出 Flex 卡片（要先登入 LINE）
-// 2. 沒有 → 手機用系統分享選單（navigator.share）
-// 3. 都沒有 → 複製連結
+// 1. 在會員專區且支援 shareTargetPicker → 選好友/群組，送出 Flex 卡片（要先登入 LINE）
+// 2. 其他情況 → 開 LINE 官方的分享頁，分享連結
 export function ShareButton({ card, className = "" }: { card: ShareCard; className?: string }) {
   const { init } = useLiffContext();
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   async function share() {
-    setStatus({ kind: "busy" });
     const origin = window.location.origin;
     const url = absoluteUrl(card.url, origin);
+    // 要在點擊當下直接開新分頁，先 await 會被瀏覽器當成彈出視窗擋掉
+    if (!window.location.pathname.startsWith(LIFF_PATH)) return openLineShare(url, card.title);
+
+    setStatus({ kind: "busy" });
     try {
       const liff = await init();
       if (liff && liff.isApiAvailable("shareTargetPicker")) {
@@ -30,16 +44,9 @@ export function ShareButton({ card, className = "" }: { card: ShareCard; classNa
         setStatus(res ? { kind: "done", text: "已分享到 LINE" } : { kind: "idle" });
         return;
       }
-      if (navigator.share) {
-        await navigator.share({ title: card.title, text: card.subtitle, url });
-        setStatus({ kind: "idle" });
-        return;
-      }
-      await navigator.clipboard.writeText(url);
-      setStatus({ kind: "done", text: "已複製連結" });
-    } catch (err) {
-      // 使用者自己關掉分享選單不算錯誤
-      if (err instanceof DOMException && err.name === "AbortError") return setStatus({ kind: "idle" });
+      openLineShare(url, card.title);
+      setStatus({ kind: "idle" });
+    } catch {
       setStatus({ kind: "error", text: "分享失敗，請稍後再試" });
     }
   }

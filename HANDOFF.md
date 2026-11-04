@@ -82,6 +82,7 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 - `NEXT_PUBLIC_LIFF_ID`、`LINE_LOGIN_CHANNEL_ID`、`NEXT_PUBLIC_SITE_URL` 已設到 Vercel。
 - 官方帳號還沒建立，加好友提醒沒測過；`NEXT_PUBLIC_LINE_OA_ID` 還沒設。
 - Supabase 已接上（Vercel 三個變數已設），掃碼報到和聯絡表單都已實測寫入資料庫。聯絡表單目前只存資料，不會通知管理者。
+- LINE 學員登入已上線並實測：伺服器驗證 ID Token 後發出簽章 cookie，`SESSION_SECRET` 已設到 Vercel。
 - 示範音檔放在 `public/audio`，來源見 `MEDIA_CREDITS.md`；私有音檔不需要，Supabase 的 `audio_tracks` 保持空的。
 
 **接下來的順序：**
