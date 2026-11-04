@@ -18,12 +18,23 @@ export async function currentAccount() {
 const accountBooks = (account: string) => BOOKS.filter((b) => ACCOUNTS[account].books.includes(b.key));
 
 // 每種語言兩段示範音檔，放在 public/audio（來源見 MEDIA_CREDITS.md）
+const DEMO_TITLES: Record<string, string> = {
+  "english-1": "世界人權宣言第一條",
+  "chinese-2": "〈南國山河〉朗讀",
+  "english-2": "吉卜林〈If〉節選",
+  "french-1": "世界人權宣言第一條",
+  "spanish-1": "世界人權宣言第一條",
+  "german-2": "里爾克〈豹〉",
+  "japanese-2": "日本國憲法前文節選",
+  "korean-2": "玄鎮健〈鋼琴〉節選",
+};
+
 function demoBooks(account: string): AudioBook[] {
   return accountBooks(account).map((book, i) => ({
     key: book.key,
     title: book.title,
     cover: book.cover,
-    tracks: [1, 2].map((n) => ({ id: i * 10 + n, title: `${book.language}發音練習 ${String(n).padStart(2, "0")}`, url: `/audio/${book.key}-${n}.mp3` })),
+    tracks: [1, 2].map((n) => ({ id: i * 10 + n, title: DEMO_TITLES[`${book.key}-${n}`] ?? `${book.language}發音練習 ${String(n).padStart(2, "0")}`, url: `/audio/${book.key}-${n}.mp3` })),
   }));
 }
 

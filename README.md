@@ -77,14 +77,17 @@
 - [x] Vercel 匯入專案並完成第一次部署
 - [x] 正式站讀到 Google 試算表的活動消息
 - [ ] 正式站改試算表，確認活動消息有更新
-- [ ] Vercel 設定 `NEXT_PUBLIC_SITE_URL`，填入正式網址後重新部署
+- [x] Vercel 設定 `NEXT_PUBLIC_SITE_URL`，填入正式網址後重新部署
 - [x] 把正式網址補到這份 README
-- [ ] 建立 Supabase 專案並執行 `supabase/schema.sql`
-- [ ] Vercel 設定 Supabase 環境變數
-- [ ] 建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://你的網域/member`
-- [ ] Vercel 設定 LINE 環境變數
-- [ ] 真實手機測試 LIFF：登入、分享卡片、掃碼報到、加好友提醒
-- [ ] 真實環境測試聯絡表單和私有音檔
+- [x] 建立 Supabase 專案並執行 `supabase/schema.sql`
+- [x] Vercel 設定 Supabase 環境變數
+- [x] 建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://你的網域/member`
+- [x] Vercel 設定 LINE 環境變數
+- [x] 真實手機測試 LIFF：登入、分享卡片、掃描 QR Code
+- [ ] 建立官方帳號並連結 channel，測試加好友提醒
+- [x] 接上 Supabase 後，用手機測試掃碼報到完成寫入
+- [x] 真實環境測試聯絡表單
+- [ ] 收到聯絡表單時通知管理者（目前只存進資料庫）
 
 ### 手機開發
 
@@ -135,7 +138,7 @@ npm run dev       # http://localhost:3000
 
 - **Supabase**：建立專案，在 SQL Editor 執行 [`supabase/schema.sql`](supabase/schema.sql)，再填入 URL 和金鑰。要放私有音檔可以用 `scripts/upload-audio.ts`（需要 Node 22.18 以上）。
 - **活動報到**：在 `checkin_events` 新增活動，把 `https://你的網域/member?checkin=活動代碼` 做成 QR Code。
-- **LINE**：在 LINE Developers 建立 LIFF，Endpoint URL 填 `https://你的網域/member`，Scope 勾選 `profile`、`openid`，開啟 shareTargetPicker 和 Scan QR，Bot link 選 On (Aggressive) 並連結官方帳號。
+- **LINE**：在 LINE Developers 建立 LIFF，Endpoint URL 填 `https://你的網域/member`，Scope 勾選 `profile`、`openid`，開啟 shareTargetPicker 和 Scan QR，連結官方帳號後，Add friend option 選 On (aggressive)。
 - **Google 試算表**：A 欄標題、B 欄內文、C 欄日期，開啟「知道連結的任何人都能檢視」，再填入 `NEWS_SHEET_ID`。
 
 ## 聲明

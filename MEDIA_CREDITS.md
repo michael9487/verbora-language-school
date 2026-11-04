@@ -46,17 +46,17 @@
 
 | 檔案 | 授權 | 作者 | 來源 |
 | --- | --- | --- | --- |
-| `audio/english-1.mp3` | CC0 | Speaker: ManjiroLL Recorder: ManjiroLL | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-ManjiroLL-Kew.wav) |
-| `audio/english-2.mp3` | CC0 | Speaker: ManjiroLL Recorder: ManjiroLL | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-ManjiroLL-pie.wav) |
+| `audio/english-1.mp3` | Public domain（LibriVox） | Kara Shallenberg | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Universal_Declaration_of_Human_Rights_-_eng_-_ks_-_Article_1.ogg) |
+| `audio/english-2.mp3`（節選） | Public domain（朗讀者自行釋出） | Luis.imperator；原詩 Rudyard Kipling | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:If_rudyard_kipling.ogg) |
 | `audio/japanese-1.mp3` | CC0 | FreeMediaKid! | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Ja-nani-anglonative.oga) |
-| `audio/japanese-2.mp3` | CC0 | FreeMediaKid! | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Ja-gan-anglonative.oga) |
+| `audio/japanese-2.mp3`（節選） | CC0 | Molgen3966；原文為日本國憲法前文 | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:%E6%97%A5%E6%9C%AC%E5%9B%BD%E6%86%B2%E6%B3%95%E5%89%8D%E6%96%87.ogg) |
 | `audio/korean-1.mp3` | CC0 | Speaker: 호로조 Recorder: 호로조 | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q9176_(kor)-%ED%98%B8%EB%A1%9C%EC%A1%B0-%EB%88%88.wav) |
-| `audio/korean-2.mp3` | CC0 | Speaker: CHK2605 Recorder: CHK2605 | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q9176_(kor)-CHK2605-%EC%98%88.wav) |
-| `audio/french-1.mp3` | CC0 | Speaker: ManjiroLL Recorder: ManjiroLL | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-ManjiroLL-kick.wav) |
+| `audio/korean-2.mp3`（節選） | Public domain（LibriVox） | Jessie Yun；原作玄鎮健 | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LibriVox_-_%ED%98%84%EC%A7%84%EA%B1%B4_%ED%94%BC%EC%95%84%EB%85%B8.ogg) |
+| `audio/french-1.mp3` | Public domain（LibriVox） | Ezwa | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Universal_Declaration_of_Human_Rights_-_frn_-_ezwa_-_Art1.ogg) |
 | `audio/french-2.mp3` | CC0 | Speaker: ManjiroLL Recorder: ManjiroLL | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-ManjiroLL-kitsch.wav) |
 | `audio/german-1.mp3` | CC0 | Speaker: Mukeber Recorder: Mukeber | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q188_(deu)-Mukeber-A.wav) |
-| `audio/german-2.mp3` | CC0 | Speaker: Mukeber Recorder: Mukeber | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q188_(deu)-Mukeber-a.wav) |
-| `audio/spanish-1.mp3` | CC0 | Speaker: Sinaloa Recorder: Sinaloa | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q1321_(spa)-Sinaloa-no.wav) |
+| `audio/german-2.mp3` | Public domain（LibriVox） | Stephan Gambke；原詩 Rainer Maria Rilke | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LibriVox_-_Rilke_Der_Panther_sg.ogg) |
+| `audio/spanish-1.mp3` | Public domain（LibriVox） | Karen Savage | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Universal_Declaration_of_Human_Rights_-_spn_-_krs_-_Art1.ogg) |
 | `audio/spanish-2.mp3` | CC0 | Speaker: Rubýñ Recorder: Rubýñ | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:LL-Q1321_(spa)-Rub%C3%BD%C3%B1-chema.wav) |
 | `audio/chinese-1.mp3` | Public domain | EEIM | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Zh_Handan_ia.ogg) |
-| `audio/chinese-2.mp3` | Public domain | EEIM | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Zh_Pingquan_ia.ogg) |
+| `audio/chinese-2.mp3` | CC0 | Ngguls | [Commons 檔案頁](https://commons.wikimedia.org/wiki/File:Mandarin_Chinese-%E5%8D%97%E5%9B%BD%E5%B1%B1%E6%B2%B3.ogg) |

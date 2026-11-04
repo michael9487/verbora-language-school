@@ -62,7 +62,7 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 
 待辦和完成狀態看 `README.md` 的「開發進度」，完成項目後順手打勾。
 
-## 備註（2026-11-02）
+## 備註（2026-11-05 更新）
 
 這個專案是面試用的作品，使用者接下來主要用手機 Claude 開發。
 
@@ -78,14 +78,18 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 - GitHub repo：`michael9487/verbora-language-school`（public）。
 - 正式網站：<https://verbora-language-school.vercel.app/>，推到 `main` 會自動部署。
 - Google 試算表活動消息已在正式站顯示。
-- LIFF、LINE 會員和 Supabase 還沒有實際設定，也沒在真實手機測試過。
+- LIFF 已設定並用 iPhone 實測：LINE 登入、分享卡片、掃描 QR Code 都正常。入口：<https://liff.line.me/2012358470-MrC07YH9>。
+- `NEXT_PUBLIC_LIFF_ID`、`LINE_LOGIN_CHANNEL_ID`、`NEXT_PUBLIC_SITE_URL` 已設到 Vercel。
+- 官方帳號還沒建立，加好友提醒沒測過；`NEXT_PUBLIC_LINE_OA_ID` 還沒設。
+- Supabase 已接上（Vercel 三個變數已設），掃碼報到和聯絡表單都已實測寫入資料庫。聯絡表單目前只存資料，不會通知管理者。
+- 示範音檔放在 `public/audio`，來源見 `MEDIA_CREDITS.md`；私有音檔不需要，Supabase 的 `audio_tracks` 保持空的。
 
 **接下來的順序：**
 
-1. 請使用者在 Vercel 設定 `NEXT_PUBLIC_SITE_URL=https://verbora-language-school.vercel.app`，再 Redeploy。目前 sitemap 輸出的網址還是 `http://localhost:3000`。
-2. 請使用者建立 LINE Login channel 和 LIFF，Endpoint URL 填 `https://verbora-language-school.vercel.app/member`，再把 LINE 環境變數設到 Vercel。
-3. 請使用者用真實手機測試 LIFF 和 LINE 會員。
-4. 要做掃碼報到時，才接 Supabase 並執行 `supabase/schema.sql`。
+1. 請使用者建立官方帳號：Messaging API 要選和 channel 相同的 Provider，再到 channel 的 Linked LINE Official Account 連結；LIFF 的 Add friend option 改成 On (aggressive)，Vercel 加 `NEXT_PUBLIC_LINE_OA_ID` 後 Redeploy，測試加好友提醒。
+2. 視需要加上聯絡表單通知（例如 Email 或 LINE）。
+3. 把學員登入改成 LINE，目前 `/login` 是寫死的帳號。
+4. 隱私權政策補上 LINE 登入會取得名稱、頭像和使用者 ID。
 5. 完整待辦看 `README.md` 的「上線」和「手機開發」，開始前先問使用者哪些已經做了。
 
 **之後可考慮的新功能：** 預約體驗課加 LINE 通知，並用圖文選單當入口。等現有功能實機測過再做。
@@ -95,3 +99,4 @@ Verbora 沃語國際語言學校，是虛構品牌的作品集示範網站，不
 - 使用者在手機上無法跑本機環境，改動要靠 Vercel 預覽網址確認。
 - 接 LINE、Supabase 或 Vercel 後台的步驟只有使用者能做，請給簡短、照著點就能完成的步驟。
 - 不要把金鑰或 `.env.local` 的內容寫進 repo，這個 repo 是公開的。
+- 貼環境變數時要注意前後的空白。之前 `NEXT_PUBLIC_LIFF_ID` 多了一個 Tab，LIFF 就回報 Invalid LIFF ID。
